@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Societas Magica — Webmaster Field Guide</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-title">
+      <span class="sigil">⬡</span>
+      <div>
+        <h1>Societas Magica</h1>
+        <p class="subtitle">Webmaster Field Guide — Rescue, Rebuild, Modernize</p>
+      </div>
+    </div>
+    <nav class="top-nav">
+      <a href="#access">Access</a>
+      <a href="#audit">Audit</a>
+      <a href="#content">Content</a>
+      <a href="#members">Members</a>
+      <a href="#payments">Payments</a>
+      <a href="#migration">Migration</a>
+      <a href="#stack">Stack Compare</a>
+    </nav>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <h2>Sections</h2>
+    <ol>
+      <li><a href="#access">1. Access Recovery</a></li>
+      <li><a href="#audit">2. Audit &amp; Triage</a></li>
+      <li><a href="#content">3. Content Repairs</a></li>
+      <li><a href="#members">4. Member Directory</a></li>
+      <li><a href="#payments">5. Payments &amp; Dues</a></li>
+      <li><a href="#migration">6. Migration Paths</a></li>
+      <li><a href="#stack">7. Stack Comparison</a></li>
+    </ol>
+    <div class="sidebar-note">
+      <p>This guide covers everything a new webmaster needs to take over, stabilize, and modernize the Societas Magica website.</p>
+    </div>
+  </aside>
+
+  <main>
+
+    <section class="intro-banner">
+      <h2>What this guide is</h2>
+      <p>Societas Magica is an academic society for scholars of the history of magic, founded in 1994. Its website runs on a custom PHP application built by volunteers — functional but aging. This field guide maps every task a new webmaster faces: recovering access, auditing the codebase, repairing broken features, and choosing a path to bring the site into 2026.</p>
+      <p>Each section explains the concept, the tools, the steps, and links to the best external learning resources for that technology.</p>
+    </section>
+
+    <!-- ============================================================ -->
+    <section id="access">
+      <h2><span class="num">1</span> Access Recovery</h2>
+      <p class="lead">Before you can fix anything, you need the keys. This is the most urgent task and should happen before the outgoing webmaster goes dark.</p>
+
+      <h3>What you need to collect</h3>
+      <ul class="task-list">
+        <li><strong>Hosting credentials</strong> — cPanel login, SSH key, or FTP username/password. This is how you reach the server.</li>
+        <li><strong>Domain registrar login</strong> — whoever holds <code>societasmagica.org</code> controls DNS. If this lapses, the site disappears.</li>
+        <li><strong>Database credentials</strong> — MySQL username, password, database name. Usually in a config file on the server (e.g., <code>config.php</code> or <code>.env</code>).</li>
+        <li><strong>Source code</strong> — Is there a Git repository? Or is the code only on the server? You need a copy under version control.</li>
+        <li><strong>PayPal account</strong> — API keys or at minimum the email address linked to the PayPal business account used for dues.</li>
+        <li><strong>Email/listserv credentials</strong> — Does the org use a mailing list? Who administers it?</li>
+      </ul>
+
+      <h3>SSH — Secure Shell</h3>
+      <p>SSH lets you log into the server as if you were sitting at its terminal. Most web hosts (DreamHost, SiteGround, etc.) provide SSH access. Once connected, you can read files, export the database, and inspect the PHP code.</p>
+      <div class="code-block">
+        <pre><code># Connect to a server
+ssh youruser@societasmagica.org
+
+# Export the full database to a file
+mysqldump -u dbuser -p dbname > backup.sql
+
+# Pull all site files to your local machine
+scp -r youruser@societasmagica.org:/path/to/site ./site-backup</code></pre>
+      </div>
+      <div class="resource-links">
+        <h4>Learn more</h4>
+        <ul>
+          <li><a href="https://www.digitalocean.com/community/tutorials/how-to-use-ssh-to-connect-to-a-remote-server" target="_blank" rel="noopener">DigitalOcean: How To Use SSH to Connect to a Remote Server</a></li>
+          <li><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh" target="_blank" rel="noopener">GitHub Docs: Connecting to GitHub with SSH</a></li>
+          <li><a href="https://www.ssh.com/academy/ssh/command" target="_blank" rel="noopener">SSH Academy: SSH Command Reference</a></li>
+        </ul>
+      </div>
+
+      <h3>DNS — Domain Name System</h3>
+      <p>DNS is the phone book that maps <code>societasmagica.org</code> to the IP address of the server. The domain registrar (e.g., GoDaddy, Namecheap, Network Solutions) controls this. Losing access to the registrar is an emergency — it means you can't point the domain at a new server or renew it.</p>
+      <div class="resource-links">
+        <h4>Learn more</h4>
+        <ul>
+          <li><a href="https://www.cloudflare.com/learning/dns/what-is-dns/" target="_blank" rel="noopener">Cloudflare: What is DNS?</a></li>
+          <li><a href="https://www.namecheap.com/guru-guides/dns/" target="_blank" rel="noopener">Namecheap: DNS Guru Guides</a></li>
+          <li><a href="https://developers.google.com/speed/public-dns/docs/intro" target="_blank" rel="noopener">Google: Introduction to DNS</a></li>
+        </ul>
+      </div>
+
+      <h3>Git — Version Control</h3>
+      <p>If the site code isn't in a Git repository, your first act should be creating one. Git tracks every change to every file, lets you roll back mistakes, and makes collaboration safe.</p>
+      <div class="code-block">
+        <pre><code># Initialize a repo in the site folder
+git init
+
+# Add all files and make the first commit
+git add .
+git commit -m "Initial commit: site as inherited"
+
+# Push to GitHub
+git remote add origin https://github.com/YourOrg/sm-site.git
+git push -u origin main</code></pre>
+      </div>
+      <div class="resource-links">
+        <h4>Learn more</h4>
+        <ul>
+          <li><a href="https://git-scm.com/book/en/v2" target="_blank" rel="noopener">Pro Git (free book) — the definitive reference</a></li>
+          <li><a href="https://docs.github.com/en/get-started/quickstart/hello-world" target="_blank" rel="noopener">GitHub: Hello World quickstart</a></li>
+          <li><a href="https://www.atlassian.com/git/tutorials" target="_blank" rel="noopener">Atlassian Git Tutorials</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <section id="audit">
+      <h2><span class="num">2</span> Audit &amp; Triage</h2>
+      <p class="lead">Once you have access, read the codebase and database before touching anything. Understand what you have before you change it.</p>
+
+      <h3>Reading a PHP application</h3>
+      <p>The Societas Magica site is a custom PHP application. PHP is a server-side scripting language that generates HTML dynamically. In a custom app (no framework), the codebase typically looks like:</p>
+      <ul>
+        <li><code>index.php</code> — the entry point, handles routing</li>
+        <li><code>config.php</code> or <code>.env</code> — database credentials, site settings</li>
+        <li><code>themes/</code> — HTML templates</li>
+        <li><code>users.php</code>, <code>members.php</code> — feature modules</li>
+        <li><code>sql/</code> — database schema or migrations</li>
+      </ul>
+      <p>Clues already visible on the site: <code>themes/default/images/</code> path, <code>?page=TravelBursary.html</code> query parameter pattern, and routes like <code>/users/run_once</code> — all signatures of hand-rolled PHP, not a major CMS.</p>
+
+      <h3>Inspecting a MySQL database</h3>
+      <p>The member list, newsletter posts, and user accounts all live in a database. Use a GUI tool to explore it safely.</p>
+      <div class="code-block">
+        <pre><code># List all tables
+SHOW TABLES;
+
+# See the structure of the members table
+DESCRIBE members;
+
+# Count active members
+SELECT COUNT(*) FROM members WHERE active = 1;</code></pre>
+      </div>
+      <div class="resource-links">
+        <h4>Tools for database inspection</h4>
+        <ul>
+          <li><a href="https://www.phpmyadmin.net/" target="_blank" rel="noopener">phpMyAdmin</a> — web-based MySQL GUI, often pre-installed on shared hosting</li>
+          <li><a href="https://tableplus.com/" target="_blank" rel="noopener">TablePlus</a> — modern Mac/Windows desktop GUI for databases</li>
+          <li><a href="https://dbeaver.io/" target="_blank" rel="noopener">DBeaver</a> — free, cross-platform database tool</li>
+        </ul>
+        <h4>Learn PHP</h4>
+        <ul>
+          <li><a href="https://www.php.net/manual/en/tutorial.php" target="_blank" rel="noopener">PHP.net: Getting Started (official tutorial)</a></li>
+          <li><a href="https://www.phptherightway.com/" target="_blank" rel="noopener">PHP The Right Way — modern PHP best practices</a></li>
+          <li><a href="https://laracasts.com/series/php-for-beginners-2023-edition" target="_blank" rel="noopener">Laracasts: PHP For Beginners</a></li>
+        </ul>
+      </div>
+
+      <h3>Checklist: First-week audit</h3>
+      <ul class="task-list">
+        <li>List every route/URL and test each one — note 404s and broken pages</li>
+        <li>Find every page with a stale "Updated:" timestamp (several are from 2012)</li>
+        <li>Map the database schema: tables, columns, relationships</li>
+        <li>Count members in the DB vs. what officers believe is active</li>
+        <li>Identify the PHP version on the server (<code>php --version</code> via SSH)</li>
+        <li>Check SSL certificate status (is HTTPS valid and auto-renewing?)</li>
+        <li>Find where PayPal sends callbacks — the IPN or webhook endpoint</li>
+        <li>Identify all hardcoded email addresses in the code</li>
+      </ul>
+    </section>
+
+    <!-- ============================================================ -->
+    <section id="content">
+      <h2><span class="num">3</span> Content Repairs</h2>
+      <p class="lead">Much of the site's content is stale or broken. These are the highest-visibility fixes that don't require migrating the platform.</p>
+
+      <h3>Known broken or stale pages</h3>
+      <table class="status-table">
+        <thead>
+          <tr><th>Page</th><th>Issue</th><th>Fix</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>/contact</code></td><td>HTTP 404</td><td>Find correct URL or rebuild the page</td></tr>
+          <tr><td>Publications</td><td>Last updated May 1, 2012</td><td>Add recent MRW journal issues, new Magic in History titles</td></tr>
+          <tr><td>Conferences</td><td>Archive stops at 2017; post-2017 links are external</td><td>Pull in post-2017 sessions, add 2025–2026</td></tr>
+          <tr><td>Membership page</td><td>Footer says "Updated: January 12, 2012"</td><td>Verify dues amounts, benefit list, and renewal process</td></tr>
+          <tr><td>Newsletter list</td><td>Issue numbering gap (no Issue 19)</td><td>Clarify 2017–2020 hiatus note in the archive</td></tr>
+          <tr><td>Officers/Contact</td><td>404 — completely missing</td><td>Rebuild with current officer names and emails</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Writing HTML content updates</h3>
+      <p>In the custom PHP app, static content is likely embedded in PHP template files or flat HTML files served via the <code>?page=</code> query parameter. To update a page:</p>
+      <div class="code-block">
+        <pre><code>&lt;!-- Find the file being served, e.g. pages/Publications.html --&gt;
+&lt;!-- Edit it directly in a text editor, then upload via SSH/FTP --&gt;
+
+&lt;p&gt;The &lt;em&gt;Magic in History&lt;/em&gt; series is published by Penn State University Press.
+Members receive a 20% discount. &lt;a href="https://www.psupress.org/..."&gt;Browse titles&lt;/a&gt;.&lt;/p&gt;</code></pre>
+      </div>
+
+      <div class="resource-links">
+        <h4>Learn more</h4>
+        <ul>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener">MDN Web Docs: HTML — the definitive reference</a></li>
+          <li><a href="https://htmlreference.io/" target="_blank" rel="noopener">HTML Reference — visual reference to all HTML elements</a></li>
+          <li><a href="https://www.a11yproject.com/checklist/" target="_blank" rel="noopener">A11Y Project: Accessibility Checklist</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <section id="members">
+      <h2><span class="num">4</span> Member Directory</h2>
+      <p class="lead">The member list is the most valuable feature of the site — it's the main reason scholars pay dues. It's currently login-gated (correct) but its internal state is unknown. This section explains the concept and the best 2026 options.</p>
+
+      <h3>How a member directory works</h3>
+      <p>A member directory is a login-protected database view: members log in, see each other's profiles (name, institution, research interests, email), and can update their own entry. The backend stores records in a database table; the frontend renders them as HTML with optional search and filter.</p>
+
+      <h3>What the current site likely has</h3>
+      <ul>
+        <li>A <code>members</code> or <code>users</code> table in MySQL</li>
+        <li>A PHP page that queries that table and renders the list</li>
+        <li>A session check at the top to verify the user is logged in</li>
+        <li>No self-service profile editing (typical of early-2000s hand-rolled systems)</li>
+      </ul>
+
+      <h3>Option A — Repair the existing system</h3>
+      <p>If the PHP member list is mostly working, repair and document it. Add:</p>
+      <ul>
+        <li>A search/filter field (JavaScript on the rendered HTML table)</li>
+        <li>A self-service profile edit form (new PHP page with a <code>UPDATE</code> query)</li>
+        <li>Pagination if the list is long</li>
+      </ul>
+
+      <h3>Option B — WordPress + MemberPress</h3>
+      <p>MemberPress is the most established WordPress plugin for membership management. It handles registration, login, dues, renewal reminders, and a member directory out of the box.</p>
+      <div class="resource-links">
+        <ul>
+          <li><a href="https://memberpress.com/features/member-management/" target="_blank" rel="noopener">MemberPress: Member Management features</a></li>
+          <li><a href="https://memberpress.com/docs/memberpress-getting-started-guide/" target="_blank" rel="noopener">MemberPress: Getting Started Guide</a></li>
+          <li><a href="https://profilepress.com/article/wordpress-member-directory/" target="_blank" rel="noopener">ProfilePress: Building a WordPress Member Directory</a></li>
+        </ul>
+      </div>
+
+      <h3>Option C — Wild Apricot</h3>
+      <p>Wild Apricot is a hosted platform purpose-built for associations, academic societies, and nonprofits. It includes member database, dues billing, event registration, email blasts, and a website builder — all in one subscription with no custom code required.</p>
+      <div class="resource-links">
+        <ul>
+          <li><a href="https://www.wildapricot.com/membership-management-software" target="_blank" rel="noopener">Wild Apricot: Membership Management overview</a></li>
+          <li><a href="https://www.wildapricot.com/blog/membership-database" target="_blank" rel="noopener">Wild Apricot: What is a Membership Database?</a></li>
+          <li><a href="https://www.wildapricot.com/pricing" target="_blank" rel="noopener">Wild Apricot: Pricing (starts ~$60/mo)</a></li>
+        </ul>
+      </div>
+
+      <h3>Option D — Outseta</h3>
+      <p>Outseta is a modern all-in-one platform combining authentication, billing (Stripe-backed), CRM, and member profiles. Unlike Wild Apricot it integrates cleanly with a custom or static frontend, making it the best choice if you want design control.</p>
+      <div class="resource-links">
+        <ul>
+          <li><a href="https://www.outseta.com/features/membership" target="_blank" rel="noopener">Outseta: Membership features</a></li>
+          <li><a href="https://docs.outseta.com/en/" target="_blank" rel="noopener">Outseta: Documentation</a></li>
+        </ul>
+      </div>
+
+      <h3>Comparison at a glance</h3>
+      <table class="status-table">
+        <thead>
+          <tr><th>Option</th><th>Cost/yr</th><th>Code needed?</th><th>Best for</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Repair current PHP</td><td>~$0</td><td>Yes — PHP</td><td>Minimal disruption, short runway</td></tr>
+          <tr><td>WordPress + MemberPress</td><td>~$360 plugin + ~$120 hosting</td><td>Minimal</td><td>Long-term sustainability, volunteer maintainable</td></tr>
+          <tr><td>Wild Apricot</td><td>~$720</td><td>None</td><td>All-in-one, no technical admin needed</td></tr>
+          <tr><td>Outseta</td><td>~$588</td><td>Some frontend</td><td>Modern design + full billing/auth/CRM</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ============================================================ -->
+    <section id="payments">
+      <h2><span class="num">5</span> Payments &amp; Dues</h2>
+      <p class="lead">The site uses PayPal for membership dues. PayPal was recently broken and then fixed. This section explains how payment integration works and what a modern replacement looks like.</p>
+
+      <h3>How the current PayPal flow works</h3>
+      <p>PayPal's classic integration uses <strong>IPN (Instant Payment Notification)</strong>: when someone pays, PayPal sends a POST request to a URL on your server (e.g., <code>/paypal/callback.php</code>). That script verifies the payment and updates the member's status in the database. If that URL breaks or the script has a bug, payments succeed at PayPal but don't activate membership — which is exactly the kind of failure that was reported.</p>
+
+      <div class="code-block">
+        <pre><code>// Simplified IPN handler concept (PHP)
+$payment_status = $_POST['payment_status'];
+$payer_email    = $_POST['payer_email'];
+
+if ($payment_status === 'Completed') {
+    // Find member by email, set active = 1, update expiry date
+    $db->query("UPDATE members SET active=1, expires=DATE_ADD(NOW(), INTERVAL 1 YEAR)
+                WHERE email = ?", [$payer_email]);
+}</code></pre>
+      </div>
+
+      <div class="resource-links">
+        <h4>PayPal resources</h4>
+        <ul>
+          <li><a href="https://developer.paypal.com/api/nvp-soap/ipn/" target="_blank" rel="noopener">PayPal: IPN (Instant Payment Notification) docs</a></li>
+          <li><a href="https://developer.paypal.com/docs/checkout/" target="_blank" rel="noopener">PayPal: Modern Checkout integration</a></li>
+        </ul>
+      </div>
+
+      <h3>Why Stripe is a better choice in 2026</h3>
+      <p>Stripe has become the standard for online payments. Its API is cleaner than PayPal's, its webhook system is more reliable than IPN, it handles recurring subscriptions natively (important for annual dues), and its dashboard is far more transparent for non-technical officers who need to see who has paid.</p>
+
+      <div class="code-block">
+        <pre><code>// Stripe webhook handler concept (PHP)
+$payload = file_get_contents('php://input');
+$event   = \Stripe\Webhook::constructEvent($payload, $_SERVER['HTTP_STRIPE_SIGNATURE'], $secret);
+
+if ($event->type === 'checkout.session.completed') {
+    $email = $event->data->object->customer_details->email;
+    // Activate membership for $email
+}</code></pre>
+      </div>
+
+      <div class="resource-links">
+        <h4>Stripe resources</h4>
+        <ul>
+          <li><a href="https://stripe.com/docs/payments/checkout" target="_blank" rel="noopener">Stripe: Checkout — quickest way to accept payments</a></li>
+          <li><a href="https://stripe.com/docs/webhooks" target="_blank" rel="noopener">Stripe: Webhooks — how to respond to payment events</a></li>
+          <li><a href="https://stripe.com/docs/billing/subscriptions/overview" target="_blank" rel="noopener">Stripe: Subscriptions — recurring dues</a></li>
+          <li><a href="https://www.smashingmagazine.com/2022/06/stripe-payments-react-node/" target="_blank" rel="noopener">Smashing Magazine: Stripe Payments Integration walkthrough</a></li>
+        </ul>
+      </div>
+
+      <h3>Subscription / renewal logic</h3>
+      <p>Annual dues need renewal reminders. A modern approach:</p>
+      <ul>
+        <li><strong>Stripe Billing</strong> — handles recurring charges, sends renewal receipts, handles failed payment retries automatically</li>
+        <li><strong>Email reminders</strong> — 30/7/1 day before expiry via a cron job or Stripe's built-in dunning emails</li>
+        <li><strong>Grace period</strong> — typically 30 days of access after expiry before locking the member out</li>
+      </ul>
+    </section>
+
+    <!-- ============================================================ -->
+    <section id="migration">
+      <h2><span class="num">6</span> Migration Paths</h2>
+      <p class="lead">The custom PHP codebase is the biggest long-term risk. It depends on one person's knowledge and can break silently on a PHP version upgrade. These are the three realistic paths forward.</p>
+
+      <h3>Path A — Stabilize the Current Stack</h3>
+      <div class="path-card path-a">
+        <p><strong>What:</strong> Keep the custom PHP. Put it in Git. Document it. Move to a VPS you control. Fix broken pages.</p>
+        <p><strong>Effort:</strong> Low (2–4 weeks)</p>
+        <p><strong>Cost:</strong> ~$10–20/month hosting (DigitalOcean, Linode)</p>
+        <p><strong>Risk:</strong> Still fragile. One PHP version upgrade can break undocumented code. No volunteer can easily take over from you.</p>
+        <p><strong>Best if:</strong> The board wants minimal disruption and the site is mostly working.</p>
+      </div>
+
+      <div class="resource-links">
+        <h4>VPS hosting guides</h4>
+        <ul>
+          <li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-22-04" target="_blank" rel="noopener">DigitalOcean: LAMP Stack on Ubuntu (PHP hosting tutorial)</a></li>
+          <li><a href="https://www.linode.com/docs/guides/how-to-install-a-lamp-stack-on-ubuntu-20-04/" target="_blank" rel="noopener">Linode: LAMP Stack setup guide</a></li>
+        </ul>
+      </div>
+
+      <h3>Path B — Migrate to WordPress</h3>
+      <div class="path-card path-b">
+        <p><strong>What:</strong> Move content to WordPress. Use MemberPress or ProfilePress for member management. Stripe for payments. Export the member database and import it.</p>
+        <p><strong>Effort:</strong> Medium (4–8 weeks)</p>
+        <p><strong>Cost:</strong> ~$15/month hosting + ~$30/month for plugins</p>
+        <p><strong>Risk:</strong> WordPress requires ongoing plugin/security updates. But it's maintainable by any tech volunteer.</p>
+        <p><strong>Best if:</strong> The org wants long-term sustainability without a dedicated developer.</p>
+      </div>
+
+      <div class="resource-links">
+        <h4>WordPress migration resources</h4>
+        <ul>
+          <li><a href="https://wordpress.org/documentation/article/wordpress-vs-email-based-membership-sites/" target="_blank" rel="noopener">WordPress.org: Official documentation hub</a></li>
+          <li><a href="https://kinsta.com/blog/migrate-to-wordpress/" target="_blank" rel="noopener">Kinsta: How to Migrate to WordPress</a></li>
+          <li><a href="https://memberpress.com/blog/wordpress-membership-site/" target="_blank" rel="noopener">MemberPress: Building a WordPress membership site</a></li>
+          <li><a href="https://www.wpbeginner.com/" target="_blank" rel="noopener">WPBeginner — beginner-friendly WordPress tutorials</a></li>
+        </ul>
+      </div>
+
+      <h3>Path C — Static Site + Managed Services</h3>
+      <div class="path-card path-c">
+        <p><strong>What:</strong> Rebuild the public site as a static HTML/CSS site (or Astro/Hugo) hosted on Netlify or GitHub Pages (free). Delegate auth, billing, and member directory to Outseta or Memberstack. Stripe for payments.</p>
+        <p><strong>Effort:</strong> High (8–16 weeks) — but results in the most modern, durable architecture.</p>
+        <p><strong>Cost:</strong> $0 hosting + $49–79/month for Outseta/Memberstack</p>
+        <p><strong>Risk:</strong> Requires frontend skills and a larger initial investment of time.</p>
+        <p><strong>Best if:</strong> The org is willing to invest once for a system that runs itself for years.</p>
+      </div>
+
+      <div class="resource-links">
+        <h4>Static site &amp; Jamstack resources</h4>
+        <ul>
+          <li><a href="https://astro.build/blog/astro-4/" target="_blank" rel="noopener">Astro — modern static site generator, excellent for content sites</a></li>
+          <li><a href="https://gohugo.io/getting-started/quick-start/" target="_blank" rel="noopener">Hugo: Quick Start — fastest static site generator</a></li>
+          <li><a href="https://docs.netlify.com/get-started/" target="_blank" rel="noopener">Netlify: Get Started (free hosting for static sites)</a></li>
+          <li><a href="https://jamstack.org/what-is-jamstack/" target="_blank" rel="noopener">Jamstack.org: What is Jamstack?</a></li>
+        </ul>
+      </div>
+
+      <h3>Database migration: exporting and importing member records</h3>
+      <p>Whichever path you choose, the member database must be migrated carefully. No member should lose their account or be asked to re-register.</p>
+      <div class="code-block">
+        <pre><code># 1. Export from the old MySQL database
+mysqldump -u olduser -p olddb members > members_export.sql
+
+# 2. Inspect the data — check field names, email formats, active flags
+# 3. Map old fields to new schema (name, email, institution, active, expires)
+# 4. Import into new system — most platforms accept CSV imports
+#    CSV format: First Name, Last Name, Email, Institution, Membership Expiry</code></pre>
+      </div>
+      <div class="resource-links">
+        <ul>
+          <li><a href="https://www.mysqltutorial.org/mysql-administration/mysqldump/" target="_blank" rel="noopener">MySQL Tutorial: mysqldump reference</a></li>
+          <li><a href="https://memberpress.com/docs/importing-members/" target="_blank" rel="noopener">MemberPress: Importing Members documentation</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <section id="stack">
+      <h2><span class="num">7</span> Technology Stack Comparison</h2>
+      <p class="lead">A summary of every technology mentioned in this guide and where to learn it — organized by role.</p>
+
+      <h3>Server &amp; Hosting</h3>
+      <table class="status-table">
+        <thead><tr><th>Technology</th><th>What it is</th><th>Learn</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>PHP</td>
+            <td>Server-side scripting language powering the current site</td>
+            <td><a href="https://www.php.net/manual/en/" target="_blank" rel="noopener">php.net manual</a> · <a href="https://www.phptherightway.com/" target="_blank" rel="noopener">PHP The Right Way</a></td>
+          </tr>
+          <tr>
+            <td>MySQL</td>
+            <td>Relational database storing members, content, sessions</td>
+            <td><a href="https://dev.mysql.com/doc/refman/8.0/en/" target="_blank" rel="noopener">MySQL 8.0 Reference</a> · <a href="https://www.mysqltutorial.org/" target="_blank" rel="noopener">MySQLTutorial.org</a></td>
+          </tr>
+          <tr>
+            <td>Apache / Nginx</td>
+            <td>Web server software that receives HTTP requests</td>
+            <td><a href="https://httpd.apache.org/docs/" target="_blank" rel="noopener">Apache Docs</a> · <a href="https://nginx.org/en/docs/" target="_blank" rel="noopener">Nginx Docs</a></td>
+          </tr>
+          <tr>
+            <td>cPanel</td>
+            <td>Web hosting control panel (used on shared hosts)</td>
+            <td><a href="https://docs.cpanel.net/" target="_blank" rel="noopener">cPanel Official Docs</a></td>
+          </tr>
+          <tr>
+            <td>SSH</td>
+            <td>Secure shell — remote terminal access to server</td>
+            <td><a href="https://www.digitalocean.com/community/tutorials/how-to-use-ssh-to-connect-to-a-remote-server" target="_blank" rel="noopener">DigitalOcean SSH guide</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>CMS &amp; Frameworks</h3>
+      <table class="status-table">
+        <thead><tr><th>Technology</th><th>What it is</th><th>Learn</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>WordPress</td>
+            <td>World's most popular CMS — powers 43% of all websites</td>
+            <td><a href="https://wordpress.org/documentation/" target="_blank" rel="noopener">WordPress.org Docs</a> · <a href="https://www.wpbeginner.com/" target="_blank" rel="noopener">WPBeginner</a></td>
+          </tr>
+          <tr>
+            <td>Astro</td>
+            <td>Modern static site generator — fast, component-based</td>
+            <td><a href="https://docs.astro.build/en/getting-started/" target="_blank" rel="noopener">Astro Docs</a></td>
+          </tr>
+          <tr>
+            <td>Hugo</td>
+            <td>Fastest static site generator — great for content archives</td>
+            <td><a href="https://gohugo.io/documentation/" target="_blank" rel="noopener">Hugo Docs</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Membership Platforms</h3>
+      <table class="status-table">
+        <thead><tr><th>Platform</th><th>Type</th><th>Price</th><th>Learn</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>MemberPress</td>
+            <td>WordPress plugin</td>
+            <td>~$360/yr</td>
+            <td><a href="https://memberpress.com/docs/" target="_blank" rel="noopener">MemberPress Docs</a></td>
+          </tr>
+          <tr>
+            <td>ProfilePress</td>
+            <td>WordPress plugin (lighter)</td>
+            <td>~$149/yr</td>
+            <td><a href="https://profilepress.com/docs/" target="_blank" rel="noopener">ProfilePress Docs</a></td>
+          </tr>
+          <tr>
+            <td>Wild Apricot</td>
+            <td>All-in-one hosted platform</td>
+            <td>~$60/mo</td>
+            <td><a href="https://help.wildapricot.com/" target="_blank" rel="noopener">Wild Apricot Help</a></td>
+          </tr>
+          <tr>
+            <td>Outseta</td>
+            <td>Auth + billing + CRM SaaS</td>
+            <td>~$49/mo</td>
+            <td><a href="https://docs.outseta.com/" target="_blank" rel="noopener">Outseta Docs</a></td>
+          </tr>
+          <tr>
+            <td>Memberstack</td>
+            <td>Auth + member profiles SaaS</td>
+            <td>~$49/mo</td>
+            <td><a href="https://docs.memberstack.com/" target="_blank" rel="noopener">Memberstack Docs</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Payments</h3>
+      <table class="status-table">
+        <thead><tr><th>Platform</th><th>What it is</th><th>Learn</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Stripe</td>
+            <td>Developer-first payment processor — recommended replacement for PayPal</td>
+            <td><a href="https://stripe.com/docs" target="_blank" rel="noopener">Stripe Docs</a> · <a href="https://stripe.com/docs/billing" target="_blank" rel="noopener">Stripe Billing (subscriptions)</a></td>
+          </tr>
+          <tr>
+            <td>PayPal IPN</td>
+            <td>Legacy payment notification system (currently in use)</td>
+            <td><a href="https://developer.paypal.com/api/nvp-soap/ipn/" target="_blank" rel="noopener">PayPal IPN Docs</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>DevOps &amp; Infrastructure</h3>
+      <table class="status-table">
+        <thead><tr><th>Technology</th><th>What it is</th><th>Learn</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Git / GitHub</td>
+            <td>Version control and code hosting</td>
+            <td><a href="https://git-scm.com/book/en/v2" target="_blank" rel="noopener">Pro Git (free book)</a> · <a href="https://docs.github.com/" target="_blank" rel="noopener">GitHub Docs</a></td>
+          </tr>
+          <tr>
+            <td>Netlify</td>
+            <td>Free hosting for static sites, auto-deploys from GitHub</td>
+            <td><a href="https://docs.netlify.com/" target="_blank" rel="noopener">Netlify Docs</a></td>
+          </tr>
+          <tr>
+            <td>GitHub Pages</td>
+            <td>Free static hosting directly from a GitHub repo</td>
+            <td><a href="https://docs.github.com/en/pages" target="_blank" rel="noopener">GitHub Pages Docs</a></td>
+          </tr>
+          <tr>
+            <td>Let's Encrypt / SSL</td>
+            <td>Free HTTPS certificates — essential for login and payment pages</td>
+            <td><a href="https://letsencrypt.org/getting-started/" target="_blank" rel="noopener">Let's Encrypt: Getting Started</a></td>
+          </tr>
+          <tr>
+            <td>DNS / Cloudflare</td>
+            <td>Domain management + free CDN and DDoS protection</td>
+            <td><a href="https://developers.cloudflare.com/dns/" target="_blank" rel="noopener">Cloudflare DNS Docs</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="outro">
+      <h2>Interview prep summary</h2>
+      <p>The three things to know cold going into the Societas Magica webmaster interview:</p>
+      <ol>
+        <li><strong>Access first.</strong> The site is only as recoverable as the credentials you can collect from the outgoing webmaster. Ask about hosting, domain, database, PayPal, and source code — in that order.</li>
+        <li><strong>The member list is the product.</strong> Everything else is content. The reason scholars pay dues is to appear in and access the member directory. Getting that working and self-serve is the highest-value improvement.</li>
+        <li><strong>Path B (WordPress + MemberPress) is the pragmatic choice.</strong> It's the option a future volunteer can take over without knowing PHP, which is what a small academic society needs.</li>
+      </ol>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <p>Built for the Societas Magica webmaster interview, 2026. Source on <a href="https://github.com/t3dy/SocietasMagicaWebmaster" target="_blank" rel="noopener">GitHub</a>.</p>
+</footer>
+
+<script>
+  // Smooth scroll for sidebar links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // Highlight active sidebar link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const sidebarLinks = document.querySelectorAll('.sidebar a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    sidebarLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+</script>
+
+</body>
+</html>
