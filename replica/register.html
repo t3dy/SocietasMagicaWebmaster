@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register — Societas Magica</title>
+  <link rel="stylesheet" href="style.css" />
+  <!--
+    OUTSETA SETUP: Same domain as login.html — replace YOUR_OUTSETA_DOMAIN.
+    The registration widget collects name, email, password, and custom fields
+    (institution, research interests) that you configure in the Outseta dashboard.
+  -->
+  <script src="https://cdn.outseta.com/outseta.min.js"
+    data-options='{"domain":"YOUR_OUTSETA_DOMAIN.outseta.com"}'></script>
+</head>
+<body>
+
+<div class="page-wrap">
+  <div class="auth-wrap" style="max-width:520px;">
+    <h1>Member Registration</h1>
+
+    <p style="font-size:.9rem;color:var(--muted);margin-bottom:1.25rem;text-align:center;">
+      Membership requires payment of annual dues. If you have not yet paid, please visit the <a href="membership.html">Membership</a> page first.
+    </p>
+
+    <!-- Outseta registration widget renders here once configured -->
+    <div id="outseta-register" data-o-registration-form="true"></div>
+
+    <!-- Placeholder form shown until Outseta is configured -->
+    <form id="placeholder-register" style="display:block;" onsubmit="return false;">
+      <div class="form-group">
+        <label for="reg-firstname">First Name <span style="color:var(--crimson);">*</span></label>
+        <input type="text" id="reg-firstname" name="firstname" autocomplete="given-name" required />
+      </div>
+      <div class="form-group">
+        <label for="reg-lastname">Last Name <span style="color:var(--crimson);">*</span></label>
+        <input type="text" id="reg-lastname" name="lastname" autocomplete="family-name" required />
+      </div>
+      <div class="form-group">
+        <label for="reg-email">Email Address <span style="color:var(--crimson);">*</span></label>
+        <input type="email" id="reg-email" name="email" autocomplete="email" required placeholder="Use the email you paid dues with" />
+      </div>
+      <div class="form-group">
+        <label for="reg-institution">Institution / Affiliation</label>
+        <input type="text" id="reg-institution" name="institution" placeholder="University, independent scholar, etc." />
+      </div>
+      <div class="form-group">
+        <label for="reg-interests">Research Interests</label>
+        <textarea id="reg-interests" name="interests" style="min-height:80px;" placeholder="Brief description of your research focus (shown in member directory)"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="reg-password">Password <span style="color:var(--crimson);">*</span></label>
+        <input type="password" id="reg-password" name="password" autocomplete="new-password" required />
+      </div>
+      <div class="form-group">
+        <label for="reg-password2">Confirm Password <span style="color:var(--crimson);">*</span></label>
+        <input type="password" id="reg-password2" name="password2" autocomplete="new-password" required />
+      </div>
+
+      <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem;">
+        By registering, you agree to the <a href="privacy.html">Privacy Policy</a> and <a href="terms.html">Terms of Use</a>.
+      </p>
+
+      <button type="submit" class="btn" style="width:100%;">Create Account</button>
+    </form>
+
+    <div class="auth-links">
+      Already have an account? <a href="login.html">Log in</a>
+    </div>
+  </div>
+</div>
+
+<script src="nav.js"></script>
+</body>
+</html>

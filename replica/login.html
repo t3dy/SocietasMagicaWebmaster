@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Member Login — Societas Magica</title>
+  <link rel="stylesheet" href="style.css" />
+  <!--
+    OUTSETA SETUP:
+    1. Create a free account at https://www.outseta.com
+    2. In your Outseta dashboard, go to Auth > Login Widget
+    3. Replace YOUR_OUTSETA_DOMAIN below with your subdomain (e.g. societasmagica.outseta.com)
+    4. The widget handles login, registration, password reset, and member profiles.
+    Full docs: https://docs.outseta.com/en/articles/2910892-getting-started-with-outseta
+  -->
+  <script src="https://cdn.outseta.com/outseta.min.js"
+    data-options='{"domain":"YOUR_OUTSETA_DOMAIN.outseta.com"}'></script>
+</head>
+<body>
+
+<div class="page-wrap">
+  <div class="auth-wrap">
+    <h1>Member Login</h1>
+
+    <!--
+      Outseta login widget renders here automatically once the domain is configured.
+      Remove the placeholder form below once Outseta is live.
+    -->
+    <div id="outseta-login" data-o-login-form="true"></div>
+
+    <!-- Placeholder form shown until Outseta is configured -->
+    <form id="placeholder-login" style="display:block;" onsubmit="return false;">
+      <div class="form-group">
+        <label for="login-email">Email address</label>
+        <input type="email" id="login-email" name="email" autocomplete="email" placeholder="you@university.edu" />
+      </div>
+      <div class="form-group">
+        <label for="login-password">Password</label>
+        <input type="password" id="login-password" name="password" autocomplete="current-password" />
+      </div>
+      <button type="submit" class="btn" style="width:100%;margin-top:.25rem;">Log In</button>
+    </form>
+
+    <div class="auth-links">
+      <a href="register.html">Register as a new member</a> &nbsp;·&nbsp;
+      <a href="forgot-password.html">Forgot password?</a>
+    </div>
+
+    <div class="info-box" style="margin-top:1.5rem;font-size:.82rem;">
+      <strong>First time logging in?</strong> If you have paid dues but have not yet set up your website account, use the <a href="register.html">registration page</a> with the email address you used when paying.
+    </div>
+  </div>
+
+  <p style="text-align:center;color:var(--muted);font-family:var(--font-ui);font-size:.8rem;margin-top:1rem;">
+    Not yet a member? <a href="membership.html">Learn about membership →</a>
+  </p>
+</div>
+
+<script src="nav.js"></script>
+</body>
+</html>

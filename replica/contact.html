@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us — Societas Magica</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="page-wrap">
+  <h1>Contact Us</h1>
+
+  <p>For most inquiries, the quickest route is to email the relevant officer directly using the addresses below. For general questions, use the contact form.</p>
+
+  <h2>Officers &amp; Contacts</h2>
+
+  <div class="officer-grid">
+    <div class="officer-card">
+      <div class="officer-role">General Administration</div>
+      <div class="officer-name">Claire Fanger</div>
+      <div class="officer-inst">Rice University</div>
+      <div class="officer-email"><a href="mailto:front_desk@societasmagica.org">front_desk@societasmagica.org</a></div>
+    </div>
+    <div class="officer-card">
+      <div class="officer-role">Website Administration</div>
+      <div class="officer-name">Paul Coyne</div>
+      <div class="officer-email"><a href="mailto:admin@societasmagica.org">admin@societasmagica.org</a></div>
+    </div>
+    <div class="officer-card">
+      <div class="officer-role">Dues &amp; Membership</div>
+      <div class="officer-name">Claire Fanger</div>
+      <div class="officer-inst">Rice University</div>
+      <div class="officer-email"><a href="mailto:bookkeeper@societasmagica.org">bookkeeper@societasmagica.org</a></div>
+    </div>
+    <div class="officer-card">
+      <div class="officer-role">Secretary</div>
+      <div class="officer-name">Gwendolyne Knight</div>
+      <div class="officer-email"><a href="mailto:secretary@societasmagica.org">secretary@societasmagica.org</a></div>
+    </div>
+    <div class="officer-card">
+      <div class="officer-role">Kalamazoo Sessions</div>
+      <div class="officer-name">David Porreca</div>
+      <div class="officer-inst">University of Waterloo</div>
+      <div class="officer-email"><a href="mailto:sessions@societasmagica.org">sessions@societasmagica.org</a></div>
+    </div>
+    <div class="officer-card">
+      <div class="officer-role">Newsletter Editor</div>
+      <div class="officer-name">Brendan Walsh</div>
+      <div class="officer-email"><a href="mailto:newsletters@societasmagica.org">newsletters@societasmagica.org</a></div>
+    </div>
+    <div class="officer-card">
+      <div class="officer-role">Ars Magica Blog</div>
+      <div class="officer-name">Samuel Gillis Hogan &amp; Shandra Lamaute</div>
+      <div class="officer-inst">University of Exeter · University of Oxford</div>
+      <div class="officer-email"><a href="mailto:blogs@societasmagica.org">blogs@societasmagica.org</a></div>
+    </div>
+    <div class="officer-card">
+      <div class="officer-role">Journal &amp; Book Series</div>
+      <div class="officer-name">Claire Fanger &amp; Richard Kieckhefer</div>
+      <div class="officer-inst">Rice University · Northwestern University</div>
+      <div class="officer-email"><a href="mailto:journal@societasmagica.org">journal@societasmagica.org</a></div>
+    </div>
+    <div class="officer-card">
+      <div class="officer-role">Manuscripts</div>
+      <div class="officer-name">Claire Fanger</div>
+      <div class="officer-inst">Rice University</div>
+      <div class="officer-email"><a href="mailto:manuscripts@societasmagica.org">manuscripts@societasmagica.org</a></div>
+    </div>
+  </div>
+
+  <h2>General Enquiry Form</h2>
+  <p>Use this form for general questions not addressed by the officer contacts above. We aim to reply within a few business days.</p>
+
+  <!--
+    SETUP: Replace YOUR_FORM_ID below with your Formspree form endpoint.
+    1. Go to https://formspree.io and create a free account.
+    2. Create a new form — set the recipient email to front_desk@societasmagica.org.
+    3. Copy the form ID (e.g. "xwkdpbnj") and replace YOUR_FORM_ID.
+    The form will then submit without any backend code.
+  -->
+  <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+
+    <div class="form-group">
+      <label for="name">Your Name <span style="color:var(--crimson);">*</span></label>
+      <input type="text" id="name" name="name" required autocomplete="name" />
+    </div>
+
+    <div class="form-group">
+      <label for="email">Your Email <span style="color:var(--crimson);">*</span></label>
+      <input type="email" id="email" name="email" required autocomplete="email" />
+    </div>
+
+    <div class="form-group">
+      <label for="department">Department <span style="color:var(--crimson);">*</span></label>
+      <select id="department" name="department" required>
+        <option value="" disabled selected>Select a department…</option>
+        <option value="General Administration">General Administration</option>
+        <option value="Membership &amp; Dues">Membership &amp; Dues</option>
+        <option value="Newsletter">Newsletter</option>
+        <option value="Conferences &amp; Sessions">Conferences &amp; Sessions</option>
+        <option value="Blog">Ars Magica Blog</option>
+        <option value="Manuscripts">Manuscripts</option>
+        <option value="Publications">Publications &amp; Book Series</option>
+        <option value="Website">Website</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="subject">Subject <span style="color:var(--crimson);">*</span></label>
+      <input type="text" id="subject" name="subject" required />
+    </div>
+
+    <div class="form-group">
+      <label for="message">Message <span style="color:var(--crimson);">*</span> <span style="font-weight:normal;color:var(--muted);">(max. 500 words)</span></label>
+      <textarea id="message" name="message" required maxlength="3500"></textarea>
+    </div>
+
+    <!-- Honeypot anti-spam field — hidden from humans -->
+    <input type="text" name="_gotcha" style="display:none;" tabindex="-1" autocomplete="off" />
+    <input type="hidden" name="_subject" value="Societas Magica website enquiry" />
+
+    <button type="submit" class="btn">Send Message</button>
+  </form>
+
+  <p id="form-success" style="display:none;" class="notice-box">
+    Thank you — your message has been sent. We will be in touch shortly.
+  </p>
+</div>
+
+<script src="nav.js"></script>
+<script>
+  /* Show success message if Formspree redirects back with ?success */
+  if (location.search.includes('success')) {
+    document.getElementById('form-success').style.display = 'block';
+    document.querySelector('.contact-form').style.display  = 'none';
+  }
+</script>
+</body>
+</html>
