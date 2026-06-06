@@ -282,10 +282,34 @@
       margin-bottom: .5rem;
     }
 
-    .tech-cost-effort {
+    .tech-details {
       font-family: var(--font-ui);
       font-size: .85rem;
       color: var(--crimson);
+      font-weight: 600;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: .5rem;
+    }
+
+    .tech-detail-item {
+      display: flex;
+      flex-direction: column;
+      gap: .2rem;
+    }
+
+    .tech-detail-label {
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .tech-detail-value {
+      font-size: .9rem;
+      color: var(--ink);
       font-weight: 600;
     }
 
@@ -710,25 +734,45 @@
 // Modal data — organized by card title
 const cardDetails = {
   "Restore Contact Page (404)": {
-    problem: "The contact page returns HTTP 404. Visitors, journalists, and prospective members cannot reach the organization or find officer contact information.",
-    why: "Journalists, prospective members, and institutional partners all expect a working contact form and officer directory. A broken page is the first impression many people get.",
-    impact: "Missed media opportunities, lost member inquiries, credibility damage.",
+    problem: "The contact page returns HTTP 404. Visitors, journalists, and prospective members cannot reach the organization or find officer contact information. This is a completely broken endpoint.",
+    why: "Journalists, prospective members, and institutional partners all expect a working contact form and officer directory. This is often the first page people visit after the home page. A broken page is credibility damage.",
+    impact: "Missed media opportunities, lost member inquiries, lost donation prospects, credibility damage.",
     techOptions: [
-      { name: "Quick Fix", desc: "Restore original URL or rebuild from database if it was just moved.", cost: "1–2 hours", effort: "Low" },
-      { name: "Better Fix: Database-Backed Form", desc: "Store officer info in a form. Contact page renders from database automatically. Never breaks again.", cost: "2–3 hours", effort: "Low" }
+      {
+        name: "Quick Fix: Restore URL",
+        desc: "Ask the outgoing webmaster what happened. The page may have just been moved to a different URL. If so, either restore the original URL or add a redirect from /contact to the new location. If the page is actually missing, you'll need to rebuild it.",
+        externalCost: "$0",
+        timeToComplete: "1–2 hours"
+      },
+      {
+        name: "Better Fix: Database-Backed Contact Page",
+        desc: "Instead of a static file, store officer information in a database form. The contact page pulls this data and renders it automatically. This way, when the next officer transition happens, nobody breaks the page—officers just update their info in a form.",
+        externalCost: "$0",
+        timeToComplete: "2–3 hours"
+      }
     ],
-    nextSteps: "Ask the outgoing webmaster what happened. If it was just moved, restore the URL. If not, implement the officer self-management form (see below)."
+    nextSteps: "Do the quick fix immediately. Ask the outgoing webmaster what happened to the contact page. If it's just a redirect issue, restore it. If it's missing entirely, implement the database-backed form (which is part of the 'Officer Directory Self-Management' card below)."
   },
 
   "Stabilize PayPal/Payment Processing": {
-    problem: "PayPal IPN (Instant Payment Notification) broke recently. Members successfully paid their dues at PayPal, but their accounts were never activated on the website.",
-    why: "This is the #1 failure point for a membership organization. Payment not activating membership = lost members AND lost revenue. It happened silently — members didn't know until they tried to log in.",
-    impact: "Revenue loss, member frustration, broken trust in the payment system.",
+    problem: "PayPal IPN (Instant Payment Notification) broke recently. Members successfully paid their dues at PayPal, but their accounts were never activated on the website. This happened silently — members thought they were members, but they weren't actually activated.",
+    why: "This is the #1 failure point for a membership organization. When payment doesn't activate membership, you lose both the member and the revenue. It's a silent failure that doesn't get caught until members complain they can't log in.",
+    impact: "Revenue loss, member frustration, broken trust in the payment system, loss of confidence in the organization.",
     techOptions: [
-      { name: "Diagnose & Fix PayPal IPN", desc: "Get SSH access, find the callback script, check error logs. Test with a small payment. May be a simple database query fix.", cost: "2–4 hours", effort: "Medium" },
-      { name: "Migrate to Stripe Billing (Better)", desc: "Replace PayPal with Stripe. Better webhook reliability, native subscription renewal, automatic dunning emails, cleaner dashboard. WordPress + Stripe takes 1 day.", cost: "1 day + Stripe 2.9% + $0.30/txn", effort: "Medium" }
+      {
+        name: "Diagnose and Fix PayPal IPN (Quick Fix)",
+        desc: "Get SSH access to the server. Find the PayPal callback script (usually /paypal/callback.php or similar). Check the PHP error logs to see what's failing. The issue is likely a database connection error, a missing table, or a mismatched PayPal credential. Test by making a small payment ($1-5) through PayPal and verify it activates your test account. This may be a quick SQL query fix.",
+        externalCost: "$0",
+        timeToComplete: "2–4 hours"
+      },
+      {
+        name: "Migrate to Stripe Billing (Better Long-Term)",
+        desc: "Replace PayPal entirely with Stripe Billing. Stripe has much better webhook reliability, native support for subscription renewals, automatic dunning/retry logic for failed payments, and a cleaner admin dashboard. If you're migrating the site to WordPress anyway, Stripe integrates cleanly with WooCommerce or WP Simple Pay. The payment processing fee is 2.9% + $0.30 per transaction, which is standard for Stripe.",
+        externalCost: "Stripe: 2.9% + $0.30 per transaction (no monthly fee)",
+        timeToComplete: "1 day (during WordPress migration)"
+      }
     ],
-    nextSteps: "Immediate: diagnose the PayPal endpoint and fix it. Long-term: migrate to Stripe when you migrate the rest of the site to WordPress/Outseta."
+    nextSteps: "First, fix the immediate PayPal problem so dues start activating again. Then, long-term, migrate to Stripe when you migrate the rest of the site to WordPress or Outseta."
   },
 
   "Update Stale Content (Last changed 2012)": {
@@ -945,7 +989,16 @@ function openModal(cardEl) {
       <div class="tech-option">
         <div class="tech-name">${opt.name}</div>
         <div class="tech-desc">${opt.desc}</div>
-        <div class="tech-cost-effort">💰 ${opt.cost} · ⏱ ${opt.effort}</div>
+        <div class="tech-details">
+          <div class="tech-detail-item">
+            <div class="tech-detail-label">External Cost (from budget)</div>
+            <div class="tech-detail-value">${opt.externalCost}</div>
+          </div>
+          <div class="tech-detail-item">
+            <div class="tech-detail-label">Your Time</div>
+            <div class="tech-detail-value">${opt.timeToComplete}</div>
+          </div>
+        </div>
       </div>
     `;
   });
