@@ -7,13 +7,13 @@
   <link rel="stylesheet" href="style.css" />
   <style>
     .action-map-wrap {
-      max-width: 1000px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 2.5rem 1.5rem 4rem;
     }
 
     .category-section {
-      margin-bottom: 3.5rem;
+      margin-bottom: 4rem;
     }
 
     .category-header {
@@ -29,100 +29,62 @@
       font-size: .95rem;
       color: var(--muted);
       font-family: var(--font-ui);
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
       font-style: italic;
     }
 
     .action-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.25rem;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem;
     }
 
     .action-card {
       background: #fff;
-      border: 1px solid var(--border);
+      border: 2px solid var(--border);
       border-radius: var(--radius);
       overflow: hidden;
       box-shadow: var(--shadow);
-      transition: box-shadow .2s, border-color .2s;
+      transition: all .2s;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
     }
 
     .action-card:hover {
-      box-shadow: 0 4px 16px rgba(0,0,0,.12);
+      box-shadow: 0 8px 24px rgba(0,0,0,.15);
       border-color: var(--crimson);
+      transform: translateY(-2px);
     }
 
-    .action-card-title-bar {
-      padding: 1.25rem 1.25rem 0.75rem;
+    .action-header {
       background: var(--paper);
+      padding: 1.25rem;
       border-bottom: 1px solid var(--border);
-      cursor: pointer;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 1rem;
-      transition: background .15s;
-    }
-
-    .action-card.expanded .action-card-title-bar {
-      background: rgba(122, 17, 40, .04);
     }
 
     .action-title {
-      flex: 1;
       font-weight: 700;
       color: var(--ink);
-      font-size: 1rem;
+      font-size: 1.05rem;
       line-height: 1.4;
-    }
-
-    .action-toggle {
-      flex-shrink: 0;
-      font-size: 1.2rem;
-      color: var(--crimson);
-      transition: transform .2s;
-      font-weight: bold;
-      padding-top: .1rem;
-    }
-
-    .action-card.expanded .action-toggle {
-      transform: rotate(180deg);
+      margin-bottom: .6rem;
     }
 
     .action-meta {
       display: flex;
-      gap: .75rem;
+      gap: .5rem;
       flex-wrap: wrap;
-      margin-top: .4rem;
-    }
-
-    .action-preview {
-      padding: 0 1.25rem 1.25rem;
-      background: #fff;
-      font-size: .95rem;
-      line-height: 1.65;
-      color: var(--ink);
-    }
-
-    .action-preview strong {
-      color: var(--ink2);
-    }
-
-    .action-divider {
-      height: 1px;
-      background: var(--border);
-      margin: 0 1.25rem;
     }
 
     .action-badge {
       display: inline-block;
       font-family: var(--font-ui);
-      font-size: .7rem;
+      font-size: .65rem;
       font-weight: 700;
       letter-spacing: .05em;
       text-transform: uppercase;
-      padding: .25rem .5rem;
+      padding: .25rem .45rem;
       border-radius: 3px;
     }
 
@@ -142,75 +104,192 @@
     }
 
     .action-body {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .3s ease-out;
-    }
-
-    .action-card.expanded .action-body {
-      max-height: 2000px;
-    }
-
-    .action-content {
-      padding: 0 1.25rem 1.25rem;
+      padding: 1.25rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
     }
 
     .action-description {
       font-size: .95rem;
       color: var(--ink);
-      margin-bottom: 1rem;
-      line-height: 1.7;
+      line-height: 1.65;
+      margin-bottom: .75rem;
     }
 
-    .action-detail {
-      background: var(--gold-lt);
-      border-left: 3px solid var(--gold);
-      padding: .85rem 1rem;
+    .action-note {
+      font-size: .9rem;
+      color: var(--muted);
+      font-style: italic;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      padding: .75rem;
+      background: rgba(0,0,0,.02);
+      border-left: 2px solid var(--gold);
       border-radius: 0 var(--radius) var(--radius) 0;
-      margin-bottom: 1rem;
-      font-size: .88rem;
-      color: #4a3000;
-    }
-
-    .action-detail-title {
-      font-weight: 700;
-      color: #3a2400;
-      margin-bottom: .25rem;
     }
 
     .action-footer {
+      margin-top: auto;
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-details {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      background: var(--crimson);
+      color: #fff;
+      border: none;
+      padding: .55rem 1rem;
+      border-radius: var(--radius);
+      font-family: var(--font-ui);
+      font-size: .85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .15s;
+      text-decoration: none;
+    }
+
+    .btn-details:hover {
+      background: var(--crimson2);
+    }
+
+    .btn-details::after {
+      content: '→';
+    }
+
+    /* ─── Modal ─── */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, .6);
+      z-index: 1000;
+      overflow-y: auto;
+      padding: 2rem 1rem;
+    }
+
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: 0 20px 60px rgba(0,0,0,.3);
+      max-width: 700px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .modal-header {
+      background: var(--crimson);
+      color: #fff;
+      padding: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      position: sticky;
+      top: 0;
+    }
+
+    .modal-header h2 {
+      margin: 0 0 .5rem;
+      font-size: 1.5rem;
+      color: #fff;
+      border: none;
+    }
+
+    .modal-meta {
       display: flex;
       gap: .75rem;
       flex-wrap: wrap;
-      padding-top: .75rem;
-      border-top: 1px solid var(--border);
+      margin-top: .75rem;
     }
 
-    .action-link {
-      display: inline-block;
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255,255,255,.2);
+      color: #fff;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 1.4rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .15s;
+    }
+
+    .modal-close:hover {
+      background: rgba(255,255,255,.3);
+    }
+
+    .modal-body {
+      padding: 2rem;
+    }
+
+    .modal-section {
+      margin-bottom: 2rem;
+    }
+
+    .modal-section h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--crimson);
+      margin-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: .5rem;
+    }
+
+    .modal-section p {
+      font-size: .95rem;
+      line-height: 1.7;
+      color: var(--ink);
+      margin-bottom: .75rem;
+    }
+
+    .tech-option {
+      background: var(--paper);
+      border-left: 3px solid var(--gold);
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    .tech-name {
+      font-weight: 700;
+      color: var(--ink);
+      font-size: 1rem;
+      margin-bottom: .3rem;
+    }
+
+    .tech-desc {
+      font-size: .9rem;
+      color: var(--muted);
+      margin-bottom: .5rem;
+    }
+
+    .tech-cost-effort {
       font-family: var(--font-ui);
       font-size: .85rem;
       color: var(--crimson);
-      text-decoration: none;
-      border: 1px solid var(--crimson);
-      padding: .45rem .75rem;
-      border-radius: 3px;
-      transition: background .15s, color .15s;
+      font-weight: 600;
     }
 
-    .action-link:hover {
-      background: var(--crimson);
-      color: #fff;
-    }
-
-    .effort-estimate {
-      font-family: var(--font-ui);
-      font-size: .85rem;
-      color: var(--muted);
-      margin-top: .5rem;
-    }
-
-    .intro-section {
+    .intro-banner {
       background: var(--paper);
       border: 1px solid var(--border);
       border-left: 4px solid var(--crimson);
@@ -219,14 +298,59 @@
       border-radius: 0 var(--radius) var(--radius) 0;
     }
 
-    .intro-section h2 {
+    .intro-banner h2 {
       font-size: 1.2rem;
       margin-top: 0;
     }
 
+    .roadmap-box {
+      background: var(--ink);
+      color: #e8e4df;
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+
+    .roadmap-box h2 {
+      color: var(--gold);
+      border: none;
+      margin-top: 0;
+    }
+
+    .roadmap-phase {
+      margin-bottom: 1.25rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+
+    .roadmap-phase:last-child {
+      border-bottom: none;
+    }
+
+    .phase-title {
+      font-weight: 700;
+      color: #fff;
+      font-size: 1rem;
+      margin-bottom: .4rem;
+    }
+
+    .phase-desc {
+      font-family: var(--font-ui);
+      font-size: .9rem;
+      color: #d4cec4;
+    }
+
     @media (max-width: 680px) {
-      .action-grid { grid-template-columns: 1fr; }
-      .action-meta { margin-top: .75rem; }
+      .action-grid {
+        grid-template-columns: 1fr;
+      }
+      .modal-content {
+        max-height: 100vh;
+        border-radius: 0;
+      }
+      .modal {
+        padding: 0;
+      }
     }
   </style>
 </head>
@@ -236,10 +360,10 @@
 
   <h1>Societas Magica — Site Work Action Map</h1>
 
-  <div class="intro-section">
-    <h2>How to use this map</h2>
-    <p>This is a breakdown of all the work needed to take over, stabilize, and improve the Societas Magica website. Each card below represents a distinct task. Click any card to expand and see details, technology options, effort estimates, and links to full implementation guides.</p>
-    <p>Tasks are organized by <strong>priority</strong> (fixing broken things first) and <strong>effort</strong> (quick wins before big projects). Cards are color-coded to show whether each task is <span style="background:var(--crimson);color:#fff;padding:.1rem .3rem;border-radius:2px;">Essential</span> or <span style="background:var(--gold-lt);color:#5a3e00;padding:.1rem .3rem;border-radius:2px;">Nice to Have</span>.</p>
+  <div class="intro-banner">
+    <h2>How to use this deck</h2>
+    <p>Each card shows a task that needs to be done. Read the preview on each card to understand the problem and why it matters. <strong>Click "Details"</strong> to see technology options, cost/effort estimates, and implementation approaches. Cards are prioritized by category: fix what's broken first, then quick improvements, then long-term projects.</p>
+    <p><strong>Color coding:</strong> <span style="background:var(--crimson);color:#fff;padding:.15rem .4rem;border-radius:2px;font-size:.85rem;">Essential</span> = must do soon | <span style="background:var(--gold-lt);color:#5a3e00;padding:.15rem .4rem;border-radius:2px;font-size:.85rem;">Nice to Have</span> = valuable when capacity allows</p>
   </div>
 
   <!-- ════════════════════════════════════════════ -->
@@ -248,204 +372,84 @@
 
   <section class="category-section">
     <h2 class="category-header">1. Fixing Existing Functionality</h2>
-    <p class="category-desc">The site has known broken pages and outdated content. These fixes must happen first — they're the foundation for everything else.</p>
+    <p class="category-desc">Fix broken pages and outdated content first — these undermine credibility and must be addressed before moving forward.</p>
 
     <div class="action-grid">
 
-      <!-- CARD: Restore contact page (404) -->
-      <div class="action-card">
-        <div class="action-card-title-bar" onclick="toggleCard(this)">
-          <div>
-            <div class="action-title">Restore Contact Page (404)</div>
-            <div class="action-meta">
-              <span class="action-badge badge-essential">Essential</span>
-              <span class="action-badge badge-high-value">Critical</span>
-            </div>
+      <!-- Card: Contact page 404 -->
+      <div class="action-card" onclick="openModal(this)">
+        <div class="action-header">
+          <div class="action-title">Restore Contact Page (404)</div>
+          <div class="action-meta">
+            <span class="action-badge badge-essential">Essential</span>
+            <span class="action-badge badge-high-value">Critical</span>
           </div>
-          <div class="action-toggle">▼</div>
         </div>
-
-        <div class="action-preview">
-          <p><strong>The problem:</strong> The contact page returns HTTP 404. Visitors, journalists, and prospective members cannot reach the organization. This is a basic credibility issue — a broken contact page signals that the organization is inactive.</p>
-          <p><strong>What it looks like now:</strong> Anyone visiting <code>/contact</code> or <code>/contact_us</code> gets an error page instead of an officer directory with contact forms.</p>
-        </div>
-
-        <div class="action-divider"></div>
-
         <div class="action-body">
-          <div class="action-content">
-            <div class="action-detail">
-              <div class="action-detail-title">Why This Matters</div>
-              Journalists, prospective members, and institutional partners all expect a working contact form and officer directory. A broken contact page is often the first thing visitors see if they search for "Societas Magica contact." It's a missed opportunity every time.
-            </div>
-
-            <h4>Immediate fix (1–2 hours)</h4>
-            <p>Either restore the original URL (if it was just moved) or rebuild the page from the officer data in the database. The outgoing webmaster should know what happened.</p>
-
-            <h4>Better long-term fix</h4>
-            <p>See the "Officer Directory Self-Management" action below. Instead of maintaining contact info in files, store it in a form. The contact page renders from the database and is never a static file that can break.</p>
-
-            <p class="effort-estimate">⏱ 1–2 hours (quick fix) / 2–3 hours (database-backed long-term)</p>
-          </div>
+          <p class="action-description">The contact page returns HTTP 404. Visitors and journalists cannot reach the organization. This is a credibility killer.</p>
+          <p class="action-note">Journalists, prospective members, and institutional partners all expect a working contact form. A broken page is a missed opportunity.</p>
+          <button class="btn-details">Details</button>
         </div>
       </div>
 
-      <!-- CARD: Fix PayPal integration -->
-      <div class="action-card">
-        <div class="action-card-title-bar" onclick="toggleCard(this)">
-          <div>
-            <div class="action-title">Stabilize PayPal/Payment Processing</div>
-            <div class="action-meta">
-              <span class="action-badge badge-essential">Essential</span>
-              <span class="action-badge badge-high-value">Critical</span>
-            </div>
+      <!-- Card: PayPal fix -->
+      <div class="action-card" onclick="openModal(this)">
+        <div class="action-header">
+          <div class="action-title">Stabilize PayPal/Payment Processing</div>
+          <div class="action-meta">
+            <span class="action-badge badge-essential">Essential</span>
+            <span class="action-badge badge-high-value">Critical</span>
           </div>
-          <div class="action-toggle">▼</div>
         </div>
-
-        <div class="action-preview">
-          <p><strong>The problem:</strong> PayPal IPN (Instant Payment Notification) recently broke. Members paid their dues successfully at PayPal, but their accounts never got activated on the website. This happened silently — nobody knew until members complained.</p>
-          <p><strong>Why it's urgent:</strong> This is the #1 failure point for a membership organization. If payment doesn't activate membership, you lose both the member and the revenue.</p>
-        </div>
-
-        <div class="action-divider"></div>
-
         <div class="action-body">
-          <div class="action-content">
-            <div class="action-detail">
-              <div class="action-detail-title">How PayPal IPN Works</div>
-              When someone pays, PayPal sends a webhook to a script on your server (e.g., <code>/paypal/callback.php</code>). That script checks the payment status, verifies it came from PayPal, and updates the member record in the database to <code>active=1</code>. If that script has an error, or if PayPal can't reach it, the payment succeeds but the member is never activated.
-            </div>
-
-            <h4>Immediate fix (2–4 hours)</h4>
-            <p>Get SSH access to the server. Find the PayPal callback endpoint. Check the error logs to see what went wrong. Test it by making a small payment. You may just need to fix a database query or a mismatched credential.</p>
-
-            <h4>Better long-term fix (1 day)</h4>
-            <p>Replace PayPal IPN with <strong>Stripe Billing</strong>. Stripe's webhook system is more reliable, it handles subscription renewals automatically, and it has better error reporting. If migrating to WordPress/Outseta, this becomes automatic and you get renewal reminders for free.</p>
-
-            <p class="effort-estimate">⏱ 2–4 hours (diagnosis) + 1 day (Stripe migration, optional)</p>
-          </div>
+          <p class="action-description">PayPal IPN broke recently. Members paid their dues but were never activated. This is the #1 failure point for a membership org.</p>
+          <p class="action-note">When payment doesn't activate membership, you lose both the member AND the revenue. This must be diagnosed and fixed immediately.</p>
+          <button class="btn-details">Details</button>
         </div>
       </div>
 
-      <!-- CARD: Update stale content -->
-      <div class="action-card">
-        <div class="action-card-title-bar" onclick="toggleCard(this)">
-          <div>
-            <div class="action-title">Update Content (Last changed 2012)</div>
-            <div class="action-meta">
-              <span class="action-badge badge-essential">Essential</span>
-            </div>
+      <!-- Card: Update stale content -->
+      <div class="action-card" onclick="openModal(this)">
+        <div class="action-header">
+          <div class="action-title">Update Stale Content (Last changed 2012)</div>
+          <div class="action-meta">
+            <span class="action-badge badge-essential">Essential</span>
           </div>
-          <div class="action-toggle">▼</div>
         </div>
-
-        <div class="action-preview">
-          <p><strong>The problem:</strong> Multiple pages show "Updated: January 12, 2012" — over 14 years ago. Membership benefits, publications, and officer bios are out of date or incomplete. This gives the false impression the organization is dormant.</p>
-          <p><strong>Visible impact:</strong> Any visitor sees immediately outdated content. Search engines also notice stale updates and rank the site lower.</p>
-        </div>
-
-        <div class="action-divider"></div>
-
         <div class="action-body">
-          <div class="action-content">
-            <h4>Pages needing urgent updates</h4>
-            <ul style="margin-bottom:1rem;">
-              <li><strong>Membership page</strong> — Verify dues amounts, journal subscription options, benefits list</li>
-              <li><strong>Publications page</strong> — Add recent Magic in History titles and MRW issues</li>
-              <li><strong>Conferences page</strong> — Add 2024–2026 session information</li>
-              <li><strong>Home page</strong> — Update officer info, recent announcements</li>
-            </ul>
-
-            <h4>How to do it</h4>
-            <p>Visit every public page. Check the date footer and content accuracy. Edit in place (if it's a static file) or update the database record (if it's data-driven). Add a current date to the footer when you finish.</p>
-
-            <h4>Long-term solution</h4>
-            <p>Content that's updated frequently (officer names, dues info, conference listings) should be stored in a database or CMS, not in static HTML files. This prevents dates from drifting.</p>
-
-            <p class="effort-estimate">⏱ 3–4 hours (audit + updates)</p>
-          </div>
+          <p class="action-description">Multiple pages show "Updated: January 12, 2012" or are missing current information. This makes the site look dormant.</p>
+          <p class="action-note">Membership benefits, publications, officer bios, and conference info all need updates. This is the most visible credibility issue.</p>
+          <button class="btn-details">Details</button>
         </div>
       </div>
 
-      <!-- CARD: Member directory status -->
-      <div class="action-card">
-        <div class="action-card-title-bar" onclick="toggleCard(this)">
-          <div>
-            <div class="action-title">Assess Member Directory State</div>
-            <div class="action-meta">
-              <span class="action-badge badge-essential">Essential</span>
-            </div>
+      <!-- Card: Member directory audit -->
+      <div class="action-card" onclick="openModal(this)">
+        <div class="action-header">
+          <div class="action-title">Assess Member Directory State</div>
+          <div class="action-meta">
+            <span class="action-badge badge-essential">Essential</span>
           </div>
-          <div class="action-toggle">▼</div>
         </div>
-
-        <div class="action-preview">
-          <p><strong>The problem:</strong> The member directory is login-gated (correct), but its current state is unknown. How many members are actually in the system? Does the search work? Can members edit their own profiles? Is the data complete?</p>
-          <p><strong>Why it matters:</strong> The member list is the core value proposition of the site. If it's broken or out of date, the whole membership program is undermined.</p>
-        </div>
-
-        <div class="action-divider"></div>
-
         <div class="action-body">
-          <div class="action-content">
-            <h4>What to test</h4>
-            <ul style="margin-bottom:1rem;">
-              <li>Total member count (check the database or admin panel)</li>
-              <li>Search functionality — can you find a member by name or institution?</li>
-              <li>Profile editing — can a member log in and update their info?</li>
-              <li>Data completeness — are all members listed? Do profiles have required fields filled?</li>
-              <li>Lapsed members — are expired memberships marked correctly?</li>
-            </ul>
-
-            <h4>How to do it</h4>
-            <p>Create a test account if needed. Log in and browse the member list. Try searching for your name. Try editing your profile. Verify the member count matches what the treasurer expects.</p>
-
-            <h4>Document your findings</h4>
-            <p>Write down what works and what doesn't. Share this with the officers so they know the state of the system before your changes.</p>
-
-            <p class="effort-estimate">⏱ 1–2 hours (testing)</p>
-          </div>
+          <p class="action-description">The member directory is login-gated, but its current state is unknown. How many members? Does search work? Can members edit profiles?</p>
+          <p class="action-note">The member list is the core value of the site. If it's broken, the whole membership program is undermined.</p>
+          <button class="btn-details">Details</button>
         </div>
       </div>
 
-      <!-- CARD: Newsletter archiving -->
-      <div class="action-card">
-        <div class="action-card-title-bar" onclick="toggleCard(this)">
-          <div>
-            <div class="action-title">Verify Newsletter PDF Archive</div>
-            <div class="action-meta">
-              <span class="action-badge badge-nice-to-have">Nice to Have</span>
-            </div>
+      <!-- Card: Newsletter verification -->
+      <div class="action-card" onclick="openModal(this)">
+        <div class="action-header">
+          <div class="action-title">Verify Newsletter PDF Archive</div>
+          <div class="action-meta">
+            <span class="action-badge badge-nice-to-have">Nice to Have</span>
           </div>
-          <div class="action-toggle">▼</div>
         </div>
-
-        <div class="action-preview">
-          <p><strong>The task:</strong> All 44 newsletter PDFs are hosted on the current server. If the site ever migrates to new hosting, these files must be moved or re-linked. First, verify all the links still work.</p>
-          <p><strong>Why it matters:</strong> A broken newsletter archive kills credibility. Scholars expect to be able to access 30 years of organizational history.</p>
-        </div>
-
-        <div class="action-divider"></div>
-
         <div class="action-body">
-          <div class="action-content">
-            <h4>What to check</h4>
-            <ul style="margin-bottom:1rem;">
-              <li>Are all 44 PDF links returning 200 OK (not 404)?</li>
-              <li>What's the total file size of the archive? (Will this fit on new hosting?)</li>
-              <li>Where on the server are the PDFs stored? (Note the path for migration planning.)</li>
-              <li>Are any PDFs corrupted or missing from the sequence?</li>
-            </ul>
-
-            <h4>How to do it</h4>
-            <p>Visit the newsletter archive page. Check a few PDFs from different years — do they download correctly? Keep a spreadsheet of the file sizes and paths if they vary.</p>
-
-            <h4>Migration planning</h4>
-            <p>If the site moves to a new platform, you'll need to either download all PDFs and re-upload them, or set up URL redirects so old links don't break.</p>
-
-            <p class="effort-estimate">⏱ 30 minutes (verification)</p>
-          </div>
+          <p class="action-description">All 44 newsletter PDFs are hosted on the current server. If the site migrates, these files must be moved or re-linked.</p>
+          <p class="action-note">A broken newsletter archive kills credibility. Scholars expect 30 years of organizational history to be accessible.</p>
+          <button class="btn-details">Details</button>
         </div>
       </div>
 
@@ -458,204 +462,82 @@
 
   <section class="category-section">
     <h2 class="category-header">2. Short-Term Easy Improvements (1–2 weeks)</h2>
-    <p class="category-desc">Low-effort wins that improve usability and reduce ongoing maintenance burden. These can run in parallel with fixes.</p>
+    <p class="category-desc">Low-effort wins that reduce webmaster burden and improve usability. These run in parallel with fixes.</p>
 
     <div class="action-grid">
 
-      <!-- CARD: Member dashboard -->
-      <div class="action-card">
-        <div class="action-card-title-bar" onclick="toggleCard(this)">
-          <div>
-            <div class="action-title">Build Member Management Dashboard</div>
-            <div class="action-meta">
-              <span class="action-badge badge-essential">Essential</span>
-            </div>
+      <!-- Card: Member dashboard -->
+      <div class="action-card" onclick="openModal(this)">
+        <div class="action-header">
+          <div class="action-title">Build Member Management Dashboard</div>
+          <div class="action-meta">
+            <span class="action-badge badge-essential">Essential</span>
           </div>
-          <div class="action-toggle">▼</div>
         </div>
-
-        <div class="action-preview">
-          <p><strong>The problem:</strong> Officers need to answer basic questions — How many active members? Who is lapsed? When do memberships expire? — but right now they have to query the database directly or use a spreadsheet that constantly drifts out of sync.</p>
-          <p><strong>What you'll build:</strong> A simple admin dashboard showing active members, lapsed members, members expiring soon, and recent new joins. One-click CSV export for treasurer and board reports.</p>
-        </div>
-
-        <div class="action-divider"></div>
-
         <div class="action-body">
-          <div class="action-content">
-            <h4>Dashboard features</h4>
-            <ul style="margin-bottom:1rem;">
-              <li>Total active member count</li>
-              <li>Lapsed members (expired > 30 days)</li>
-              <li>Members expiring in next 60 days</li>
-              <li>New members this month</li>
-              <li>Search by name, email, or institution</li>
-              <li>CSV export for reports and mailing lists</li>
-            </ul>
-
-            <h4>Platform fit</h4>
-            <p><strong>WordPress + MemberPress:</strong> Built-in. Configure and go. 1–2 hours.</p>
-            <p><strong>Outseta:</strong> Built-in CRM view. 30 minutes.</p>
-            <p><strong>Custom PHP:</strong> Write a SQL query and render as HTML table with PDF/CSV export. 4–8 hours.</p>
-
-            <p class="effort-estimate">⏱ 30 min–8 hours depending on platform</p>
-          </div>
+          <p class="action-description">Officers need to know: How many active members? Who is lapsed? When do memberships expire? Currently requires database queries or outdated spreadsheets.</p>
+          <p class="action-note">A simple admin view solves this. Active members, lapsed members, expiring soon, new this month, plus CSV export for reports.</p>
+          <button class="btn-details">Details</button>
         </div>
       </div>
 
-      <!-- CARD: Officer self-management form -->
-      <div class="action-card">
-        <div class="action-card-title-bar" onclick="toggleCard(this)">
-          <div>
-            <div class="action-title">Officer Directory Self-Management Form</div>
-            <div class="action-meta">
-              <span class="action-badge badge-essential">Essential</span>
-            </div>
+      <!-- Card: Officer self-management -->
+      <div class="action-card" onclick="openModal(this)">
+        <div class="action-header">
+          <div class="action-title">Officer Directory Self-Management Form</div>
+          <div class="action-meta">
+            <span class="action-badge badge-essential">Essential</span>
           </div>
-          <div class="action-toggle">▼</div>
         </div>
-
-        <div class="action-preview">
-          <p><strong>The problem:</strong> Currently, updating the officer directory requires editing files or database records directly. When someone becomes president, someone has to remember to update the contact page. Inevitably, something gets missed — like what happened with the 404 contact page.</p>
-          <p><strong>The fix:</strong> Create a form where each officer can update their own entry. The contact page pulls from the database and renders automatically. It's never stale because it's data-driven, not a static file.</p>
-        </div>
-
-        <div class="action-divider"></div>
-
         <div class="action-body">
-          <div class="action-content">
-            <h4>What to build</h4>
-            <p>A simple admin form, one per officer role:</p>
-            <ul style="margin-bottom:1rem;">
-              <li>Role title (President, Treasurer, etc.) — locked in, not editable</li>
-              <li>Name</li>
-              <li>Institution</li>
-              <li>Email address</li>
-              <li>Profile/ORCID URL (optional)</li>
-              <li>Bio (optional)</li>
-            </ul>
-
-            <h4>How it prevents breakage</h4>
-            <p>When the treasurer changes, the outgoing treasurer (or the webmaster) updates one form. The contact page reflects it immediately. No files to edit, no static HTML to update.</p>
-
-            <h4>Implementation</h4>
-            <p>WordPress: ACF Options Page with a repeater field. Custom PHP: HTML form + UPDATE query. Either takes 2–3 hours.</p>
-
-            <p class="effort-estimate">⏱ 2–3 hours</p>
-          </div>
+          <p class="action-description">Updating the officer directory currently requires editing files. When someone becomes president, someone forgets to update the page. This caused the 404 contact page.</p>
+          <p class="action-note">A form prevents breakage. Officers can update their own entries. The page renders from the database and is never stale.</p>
+          <button class="btn-details">Details</button>
         </div>
       </div>
 
-      <!-- CARD: Role-based access -->
-      <div class="action-card">
-        <div class="action-card-title-bar" onclick="toggleCard(this)">
-          <div>
-            <div class="action-title">Set Up Role-Based Admin Access</div>
-            <div class="action-meta">
-              <span class="action-badge badge-nice-to-have">Nice to Have</span>
-            </div>
+      <!-- Card: Role-based access -->
+      <div class="action-card" onclick="openModal(this)">
+        <div class="action-header">
+          <div class="action-title">Set Up Role-Based Admin Access</div>
+          <div class="action-meta">
+            <span class="action-badge badge-nice-to-have">Nice to Have</span>
           </div>
-          <div class="action-toggle">▼</div>
         </div>
-
-        <div class="action-preview">
-          <p><strong>The problem:</strong> Currently there's no middle ground — you either have full server access (webmaster only) or no access. The newsletter editor can't publish without the webmaster. The treasurer can't view payment records.</p>
-          <p><strong>The solution:</strong> Define specific roles: Newsletter Editor, Blog Editor, Treasurer (view records), Officer (edit own info). Each role has exactly the permissions it needs.</p>
-        </div>
-
-        <div class="action-divider"></div>
-
         <div class="action-body">
-          <div class="action-content">
-            <h4>Roles to create</h4>
-            <ul style="margin-bottom:1rem;">
-              <li><strong>Newsletter Editor:</strong> Upload PDFs, publish new issues, send member emails</li>
-              <li><strong>Blog Editor:</strong> Create and publish blog posts</li>
-              <li><strong>Session Organizer:</strong> Edit conference session listings</li>
-              <li><strong>Treasurer:</strong> View and export member payment records (read-only)</li>
-              <li><strong>Officer:</strong> Edit their own directory entry</li>
-            </ul>
-
-            <p class="effort-estimate">⏱ 2–4 hours (WordPress) or built-in (Outseta/Wild Apricot)</p>
-          </div>
+          <p class="action-description">Currently: you either have full server access or no access. The newsletter editor can't publish. The treasurer can't view payment records.</p>
+          <p class="action-note">Define roles: Newsletter Editor, Blog Editor, Treasurer (read-only), Officer (edit own info). Each person can do exactly what they need.</p>
+          <button class="btn-details">Details</button>
         </div>
       </div>
 
-      <!-- CARD: Newsletter upload interface -->
-      <div class="action-card">
-        <div class="action-card-title-bar" onclick="toggleCard(this)">
-          <div>
-            <div class="action-title">Newsletter Upload & Publish Interface</div>
-            <div class="action-meta">
-              <span class="action-badge badge-essential">Essential</span>
-            </div>
+      <!-- Card: Newsletter upload interface -->
+      <div class="action-card" onclick="openModal(this)">
+        <div class="action-header">
+          <div class="action-title">Newsletter Upload & Publish Interface</div>
+          <div class="action-meta">
+            <span class="action-badge badge-essential">Essential</span>
           </div>
-          <div class="action-toggle">▼</div>
         </div>
-
-        <div class="action-preview">
-          <p><strong>The problem:</strong> Publishing a newsletter currently requires FTP access, knowledge of the exact server directory path, and manually editing the page to add the new entry. The newsletter editor (a volunteer) is blocked from publishing independently. The webmaster must do it, creating a bottleneck.</p>
-          <p><strong>The fix:</strong> A simple form where the editor uploads the PDF, enters Season/Year/Issue#, and clicks Publish. Everything happens automatically — upload, archive update, member email announcement.</p>
-        </div>
-
-        <div class="action-divider"></div>
-
         <div class="action-body">
-          <div class="action-content">
-            <h4>What the form does</h4>
-            <ol style="margin-bottom:1rem;">
-              <li>Editor selects PDF from their computer</li>
-              <li>Enters: Season (Spring/Fall), Year, Issue number</li>
-              <li>Clicks Publish</li>
-              <li>PDF uploads to server automatically</li>
-              <li>Newsletter archive page updates automatically</li>
-              <li>Email announcement sent to all members</li>
-            </ol>
-
-            <h4>Who can use it</h4>
-            <p>Only the newsletter editor and webmaster. (Use role-based access control.)</p>
-
-            <h4>Implementation options</h4>
-            <p><strong>WordPress:</strong> Custom post type for newsletters, file upload via ACF, automatic email via MailPoet. 4–6 hours.</p>
-            <p><strong>Wild Apricot:</strong> Built-in document library + email tool. 1 hour to set up.</p>
-            <p><strong>Custom PHP:</strong> Upload handler + database INSERT + email function. 4–6 hours.</p>
-
-            <p class="effort-estimate">⏱ 1–6 hours depending on platform</p>
-          </div>
+          <p class="action-description">Publishing a newsletter requires FTP access and manual page editing. The editor is blocked; the webmaster must do it.</p>
+          <p class="action-note">A simple form: upload PDF, enter Season/Year/Issue#, click Publish. Everything else happens automatically.</p>
+          <button class="btn-details">Details</button>
         </div>
       </div>
 
-      <!-- CARD: Member email list integration -->
-      <div class="action-card">
-        <div class="action-card-title-bar" onclick="toggleCard(this)">
-          <div>
-            <div class="action-title">Integrate Member Email List with Membership DB</div>
-            <div class="action-meta">
-              <span class="action-badge badge-essential">Essential</span>
-            </div>
+      <!-- Card: Email list integration -->
+      <div class="action-card" onclick="openModal(this)">
+        <div class="action-header">
+          <div class="action-title">Integrate Member Email List with Membership DB</div>
+          <div class="action-meta">
+            <span class="action-badge badge-essential">Essential</span>
           </div>
-          <div class="action-toggle">▼</div>
         </div>
-
-        <div class="action-preview">
-          <p><strong>The problem:</strong> The member email list (likely a separate Mailman or Listserv) is not synced with the website's membership database. When someone joins, they're added to the list manually. When they lapse, they stay on the list. Two systems, zero coordination.</p>
-          <p><strong>The fix:</strong> Active members automatically receive announcements. Lapsed members stop receiving them. One source of truth: the membership database.</p>
-        </div>
-
-        <div class="action-divider"></div>
-
         <div class="action-body">
-          <div class="action-content">
-            <h4>How it works</h4>
-            <p>When someone's membership status changes in the database, they're automatically added or removed from the email list. No manual sync needed. No lapsed members getting emails.</p>
-
-            <h4>Implementation options</h4>
-            <p><strong>Zapier:</strong> Automation watches for membership status changes and updates the email list. 1–2 hours to set up.</p>
-            <p><strong>Outseta/Wild Apricot:</strong> Built-in. Configure in dashboard. 30 minutes.</p>
-            <p><strong>Custom PHP:</strong> Add a database trigger that fires when membership status changes. 2–3 hours.</p>
-
-            <p class="effort-estimate">⏱ 30 min–3 hours depending on platform</p>
-          </div>
+          <p class="action-description">The member email list is a separate system not synced with the website database. New members aren't added. Lapsed members stay on the list.</p>
+          <p class="action-note">Merge them. Active members automatically get announcements. Lapsed members stop. One source of truth: the membership database.</p>
+          <button class="btn-details">Details</button>
         </div>
       </div>
 
@@ -668,230 +550,118 @@
 
   <section class="category-section">
     <h2 class="category-header">3. Long-Term Labor-Intensive Improvements (2–6 months)</h2>
-    <p class="category-desc">These transform the site from a maintenance burden into a field resource. They require editorial direction and sustained volunteer effort, but they address the underlying problem: declining attendance and interest.</p>
+    <p class="category-desc">These transform the site from a maintenance burden into a field resource. They address declining attendance by making the Societas a destination scholars visit.</p>
 
     <div class="action-grid">
 
-      <!-- CARD: Living bibliography -->
-      <div class="action-card">
-        <div class="action-card-title-bar" onclick="toggleCard(this)">
-          <div>
-            <div class="action-title">Create Living Bibliography of Magic Studies</div>
-            <div class="action-meta">
-              <span class="action-badge badge-nice-to-have">Nice to Have</span>
-              <span class="action-badge badge-high-value">Field Builder</span>
-            </div>
+      <!-- Card: Bibliography -->
+      <div class="action-card" onclick="openModal(this)">
+        <div class="action-header">
+          <div class="action-title">Create Living Bibliography of Magic Studies</div>
+          <div class="action-meta">
+            <span class="action-badge badge-nice-to-have">Nice to Have</span>
+            <span class="action-badge badge-high-value">Field Builder</span>
           </div>
-          <div class="action-toggle">▼</div>
         </div>
-
-        <div class="action-preview">
-          <p><strong>The problem:</strong> Magic studies publications are scattered across a dozen disciplines (history, religious studies, anthropology, classics, literature). There's no single searchable source. Scholars constantly miss relevant work.</p>
-          <p><strong>Why build it:</strong> Makes the Societas a destination scholars visit regularly to check new publications. Searchable by period, region, subject. Non-members can access it — a recruitment tool. RSS feed for scholars to subscribe.</p>
-        </div>
-
-        <div class="action-divider"></div>
-
         <div class="action-body">
-          <div class="action-content">
-            <h4>What to build</h4>
-            <p>A searchable database of new publications (books, articles, dissertations) in magic studies. Fields: author, title, year, publication type, period, region, subject tags, annotation. Members can submit citations. Monthly RSS feed.</p>
-
-            <h4>Implementation</h4>
-            <p>WordPress custom post type + FacetWP (search/filter), or Airtable with embedded interface. A volunteer editor curates and adds ~10 publications/month.</p>
-
-            <p class="effort-estimate">⏱ 1–2 days build + 5–10 hours/month editorial</p>
-          </div>
+          <p class="action-description">Magic studies publications are scattered across a dozen disciplines. There's no single searchable source. Scholars constantly miss relevant work.</p>
+          <p class="action-note">A searchable bibliography makes the Societas a destination. Non-members can access it — a recruitment tool. RSS feed for specialists.</p>
+          <button class="btn-details">Details</button>
         </div>
       </div>
 
-      <!-- CARD: Dissertation registry -->
-      <div class="action-card">
-        <div class="action-card-title-bar" onclick="toggleCard(this)">
-          <div>
-            <div class="action-title">Dissertation Registry & Grad Student Hub</div>
-            <div class="action-meta">
-              <span class="action-badge badge-nice-to-have">Nice to Have</span>
-              <span class="action-badge badge-high-value">Membership Growth</span>
-            </div>
+      <!-- Card: Dissertation registry -->
+      <div class="action-card" onclick="openModal(this)">
+        <div class="action-header">
+          <div class="action-title">Dissertation Registry & Grad Student Hub</div>
+          <div class="action-meta">
+            <span class="action-badge badge-nice-to-have">Nice to Have</span>
+            <span class="action-badge badge-high-value">Membership Growth</span>
           </div>
-          <div class="action-toggle">▼</div>
         </div>
-
-        <div class="action-preview">
-          <p><strong>Why it matters:</strong> Graduate students are the future of conference attendance. The site has no hook into this community. A searchable registry of dissertations (in progress and completed) creates that connection.</p>
-          <p><strong>The hook:</strong> A grad student working on Paracelsus finds two others working on similar topics. They connect, join the Societas, attend Kalamazoo. This compounds into larger conference attendance.</p>
-        </div>
-
-        <div class="action-divider"></div>
-
         <div class="action-body">
-          <div class="action-content">
-            <h4>What to build</h4>
-            <p>Searchable registry of dissertations with: author, institution, advisor, title, status (in progress/completed), abstract, tags (period, region, subject), "open to correspondence" checkbox.</p>
-
-            <p class="effort-estimate">⏱ 1–2 days build (shares code with bibliography) + minimal ongoing</p>
-          </div>
+          <p class="action-description">Graduate students are the future of conference attendance. The site has no hook into this community. Dissertations are invisible to each other.</p>
+          <p class="action-note">A searchable registry connects grad students, mentors, and collaborators. Early recruitment of future members.</p>
+          <button class="btn-details">Details</button>
         </div>
       </div>
 
-      <!-- CARD: Conference calendar -->
-      <div class="action-card">
-        <div class="action-card-title-bar" onclick="toggleCard(this)">
-          <div>
-            <div class="action-title">Field-Wide Conference Calendar & CFP Digest</div>
-            <div class="action-meta">
-              <span class="action-badge badge-nice-to-have">Nice to Have</span>
-              <span class="action-badge badge-high-value">Engagement Driver</span>
-            </div>
+      <!-- Card: Conference calendar -->
+      <div class="action-card" onclick="openModal(this)">
+        <div class="action-header">
+          <div class="action-title">Field-Wide Conference Calendar & CFP Digest</div>
+          <div class="action-meta">
+            <span class="action-badge badge-nice-to-have">Nice to Have</span>
+            <span class="action-badge badge-high-value">Engagement Driver</span>
           </div>
-          <div class="action-toggle">▼</div>
         </div>
-
-        <div class="action-preview">
-          <p><strong>The problem:</strong> Magic studies scholars present at 50+ different conferences annually. There's no single place to see all the CFPs and deadlines. Scholars miss submissions because they weren't on the right mailing list.</p>
-          <p><strong>The win:</strong> A calendar scholars bookmark and check monthly. Members can submit CFPs. Monthly digest: "10 deadlines this month." People visit the site regularly.</p>
-        </div>
-
-        <div class="action-divider"></div>
-
         <div class="action-body">
-          <div class="action-content">
-            <h4>What to build</h4>
-            <p>Calendar of conferences, CFPs, and deadlines across the field. Searchable, filterable by type. Members can submit new events. Monthly email digest sent to all members.</p>
-
-            <p class="effort-estimate">⏱ 1 day build + 5 hours/month curation</p>
-          </div>
+          <p class="action-description">Magic studies scholars present at 50+ conferences annually. There's no single place to see CFP deadlines. Scholars miss submissions.</p>
+          <p class="action-note">A calendar scholars bookmark and check monthly. Members submit CFPs. Monthly digest of upcoming deadlines.</p>
+          <button class="btn-details">Details</button>
         </div>
       </div>
 
-      <!-- CARD: Rich member profiles -->
-      <div class="action-card">
-        <div class="action-card-title-bar" onclick="toggleCard(this)">
-          <div>
-            <div class="action-title">Rich Member Profiles with ORCID Integration</div>
-            <div class="action-meta">
-              <span class="action-badge badge-nice-to-have">Nice to Have</span>
-              <span class="action-badge badge-high-value">Collaboration Tool</span>
-            </div>
+      <!-- Card: Rich member profiles -->
+      <div class="action-card" onclick="openModal(this)">
+        <div class="action-header">
+          <div class="action-title">Rich Member Profiles with ORCID Integration</div>
+          <div class="action-meta">
+            <span class="action-badge badge-nice-to-have">Nice to Have</span>
+            <span class="action-badge badge-high-value">Collaboration Tool</span>
           </div>
-          <div class="action-toggle">▼</div>
         </div>
-
-        <div class="action-preview">
-          <p><strong>Currently:</strong> Member directory is a phone book — names and emails. <strong>Potential:</strong> A discovery tool. Search for peer reviewers by specialty, find scholars to organize sessions with, identify potential committee members.</p>
-          <p><strong>How:</strong> Enrich profiles with research interests (tagged), current projects, recent publications (auto-pulled from ORCID), languages, availability for peer review/committees/media.</p>
-        </div>
-
-        <div class="action-divider"></div>
-
         <div class="action-body">
-          <div class="action-content">
-            <h4>New profile fields</h4>
-            <ul style="margin-bottom:1rem;">
-              <li>Research interests (tagged by period, region, subject)</li>
-              <li>Current projects</li>
-              <li>Recent publications (pulled from ORCID API)</li>
-              <li>Languages of research</li>
-              <li>Available for peer review / committees / conference org / media consultation</li>
-            </ul>
-
-            <p class="effort-estimate">⏱ 1 day build + setup</p>
-          </div>
+          <p class="action-description">Currently: member directory is a phone book. Potential: a discovery tool where members find peer reviewers, committee members, session organizers by specialty.</p>
+          <p class="action-note">Enrich profiles with research interests, projects, recent pubs (auto-pulled from ORCID), availability for peer review/committees/media.</p>
+          <button class="btn-details">Details</button>
         </div>
       </div>
 
-      <!-- CARD: Blog editorial program -->
-      <div class="action-card">
-        <div class="action-card-title-bar" onclick="toggleCard(this)">
-          <div>
-            <div class="action-title">Ars Magica Blog — Editorial Program</div>
-            <div class="action-meta">
-              <span class="action-badge badge-nice-to-have">Nice to Have</span>
-              <span class="action-badge badge-high-value">Visibility + Community</span>
-            </div>
+      <!-- Card: Blog program -->
+      <div class="action-card" onclick="openModal(this)">
+        <div class="action-header">
+          <div class="action-title">Ars Magica Blog — Editorial Program</div>
+          <div class="action-meta">
+            <span class="action-badge badge-nice-to-have">Nice to Have</span>
+            <span class="action-badge badge-high-value">Visibility + Community</span>
           </div>
-          <div class="action-toggle">▼</div>
         </div>
-
-        <div class="action-preview">
-          <p><strong>Currently:</strong> One blog post from 2021. A dormant blog signals a dormant organization. <strong>Potential:</strong> 6–8 posts per year = shareable content, SEO boost, reason for scholars to follow the Societas.</p>
-          <p><strong>Content types:</strong> Research previews, source spotlights, pedagogical posts, conference reports, new book forums, dissertation spotlights. Dissertation spotlights especially valuable for recruiting grad students.</p>
-        </div>
-
-        <div class="action-divider"></div>
-
         <div class="action-body">
-          <div class="action-content">
-            <h4>Editorial structure</h4>
-            <p>Two editors rotate solicitation duties. Post topics planned monthly. ~3–4 hours per post (solicit, edit, publish). WordPress infrastructure is zero setup.</p>
-
-            <p class="effort-estimate">⏱ 15–20 hours/month editorial effort</p>
-          </div>
+          <p class="action-description">One blog post from 2021. A dormant blog signals a dormant organization. With editorial commitment, 6–8 posts/year becomes shareable content.</p>
+          <p class="action-note">Posts like: research previews, source spotlights, pedagogical pieces, conference reports, book forums, dissertation spotlights.</p>
+          <button class="btn-details">Details</button>
         </div>
       </div>
 
-      <!-- CARD: Working papers -->
-      <div class="action-card">
-        <div class="action-card-title-bar" onclick="toggleCard(this)">
-          <div>
-            <div class="action-title">Open-Access Working Papers (via Zenodo)</div>
-            <div class="action-meta">
-              <span class="action-badge badge-nice-to-have">Nice to Have</span>
-              <span class="action-badge badge-high-value">Field Infrastructure</span>
-            </div>
+      <!-- Card: Working papers -->
+      <div class="action-card" onclick="openModal(this)">
+        <div class="action-header">
+          <div class="action-title">Open-Access Working Papers (via Zenodo)</div>
+          <div class="action-meta">
+            <span class="action-badge badge-nice-to-have">Nice to Have</span>
+            <span class="action-badge badge-high-value">Field Infrastructure</span>
           </div>
-          <div class="action-toggle">▼</div>
         </div>
-
-        <div class="action-preview">
-          <p><strong>The problem:</strong> Scholars have conference papers, grant reports, and draft chapters that are substantial but not journal-ready. They sit on hard drives, uncited.</p>
-          <p><strong>The solution:</strong> Papers hosted with Societas branding get cited. Those citations carry the organization's URL. Positions the Societas as field infrastructure. Best part: free DOI via CERN's Zenodo.</p>
-        </div>
-
-        <div class="action-divider"></div>
-
         <div class="action-body">
-          <div class="action-content">
-            <h4>How it works</h4>
-            <p>Create a Zenodo community (free, run by CERN). Members upload PDFs directly to Zenodo, select the Societas community. Papers get permanent DOIs and are citable. Societas URL appears in bibliographies forever.</p>
-
-            <p class="effort-estimate">⏱ 1 hour setup + minimal curation</p>
-          </div>
+          <p class="action-description">Scholars have conference papers and draft chapters that are substantial but not journal-ready. They sit on hard drives, uncited.</p>
+          <p class="action-note">Papers hosted with Societas branding get cited. Those citations carry the organization's URL. Free DOI via CERN's Zenodo.</p>
+          <button class="btn-details">Details</button>
         </div>
       </div>
 
-      <!-- CARD: Virtual events -->
-      <div class="action-card">
-        <div class="action-card-title-bar" onclick="toggleCard(this)">
-          <div>
-            <div class="action-title">Virtual Event Infrastructure</div>
-            <div class="action-meta">
-              <span class="action-badge badge-nice-to-have">Nice to Have</span>
-            </div>
+      <!-- Card: Virtual events -->
+      <div class="action-card" onclick="openModal(this)">
+        <div class="action-header">
+          <div class="action-title">Virtual Event Infrastructure</div>
+          <div class="action-meta">
+            <span class="action-badge badge-nice-to-have">Nice to Have</span>
           </div>
-          <div class="action-toggle">▼</div>
         </div>
-
-        <div class="action-preview">
-          <p><strong>Why:</strong> In-person attendance is down across academia. Travel costs, visa issues, accessibility. Virtual events extend reach to members who can't get to Kalamazoo.</p>
-          <p><strong>What to offer:</strong> Annual recorded lecture, pre-Kalamazoo virtual roundtable (ask questions about sessions), quarterly virtual working groups by research area, grad student mentorship cohorts.</p>
-        </div>
-
-        <div class="action-divider"></div>
-
         <div class="action-body">
-          <div class="action-content">
-            <h4>Event types</h4>
-            <ul style="margin-bottom:1rem;">
-              <li>Annual invited lecture (recorded, posted on YouTube)</li>
-              <li>Pre-Kalamazoo roundtable (scholars who can't travel can ask questions)</li>
-              <li>Quarterly working groups by research area</li>
-              <li>Grad student mentorship cohorts (semester-long pairing)</li>
-            </ul>
-
-            <p class="effort-estimate">⏱ ~5–10 hours/month organizational</p>
-          </div>
+          <p class="action-description">In-person attendance is down across academia. Travel costs, visa issues, accessibility. Virtual events extend reach to members who can't get to Kalamazoo.</p>
+          <p class="action-note">Annual lecture, pre-Kalamazoo roundtable (remote scholars ask questions), quarterly working groups, grad mentorship cohorts.</p>
+          <button class="btn-details">Details</button>
         </div>
       </div>
 
@@ -899,32 +669,309 @@
   </section>
 
   <!-- ════════════════════════════════════════════ -->
-  <!-- PHASE SUMMARY -->
-  <!-- ════════════════════════════════════════════ -->
+  <!-- ROADMAP ════════════════════════════════════ -->
 
-  <section class="category-section" style="background:var(--paper);padding:1.5rem;border-radius:var(--radius);border-left:4px solid var(--gold);">
-    <h2 style="border:none;margin-top:0;padding:0;color:var(--ink);">Implementation Roadmap</h2>
-    <p><strong>Phase 1 (Weeks 1–4):</strong> Restore contact page, stabilize PayPal, update stale content, build member dashboard and officer form, set up role-based access. <em>Goal: Site stability and basic usability.</em></p>
-    <p><strong>Phase 2 (Weeks 5–12):</strong> Newsletter upload interface, email list integration, blog editorial program. <em>Goal: Reduce webmaster burden, maintain active content flow.</em></p>
-    <p><strong>Phase 3 (Months 4–6):</strong> Living bibliography, dissertation registry, conference calendar, rich member profiles. <em>Goal: Make the site a field resource, drive attendance and engagement.</em></p>
-    <p><strong>Phase 4 (Ongoing):</strong> Working papers, expert directory, virtual events. <em>Goal: Long-term visibility and community building.</em></p>
-  </section>
+  <div class="roadmap-box">
+    <h2>Implementation Roadmap</h2>
+    <div class="roadmap-phase">
+      <div class="phase-title">Phase 1 (Weeks 1–4): Stabilize</div>
+      <div class="phase-desc">Restore contact page, fix PayPal, update stale content, build member dashboard, create officer self-management form. Goal: Basic credibility and functionality.</div>
+    </div>
+    <div class="roadmap-phase">
+      <div class="phase-title">Phase 2 (Weeks 5–12): Reduce Burden</div>
+      <div class="phase-desc">Newsletter upload interface, email list integration, blog editorial program. Goal: Free up webmaster time, establish regular content flow.</div>
+    </div>
+    <div class="roadmap-phase">
+      <div class="phase-title">Phase 3 (Months 4–6): Build Resources</div>
+      <div class="phase-desc">Bibliography, dissertation registry, conference calendar, rich member profiles. Goal: Make the site a field resource, drive attendance and engagement.</div>
+    </div>
+    <div class="roadmap-phase">
+      <div class="phase-title">Phase 4 (Ongoing): Amplify</div>
+      <div class="phase-desc">Working papers, expert directory, virtual events. Goal: Long-term visibility and community building.</div>
+    </div>
+  </div>
 
+</div>
+
+<!-- Modal for details -->
+<div class="modal" id="detailsModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-header">
+      <h2 id="modalTitle"></h2>
+      <div class="modal-meta" id="modalMeta"></div>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
 </div>
 
 <script src="nav.js"></script>
 <script>
-  function toggleCard(headerEl) {
-    const card = headerEl.closest('.action-card');
-    card.classList.toggle('expanded');
-  }
+// Modal data — organized by card title
+const cardDetails = {
+  "Restore Contact Page (404)": {
+    problem: "The contact page returns HTTP 404. Visitors, journalists, and prospective members cannot reach the organization or find officer contact information.",
+    why: "Journalists, prospective members, and institutional partners all expect a working contact form and officer directory. A broken page is the first impression many people get.",
+    impact: "Missed media opportunities, lost member inquiries, credibility damage.",
+    techOptions: [
+      { name: "Quick Fix", desc: "Restore original URL or rebuild from database if it was just moved.", cost: "1–2 hours", effort: "Low" },
+      { name: "Better Fix: Database-Backed Form", desc: "Store officer info in a form. Contact page renders from database automatically. Never breaks again.", cost: "2–3 hours", effort: "Low" }
+    ],
+    nextSteps: "Ask the outgoing webmaster what happened. If it was just moved, restore the URL. If not, implement the officer self-management form (see below)."
+  },
 
-  // Optional: expand on hash (e.g., #contact-page)
-  window.addEventListener('hashchange', () => {
-    document.querySelectorAll('.action-card.expanded').forEach(c => c.classList.remove('expanded'));
-    const target = document.querySelector(window.location.hash);
-    if (target?.closest('.action-card')) target.closest('.action-card').classList.add('expanded');
+  "Stabilize PayPal/Payment Processing": {
+    problem: "PayPal IPN (Instant Payment Notification) broke recently. Members successfully paid their dues at PayPal, but their accounts were never activated on the website.",
+    why: "This is the #1 failure point for a membership organization. Payment not activating membership = lost members AND lost revenue. It happened silently — members didn't know until they tried to log in.",
+    impact: "Revenue loss, member frustration, broken trust in the payment system.",
+    techOptions: [
+      { name: "Diagnose & Fix PayPal IPN", desc: "Get SSH access, find the callback script, check error logs. Test with a small payment. May be a simple database query fix.", cost: "2–4 hours", effort: "Medium" },
+      { name: "Migrate to Stripe Billing (Better)", desc: "Replace PayPal with Stripe. Better webhook reliability, native subscription renewal, automatic dunning emails, cleaner dashboard. WordPress + Stripe takes 1 day.", cost: "1 day + Stripe 2.9% + $0.30/txn", effort: "Medium" }
+    ],
+    nextSteps: "Immediate: diagnose the PayPal endpoint and fix it. Long-term: migrate to Stripe when you migrate the rest of the site to WordPress/Outseta."
+  },
+
+  "Update Stale Content (Last changed 2012)": {
+    problem: "Multiple pages show \"Updated: January 12, 2012\" or have incomplete/incorrect information. Membership benefits, publications, conference listings, and officer bios are out of date.",
+    why: "This makes the site look dormant. Search engines rank stale content lower. Any visitor sees immediately that the organization isn't maintaining its information.",
+    impact: "Low search rankings, visitor distrust, credibility damage.",
+    techOptions: [
+      { name: "Audit & Update Manually", desc: "Visit every public page. Check dates and accuracy. Edit in place. Add current date.", cost: "3–4 hours", effort: "Low" },
+      { name: "Migrate to Database-Driven System", desc: "Content that changes frequently (officer names, dues, conferences) should be in a database, not static files. Prevents dates from drifting.", cost: "2–3 days", effort: "Medium" }
+    ],
+    nextSteps: "Start with manual updates immediately. Flag the pages that need regular updates (officers, conferences, membership) for migration to a CMS later."
+  },
+
+  "Assess Member Directory State": {
+    problem: "The member directory is login-gated (correct), but its current state is unknown. How many members? Does search work? Can members edit profiles?",
+    why: "The member list is the core value of the site. If it's broken, the whole membership program is undermined.",
+    impact: "If broken, members won't renew. Loss of engagement and revenue.",
+    techOptions: [
+      { name: "Manual Testing", desc: "Log in with a test account. Check: member count, search functionality, profile edit capability, data quality. Document findings.", cost: "1–2 hours", effort: "Low" },
+      { name: "Database Audit", desc: "Query the database directly to verify member count, check for data integrity issues, identify missing fields.", cost: "1–2 hours", effort: "Low" }
+    ],
+    nextSteps: "Do the testing immediately. Report findings to the treasurer. Use this information to prioritize improvements to the directory."
+  },
+
+  "Verify Newsletter PDF Archive": {
+    problem: "All 44 newsletter PDFs are hosted on the current server. If the site migrates, these files must be moved or links must be updated.",
+    why: "A broken newsletter archive kills credibility. Scholars expect decades of organizational history to be accessible.",
+    impact: "If links break during migration, the organization looks negligent. 30 years of newsletters become inaccessible.",
+    techOptions: [
+      { name: "Spot Check Links", desc: "Test a few PDFs from different years. Do they download correctly? Check file sizes.", cost: "30 minutes", effort: "Low" },
+      { name: "Full Audit", desc: "Test all 44 links. Note file sizes and storage location. Make a backup. Plan for migration.", cost: "1–2 hours", effort: "Low" }
+    ],
+    nextSteps: "Do a quick spot check now. Before any migration, download all PDFs as a backup and plan the re-upload process."
+  },
+
+  "Build Member Management Dashboard": {
+    problem: "Officers need to know basic information — How many active members? Who is lapsed? When do memberships expire? Currently requires database queries or relying on outdated spreadsheets.",
+    why: "A simple admin view gives officers visibility into membership health without needing database access. Treasurer can generate reports for the board.",
+    impact: "Better governance, faster member support, clearer view of membership trends.",
+    techOptions: [
+      { name: "WordPress + MemberPress", desc: "Built-in Members table in admin. Search, filter, export to CSV. 1–2 hours setup.", cost: "~$360/yr (MemberPress license)", effort: "Low" },
+      { name: "Outseta", desc: "Built-in Contacts view with all features. 30 minutes setup.", cost: "Included in Outseta (~$49/mo)", effort: "Very Low" },
+      { name: "Custom PHP", desc: "Write a SQL query and render as HTML table with CSV export. 4–8 hours development.", cost: "$0", effort: "Medium" }
+    ],
+    nextSteps: "If migrating platforms, this comes free. If staying on custom PHP, worth the 1 day of development."
+  },
+
+  "Officer Directory Self-Management Form": {
+    problem: "Currently, updating the officer directory requires editing files or database records directly. When someone becomes president, someone forgets to update the page or breaks the link. This caused the 404 contact page.",
+    why: "A form prevents breakage. Officers can self-serve updates. The page renders from the database and is never a static file that can break.",
+    impact: "Prevents broken contact pages, allows officers to update their own info, reduces webmaster burden.",
+    techOptions: [
+      { name: "WordPress + ACF Options Page", desc: "Create a form with fields for each role. ACF repeater field for officers. Contact page template pulls from database.", cost: "~$0 (ACF free)", effort: "Low (2–3 hrs)" },
+      { name: "Custom PHP Form", desc: "HTML form + database UPDATE query. Contact page queries the database on render.", cost: "$0", effort: "Low (2–3 hrs)" },
+      { name: "Outseta / Wild Apricot", desc: "Built-in member profiles. Officers update their own info.", cost: "Included in platform", effort: "Very Low" }
+    ],
+    nextSteps: "Implement this soon. It prevents the \"404 contact page\" situation from ever happening again."
+  },
+
+  "Set Up Role-Based Admin Access": {
+    problem: "Currently: either you have full server access (webmaster only) or no access at all. The newsletter editor can't publish without the webmaster. The treasurer can't view payment records. The blog editor can't post.",
+    why: "Reduces the webmaster bottleneck. Officers can do their jobs without needing full system access.",
+    impact: "Faster content turnaround, less webmaster burden, more resilience.",
+    techOptions: [
+      { name: "WordPress Roles & Capabilities", desc: "Built-in system. Create custom roles: Newsletter Editor, Blog Editor, Treasurer, etc. Each role has exact permissions needed.", cost: "~$0", effort: "Low (2–4 hrs)" },
+      { name: "Outseta / Wild Apricot", desc: "Built-in role system in dashboard.", cost: "Included", effort: "Very Low" },
+      { name: "Custom PHP", desc: "Create a simple permission table. Check permissions on each admin page.", cost: "$0", effort: "Medium (1 day)" }
+    ],
+    nextSteps: "Implement after fixing immediate issues. Critical for scaling beyond one webmaster."
+  },
+
+  "Newsletter Upload & Publish Interface": {
+    problem: "Publishing a newsletter currently requires FTP access, knowledge of the exact server directory path, and manually editing the page to add the new entry. The newsletter editor (a volunteer) is blocked from publishing independently.",
+    why: "Empowers the editor to publish without webmaster involvement. Automates the announcement email to members.",
+    impact: "Faster newsletter turnaround, less webmaster burden, automatic member notifications.",
+    techOptions: [
+      { name: "WordPress Custom Post Type + ACF", desc: "Register 'newsletter_issue' post type. ACF fields for Season, Year, Issue#, PDF file. Publish fires webhook to send member email via MailPoet.", cost: "~$0–$10/mo (MailPoet free tier)", effort: "Low (4–6 hrs)" },
+      { name: "GitHub Actions (Static)", desc: "Newsletter PDFs committed to repo. GitHub Action detects new file, updates JSON manifest, triggers Netlify build. Optional webhook to Mailchimp for announcements.", cost: "$0", effort: "Medium (3–4 hrs)" },
+      { name: "Wild Apricot", desc: "Built-in document library + email tool. Upload PDF, create announcement, send. No code.", cost: "Included", effort: "Very Low" }
+    ],
+    nextSteps: "Implement this soon after stabilization. It's quick and high-impact for reducing webmaster burden."
+  },
+
+  "Integrate Member Email List with Membership DB": {
+    problem: "The member email list (probably Mailman or Listserv) is a separate system not synced with the website database. When someone joins, they're added manually. When they lapse, they stay on the list. Two systems, zero coordination.",
+    why: "Single source of truth. Active members automatically get announcements. Lapsed members stop receiving them. No manual sync needed.",
+    impact: "Reduced confusion, automatic enforcement of membership status, reduced manual work.",
+    techOptions: [
+      { name: "Zapier Automation", desc: "Zapier watches for membership status changes and updates Mailchimp/Convertkit list tags. Quick to set up.", cost: "$20–$25/mo (Zapier paid)", effort: "Very Low (1 hr)" },
+      { name: "WordPress + MailPoet", desc: "MailPoet syncs with MemberPress automatically. Active members tagged 'active', lapsed members removed.", cost: "MailPoet free tier", effort: "Low (1–2 hrs)" },
+      { name: "Outseta / Wild Apricot", desc: "Built-in email list synced to membership status.", cost: "Included", effort: "Very Low" },
+      { name: "Custom PHP Database Trigger", desc: "When membership status changes in DB, trigger fires and updates email list.", cost: "$0", effort: "Medium (2–3 hrs)" }
+    ],
+    nextSteps: "Implement alongside the member dashboard. Eliminates manual list management."
+  },
+
+  "Create Living Bibliography of Magic Studies": {
+    problem: "Magic studies publications are scattered across history, religious studies, anthropology, classics, literature, and many other fields. There's no curated, searchable source. Scholars constantly miss relevant work.",
+    why: "A living bibliography makes the Societas a destination scholars visit regularly. It's searchable by period, region, subject. Non-members can access it (recruitment). RSS feed for specialists.",
+    impact: "Increases site traffic and engagement, establishes Societas as field infrastructure, drives new memberships.",
+    techOptions: [
+      { name: "WordPress Custom Post Type + FacetWP", desc: "Custom post type 'publication'. FacetWP adds search/filter UI. Members submit via Gravity Forms. Editor approves before going live.", cost: "FacetWP ~$99/yr", effort: "Medium (1–2 days)" },
+      { name: "Airtable (No-Code)", desc: "Build base in Airtable. Embed public view on website. Members submit via Airtable form. Editor approves in Airtable UI.", cost: "Airtable Plus ~$10/mo", effort: "Low (2–3 hrs)" },
+      { name: "Static JSON + Client-Side Search", desc: "Bibliography as JSON file in GitHub. Fuse.js for client-side search/filter. No backend needed.", cost: "$0", effort: "Medium (4–6 hrs)" }
+    ],
+    nextSteps: "Plan for Phase 3. Requires ongoing editorial work (~5–10 hrs/month), so only start when you have a volunteer editor ready."
+  },
+
+  "Dissertation Registry & Grad Student Hub": {
+    problem: "Graduate students are the future of conference attendance. The site has no hook into this community. Dissertations are invisible to each other.",
+    why: "A searchable registry connects grad students, mentors, and collaborators. Early recruitment of future members.",
+    impact: "Grows future membership, establishes grad student community, positions Societas as essential resource for the field.",
+    techOptions: [
+      { name: "WordPress (Shares infrastructure with Bibliography)", desc: "Second custom post type 'dissertation'. Same FacetWP filter UI. Completed dissertations feed into bibliography.", cost: "Same as bibliography", effort: "Low (1 day, shares code)" },
+      { name: "Airtable (Shares with Bibliography)", desc: "Second base or linked table. Same approach as bibliography.", cost: "Same as bibliography", effort: "Very Low" }
+    ],
+    nextSteps: "Build alongside the bibliography. Small additional effort since it shares the same infrastructure."
+  },
+
+  "Field-Wide Conference Calendar & CFP Digest": {
+    problem: "Magic studies scholars present at 50+ conferences annually. There's no single place to see CFPs and deadlines. Scholars miss submissions.",
+    why: "A calendar scholars bookmark and check monthly. Members can submit new CFPs. Monthly email digest of upcoming deadlines.",
+    impact: "Increases site visits, positions Societas as field infrastructure, helps members find venues.",
+    techOptions: [
+      { name: "WordPress + The Events Calendar Plugin", desc: "Events Calendar free plugin handles calendar + list view. Add custom field for 'CFP deadline'. Members submit via form.", cost: "$0–$90/yr (if using PRO for submissions)", effort: "Low (3–4 hrs)" },
+      { name: "Google Calendar (Simple)", desc: "Shared calendar maintained by editor. Embedded on site. Less searchable, but zero setup.", cost: "$0", effort: "Very Low" },
+      { name: "Custom PHP Events Table", desc: "Events stored in database. Query renders calendar and list. Member submission form.", cost: "$0", effort: "Medium (1 day)" }
+    ],
+    nextSteps: "Implement in Phase 3. Monthly digest automation is the key win."
+  },
+
+  "Rich Member Profiles with ORCID Integration": {
+    problem: "Currently: member directory is a phone book. Potential: a discovery tool where members find peer reviewers, committee members, session organizers by specialty.",
+    why: "Transforms the directory into a collaboration tool. Members can search by research interests, find specialists, identify reviewers.",
+    impact: "Increases value of membership, encourages member engagement, facilitates collaboration.",
+    techOptions: [
+      { name: "WordPress + Ultimate Member", desc: "Ultimate Member handles profiles + directory. Add custom fields for interests, projects, ORCID. ORCID API pulls publications automatically.", cost: "Ultimate Member free", effort: "Medium (1 day)" },
+      { name: "Outseta", desc: "Built-in people profiles. Add custom fields. ORCID field links to profile (API integration requires custom code).", cost: "Included", effort: "Low" },
+      { name: "Wild Apricot", desc: "Member profiles built in. Custom fields for all data.", cost: "Included", effort: "Low" }
+    ],
+    nextSteps: "Implement in Phase 3. High-value feature for engagement."
+  },
+
+  "Ars Magica Blog — Editorial Program": {
+    problem: "One blog post from 2021. A dormant blog signals a dormant organization. With editorial commitment, 6–8 posts/year becomes shareable content and a reason to follow the Societas.",
+    why: "Regular posts = searchable content, shareable on social media, reason for members to return to the site.",
+    impact: "Better SEO, organic traffic, community engagement, visibility.",
+    techOptions: [
+      { name: "WordPress Native", desc: "WordPress blogging is built-in. No additional cost. Just need editorial commitment: 2 editors, monthly calendar, ~3–4 hrs per post.", cost: "$0", effort: "Editorial (15–20 hrs/month)" },
+      { name: "Substack (Alternative)", desc: "External blogging platform. Embed on website or link to Substack.", cost: "$0", effort: "Editorial (15–20 hrs/month)" }
+    ],
+    nextSteps: "Start in Phase 2, but ONLY if you have 2 committed editors. Without editorial commitment, this will fail."
+  },
+
+  "Open-Access Working Papers (via Zenodo)": {
+    problem: "Scholars have conference papers and draft chapters that are substantial but not journal-ready. They sit on hard drives, uncited.",
+    why: "Papers hosted with Societas branding get cited. Those citations carry the organization's URL. Positions Societas as field infrastructure.",
+    impact: "Organic visibility over time as papers get cited. Positions organization as important resource.",
+    techOptions: [
+      { name: "Zenodo Community (Recommended)", desc: "Create free community on Zenodo (run by CERN). Members upload directly to Zenodo, select Societas community. Papers get free DOIs. Societas URL appears in bibliographies forever.", cost: "$0", effort: "Very Low (1 hr setup)" },
+      { name: "WordPress File Library", desc: "WordPress Media Library for PDFs. Custom database for metadata.", cost: "$0", effort: "Medium (1 day)" }
+    ],
+    nextSteps: "Set up Zenodo community early (Phase 1 or 2). It's free and requires almost no maintenance."
+  },
+
+  "Virtual Event Infrastructure": {
+    problem: "In-person attendance is down across academia. Travel costs, visa issues, accessibility. Virtual events extend reach to members who can't get to Kalamazoo.",
+    why: "Includes remote scholars in the community. Pre-Kalamazoo roundtable lets distant scholars ask questions about sessions.",
+    impact: "Increases engagement, extends reach beyond in-person attendees.",
+    techOptions: [
+      { name: "Zoom + YouTube", desc: "Zoom ($15/mo for webinars). Record and post to YouTube. Website lists upcoming working groups and linking to Zoom.", cost: "~$200/yr", effort: "Low (organizational)" }
+    ],
+    nextSteps: "Implement in Phase 3 or 4. Requires ongoing organizational work but low technical effort."
+  }
+};
+
+function openModal(cardEl) {
+  const titleEl = cardEl.querySelector('.action-title');
+  const metaEl = cardEl.querySelector('.action-meta');
+  const title = titleEl.textContent;
+  const details = cardDetails[title];
+
+  if (!details) return;
+
+  const modal = document.getElementById('detailsModal');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalMeta = document.getElementById('modalMeta');
+  const modalBody = document.getElementById('modalBody');
+
+  modalTitle.textContent = title;
+
+  // Copy badges from card
+  modalMeta.innerHTML = metaEl.innerHTML;
+
+  // Build body
+  let html = `
+    <div class="modal-section">
+      <h3>The Problem</h3>
+      <p>${details.problem}</p>
+    </div>
+
+    <div class="modal-section">
+      <h3>Why It Matters</h3>
+      <p>${details.why}</p>
+      <p><strong>Impact:</strong> ${details.impact}</p>
+    </div>
+
+    <div class="modal-section">
+      <h3>Technology Options</h3>
+  `;
+
+  details.techOptions.forEach(opt => {
+    html += `
+      <div class="tech-option">
+        <div class="tech-name">${opt.name}</div>
+        <div class="tech-desc">${opt.desc}</div>
+        <div class="tech-cost-effort">💰 ${opt.cost} · ⏱ ${opt.effort}</div>
+      </div>
+    `;
   });
+
+  html += `
+    </div>
+
+    <div class="modal-section">
+      <h3>Next Steps</h3>
+      <p>${details.nextSteps}</p>
+    </div>
+  `;
+
+  modalBody.innerHTML = html;
+  modal.classList.add('active');
+}
+
+function closeModal() {
+  const modal = document.getElementById('detailsModal');
+  modal.classList.remove('active');
+}
+
+// Close modal when clicking outside
+document.getElementById('detailsModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
 </script>
 </body>
 </html>
