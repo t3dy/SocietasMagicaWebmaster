@@ -386,8 +386,9 @@
 
   <div class="intro-banner">
     <h2>How to use this deck</h2>
-    <p>Each card shows a task that needs to be done. Read the preview on each card to understand the problem and why it matters. <strong>Click "Details"</strong> to see technology options, cost/effort estimates, and implementation approaches. Cards are prioritized by category: fix what's broken first, then quick improvements, then long-term projects.</p>
-    <p><strong>Color coding:</strong> <span style="background:var(--crimson);color:#fff;padding:.15rem .4rem;border-radius:2px;font-size:.85rem;">Essential</span> = must do soon | <span style="background:var(--gold-lt);color:#5a3e00;padding:.15rem .4rem;border-radius:2px;font-size:.85rem;">Nice to Have</span> = valuable when capacity allows</p>
+    <p>The Societas Magica has been connecting scholars of the history of magic since 1994. This site has the potential to serve that community far more actively — as a hub for bibliography, collaboration, news from the field, and member connection. This action map outlines the path from where the site is now to where it could be.</p>
+    <p>Each card covers one task. Read the card preview to understand what the opportunity is and why it matters. <strong>Click "Details"</strong> to see technology options, budget costs, and time estimates for each approach. Cards are organized by priority: stabilize the foundation first, then build tools that serve scholars and officers, then expand the site into a genuine field resource.</p>
+    <p><strong>Color coding:</strong> <span style="background:var(--crimson);color:#fff;padding:.15rem .4rem;border-radius:2px;font-size:.85rem;">Essential</span> = foundation work | <span style="background:var(--gold-lt);color:#5a3e00;padding:.15rem .4rem;border-radius:2px;font-size:.85rem;">Nice to Have</span> = valuable when capacity allows | <span style="background:#e3f2fd;color:#1565c0;padding:.15rem .4rem;border-radius:2px;font-size:.85rem;">Community Builder</span> = grows scholarly engagement</p>
   </div>
 
   <!-- ════════════════════════════════════════════ -->
@@ -395,10 +396,41 @@
   <!-- ════════════════════════════════════════════ -->
 
   <section class="category-section">
-    <h2 class="category-header">1. Fixing Existing Functionality</h2>
-    <p class="category-desc">Fix broken pages and outdated content first — these undermine credibility and must be addressed before moving forward.</p>
+    <h2 class="category-header">1. Foundation Work — Get Things Working Reliably</h2>
+    <p class="category-desc">The starting point: protect the existing site with backups, restore anything that needs attention, and bring content current so the organization makes the impression it deserves. These are the tasks that build the stable platform everything else rests on.</p>
 
     <div class="action-grid">
+
+      <!-- Card: Backup -->
+      <div class="action-card" onclick="openModal(this)">
+        <div class="action-header">
+          <div class="action-title">Establish Backup & Recovery Process</div>
+          <div class="action-meta">
+            <span class="action-badge badge-essential">Essential</span>
+            <span class="action-badge badge-high-value">Do First</span>
+          </div>
+        </div>
+        <div class="action-body">
+          <p class="action-description">Before any changes are made, the current site should be backed up — the database, all uploaded files, and server configuration. Thirty years of newsletters, member data, and content deserve a safety net.</p>
+          <p class="action-note">A daily automated backup to a second location takes 2 hours to set up and costs $3–5/month. It's the single most valuable thing a new webmaster can do on day one.</p>
+          <button class="btn-details">Details</button>
+        </div>
+      </div>
+
+      <!-- Card: SSL -->
+      <div class="action-card" onclick="openModal(this)">
+        <div class="action-header">
+          <div class="action-title">Verify SSL and Security Settings</div>
+          <div class="action-meta">
+            <span class="action-badge badge-essential">Essential</span>
+          </div>
+        </div>
+        <div class="action-body">
+          <p class="action-description">The site needs to run on HTTPS. If it's not already secured, modern browsers display a "Not Secure" warning. Google also deprioritizes non-HTTPS sites in search results — meaning scholars looking for magic studies resources are less likely to find it.</p>
+          <p class="action-note">SSL certificates are free through Let's Encrypt. Most hosts offer one-click configuration. Takes 30 minutes.</p>
+          <button class="btn-details">Details</button>
+        </div>
+      </div>
 
       <!-- Card: Contact page 404 -->
       <div class="action-card" onclick="openModal(this)">
@@ -406,12 +438,12 @@
           <div class="action-title">Restore Contact Page (404)</div>
           <div class="action-meta">
             <span class="action-badge badge-essential">Essential</span>
-            <span class="action-badge badge-high-value">Critical</span>
+            <span class="action-badge badge-high-value">Urgent</span>
           </div>
         </div>
         <div class="action-body">
-          <p class="action-description">The contact page returns HTTP 404. Visitors and journalists cannot reach the organization. This is a credibility killer.</p>
-          <p class="action-note">Journalists, prospective members, and institutional partners all expect a working contact form. A broken page is a missed opportunity.</p>
+          <p class="action-description">The contact page is currently returning an error. Anyone trying to reach the organization — a journalist, prospective member, or conference organizer — reaches a dead end instead of the officer directory.</p>
+          <p class="action-note">Restoring this page also means rebuilding it in a way that doesn't break again during the next leadership transition.</p>
           <button class="btn-details">Details</button>
         </div>
       </div>
@@ -422,12 +454,12 @@
           <div class="action-title">Stabilize PayPal/Payment Processing</div>
           <div class="action-meta">
             <span class="action-badge badge-essential">Essential</span>
-            <span class="action-badge badge-high-value">Critical</span>
+            <span class="action-badge badge-high-value">Urgent</span>
           </div>
         </div>
         <div class="action-body">
-          <p class="action-description">PayPal IPN broke recently. Members paid their dues but were never activated. This is the #1 failure point for a membership org.</p>
-          <p class="action-note">When payment doesn't activate membership, you lose both the member AND the revenue. This must be diagnosed and fixed immediately.</p>
+          <p class="action-description">PayPal's payment notification system recently stopped communicating with the site. Members who paid their dues were not being activated. Diagnosing and restoring this gets the membership pipeline working again.</p>
+          <p class="action-note">The good news: this is likely a narrow technical issue. Once diagnosed, fixing it is usually a matter of hours. The longer-term path is migrating to Stripe, which is more reliable.</p>
           <button class="btn-details">Details</button>
         </div>
       </div>
@@ -435,14 +467,14 @@
       <!-- Card: Update stale content -->
       <div class="action-card" onclick="openModal(this)">
         <div class="action-header">
-          <div class="action-title">Update Stale Content (Last changed 2012)</div>
+          <div class="action-title">Bring Content Up to Date</div>
           <div class="action-meta">
             <span class="action-badge badge-essential">Essential</span>
           </div>
         </div>
         <div class="action-body">
-          <p class="action-description">Multiple pages show "Updated: January 12, 2012" or are missing current information. This makes the site look dormant.</p>
-          <p class="action-note">Membership benefits, publications, officer bios, and conference info all need updates. This is the most visible credibility issue.</p>
+          <p class="action-description">Multiple pages show "Updated: January 12, 2012." The organization has been active and growing — the website should reflect that. Officer bios, conference listings, membership benefits, and publication info all need a refresh.</p>
+          <p class="action-note">This is high-visibility work. A new webmaster who brings everything current in their first month sends a clear signal that the organization has new momentum.</p>
           <button class="btn-details">Details</button>
         </div>
       </div>
@@ -456,8 +488,8 @@
           </div>
         </div>
         <div class="action-body">
-          <p class="action-description">The member directory is login-gated, but its current state is unknown. How many members? Does search work? Can members edit profiles?</p>
-          <p class="action-note">The member list is the core value of the site. If it's broken, the whole membership program is undermined.</p>
+          <p class="action-description">The member directory is behind a login, but its current state is unknown. How many members are listed? Does search work? Can members update their own profiles? These answers shape every future improvement.</p>
+          <p class="action-note">The directory is the heart of member-to-member connection in the organization. Understanding exactly what it can and can't do right now is the starting point for making it much better.</p>
           <button class="btn-details">Details</button>
         </div>
       </div>
@@ -471,8 +503,8 @@
           </div>
         </div>
         <div class="action-body">
-          <p class="action-description">All 44 newsletter PDFs are hosted on the current server. If the site migrates, these files must be moved or re-linked.</p>
-          <p class="action-note">A broken newsletter archive kills credibility. Scholars expect 30 years of organizational history to be accessible.</p>
+          <p class="action-description">The Societas Magica newsletter goes back decades. All 44 issues are hosted on the current server. Before any migration, verify that all PDFs are accessible and make a backup.</p>
+          <p class="action-note">This is one of the most valuable historical assets the organization has. A quick audit now prevents any disruption during a future migration.</p>
           <button class="btn-details">Details</button>
         </div>
       </div>
@@ -485,10 +517,25 @@
   <!-- ════════════════════════════════════════════ -->
 
   <section class="category-section">
-    <h2 class="category-header">2. Short-Term Easy Improvements (1–2 weeks)</h2>
-    <p class="category-desc">Low-effort wins that reduce webmaster burden and improve usability. These run in parallel with fixes.</p>
+    <h2 class="category-header">2. Empower Officers and Editors (Weeks 3–8)</h2>
+    <p class="category-desc">The goal here is to give the people running the organization — the newsletter editor, the treasurer, the officers — the tools to do their jobs without needing to go through the webmaster every time. A well-run site gets better when more people can contribute directly.</p>
 
     <div class="action-grid">
+
+      <!-- Card: Mobile -->
+      <div class="action-card" onclick="openModal(this)">
+        <div class="action-header">
+          <div class="action-title">Make the Site Mobile-Friendly</div>
+          <div class="action-meta">
+            <span class="action-badge badge-essential">Essential</span>
+          </div>
+        </div>
+        <div class="action-body">
+          <p class="action-description">The current site was designed for desktop screens. More than half of all web traffic now comes from phones and tablets. Scholars browsing on mobile get a cramped, hard-to-navigate version of the site — or can't use it at all.</p>
+          <p class="action-note">Mobile responsiveness also affects how Google ranks the site. Most platform migrations (WordPress, Outseta) solve this automatically.</p>
+          <button class="btn-details">Details</button>
+        </div>
+      </div>
 
       <!-- Card: Member dashboard -->
       <div class="action-card" onclick="openModal(this)">
@@ -499,8 +546,8 @@
           </div>
         </div>
         <div class="action-body">
-          <p class="action-description">Officers need to know: How many active members? Who is lapsed? When do memberships expire? Currently requires database queries or outdated spreadsheets.</p>
-          <p class="action-note">A simple admin view solves this. Active members, lapsed members, expiring soon, new this month, plus CSV export for reports.</p>
+          <p class="action-description">The treasurer and officers need clear visibility into membership health — how many active members, who is coming up for renewal, who has lapsed — without needing the webmaster to run database queries for them.</p>
+          <p class="action-note">A simple admin view: active members, recent renewals, expiring soon, lapsed this year, new this month, plus CSV export for board reports. This changes how officers relate to membership data.</p>
           <button class="btn-details">Details</button>
         </div>
       </div>
@@ -514,8 +561,8 @@
           </div>
         </div>
         <div class="action-body">
-          <p class="action-description">Updating the officer directory currently requires editing files. When someone becomes president, someone forgets to update the page. This caused the 404 contact page.</p>
-          <p class="action-note">A form prevents breakage. Officers can update their own entries. The page renders from the database and is never stale.</p>
+          <p class="action-description">Officer transitions are a natural part of any academic society. Right now, updating the directory requires editing files directly — a step that's easy to miss during a busy handoff. A form lets incoming officers update their own entries without involving the webmaster.</p>
+          <p class="action-note">This is also how the 404 contact page gets fixed permanently. When officers own their own data, transitions are seamless.</p>
           <button class="btn-details">Details</button>
         </div>
       </div>
@@ -529,8 +576,8 @@
           </div>
         </div>
         <div class="action-body">
-          <p class="action-description">Currently: you either have full server access or no access. The newsletter editor can't publish. The treasurer can't view payment records.</p>
-          <p class="action-note">Define roles: Newsletter Editor, Blog Editor, Treasurer (read-only), Officer (edit own info). Each person can do exactly what they need.</p>
+          <p class="action-description">Right now, publishing anything to the site requires going through the webmaster. Giving the newsletter editor, blog editor, and treasurer access to their own areas — and only their own areas — means content gets published faster and the webmaster's time is freed up for real development.</p>
+          <p class="action-note">Roles to define: Newsletter Editor, Blog Editor, Treasurer (read-only financial view), Officer (edit own profile). Each person can do exactly what they need, nothing more.</p>
           <button class="btn-details">Details</button>
         </div>
       </div>
@@ -544,8 +591,8 @@
           </div>
         </div>
         <div class="action-body">
-          <p class="action-description">Publishing a newsletter requires FTP access and manual page editing. The editor is blocked; the webmaster must do it.</p>
-          <p class="action-note">A simple form: upload PDF, enter Season/Year/Issue#, click Publish. Everything else happens automatically.</p>
+          <p class="action-description">The newsletter editor is a volunteer who shouldn't need FTP credentials and server knowledge to do their job. A simple upload interface — PDF, season, year, issue number, click Publish — puts them fully in control of their own publication.</p>
+          <p class="action-note">Publishing can also automatically send an email announcement to the membership list. One action, two results: site updated, members notified.</p>
           <button class="btn-details">Details</button>
         </div>
       </div>
@@ -553,14 +600,30 @@
       <!-- Card: Email list integration -->
       <div class="action-card" onclick="openModal(this)">
         <div class="action-header">
-          <div class="action-title">Integrate Member Email List with Membership DB</div>
+          <div class="action-title">Sync Member Email List with Membership Database</div>
           <div class="action-meta">
             <span class="action-badge badge-essential">Essential</span>
           </div>
         </div>
         <div class="action-body">
-          <p class="action-description">The member email list is a separate system not synced with the website database. New members aren't added. Lapsed members stay on the list.</p>
-          <p class="action-note">Merge them. Active members automatically get announcements. Lapsed members stop. One source of truth: the membership database.</p>
+          <p class="action-description">The member email list and the membership database are currently two separate systems. When someone joins, they need to be added to both manually. When they lapse, they stay on the email list. Connecting them creates one source of truth and eliminates manual coordination.</p>
+          <p class="action-note">Active members get announcements automatically. Lapsed members are removed when their membership expires. New members are added the moment they join.</p>
+          <button class="btn-details">Details</button>
+        </div>
+      </div>
+
+      <!-- Card: Renewal reminders -->
+      <div class="action-card" onclick="openModal(this)">
+        <div class="action-header">
+          <div class="action-title">Automated Membership Renewal Reminders</div>
+          <div class="action-meta">
+            <span class="action-badge badge-nice-to-have">Nice to Have</span>
+            <span class="action-badge badge-high-value">Community Builder</span>
+          </div>
+        </div>
+        <div class="action-body">
+          <p class="action-description">Most membership lapses happen not because someone decided to leave, but because they got busy and forgot to renew. Automated reminders — 30 days before expiration, 7 days before, and on the expiration date — are the simplest way to keep members connected.</p>
+          <p class="action-note">Studies of membership organizations consistently show that renewal reminders alone lift renewal rates by 15–25%. This is community care made automatic.</p>
           <button class="btn-details">Details</button>
         </div>
       </div>
@@ -573,23 +636,23 @@
   <!-- ════════════════════════════════════════════ -->
 
   <section class="category-section">
-    <h2 class="category-header">3. Long-Term Labor-Intensive Improvements (2–6 months)</h2>
-    <p class="category-desc">These transform the site from a maintenance burden into a field resource. They address declining attendance by making the Societas a destination scholars visit.</p>
+    <h2 class="category-header">3. Build a Scholarly Resource (Months 2–6)</h2>
+    <p class="category-desc">These are the projects that turn the site from an organizational brochure into a genuine destination for scholars in the field. Each one gives researchers a reason to visit regularly, to bookmark the site, to recommend it to colleagues and students. The goal is to make the Societas Magica website something the field relies on — the way it already relies on the Kalamazoo sessions.</p>
 
     <div class="action-grid">
 
       <!-- Card: Bibliography -->
       <div class="action-card" onclick="openModal(this)">
         <div class="action-header">
-          <div class="action-title">Create Living Bibliography of Magic Studies</div>
+          <div class="action-title">Create a Living Bibliography of Magic Studies</div>
           <div class="action-meta">
             <span class="action-badge badge-nice-to-have">Nice to Have</span>
-            <span class="action-badge badge-high-value">Field Builder</span>
+            <span class="action-badge badge-high-value">Community Builder</span>
           </div>
         </div>
         <div class="action-body">
-          <p class="action-description">Magic studies publications are scattered across a dozen disciplines. There's no single searchable source. Scholars constantly miss relevant work.</p>
-          <p class="action-note">A searchable bibliography makes the Societas a destination. Non-members can access it — a recruitment tool. RSS feed for specialists.</p>
+          <p class="action-description">Magic studies publications are scattered across history, religious studies, classics, anthropology, and literary studies. There's no single curated, searchable source. A living bibliography on this site would become an essential reference for everyone working in the field.</p>
+          <p class="action-note">Members contribute entries. Searchable by period, region, and subject. Open to non-members — which brings new scholars into contact with the organization.</p>
           <button class="btn-details">Details</button>
         </div>
       </div>
@@ -597,15 +660,15 @@
       <!-- Card: Dissertation registry -->
       <div class="action-card" onclick="openModal(this)">
         <div class="action-header">
-          <div class="action-title">Dissertation Registry & Grad Student Hub</div>
+          <div class="action-title">Dissertation Registry & Graduate Student Hub</div>
           <div class="action-meta">
             <span class="action-badge badge-nice-to-have">Nice to Have</span>
-            <span class="action-badge badge-high-value">Membership Growth</span>
+            <span class="action-badge badge-high-value">Community Builder</span>
           </div>
         </div>
         <div class="action-body">
-          <p class="action-description">Graduate students are the future of conference attendance. The site has no hook into this community. Dissertations are invisible to each other.</p>
-          <p class="action-note">A searchable registry connects grad students, mentors, and collaborators. Early recruitment of future members.</p>
+          <p class="action-description">Graduate students working on magic studies often don't know about each other's work. A searchable registry of in-progress and recently completed dissertations connects researchers, surfaces potential collaborators, and helps advisors and mentors find each other.</p>
+          <p class="action-note">Graduate students are also the future of conference attendance and membership. Reaching them early builds the organization's next generation of participants.</p>
           <button class="btn-details">Details</button>
         </div>
       </div>
@@ -616,12 +679,12 @@
           <div class="action-title">Field-Wide Conference Calendar & CFP Digest</div>
           <div class="action-meta">
             <span class="action-badge badge-nice-to-have">Nice to Have</span>
-            <span class="action-badge badge-high-value">Engagement Driver</span>
+            <span class="action-badge badge-high-value">Community Builder</span>
           </div>
         </div>
         <div class="action-body">
-          <p class="action-description">Magic studies scholars present at 50+ conferences annually. There's no single place to see CFP deadlines. Scholars miss submissions.</p>
-          <p class="action-note">A calendar scholars bookmark and check monthly. Members submit CFPs. Monthly digest of upcoming deadlines.</p>
+          <p class="action-description">Magic studies scholars present at 50+ conferences a year across many disciplines. Keeping track of call-for-papers deadlines across all of them is genuinely difficult. A curated calendar — with a monthly email digest of upcoming CFPs — would be something scholars bookmark and return to.</p>
+          <p class="action-note">Members submit upcoming CFPs and conference listings. The webmaster spends an hour a month maintaining it. The value to the field is substantial.</p>
           <button class="btn-details">Details</button>
         </div>
       </div>
@@ -632,12 +695,12 @@
           <div class="action-title">Rich Member Profiles with ORCID Integration</div>
           <div class="action-meta">
             <span class="action-badge badge-nice-to-have">Nice to Have</span>
-            <span class="action-badge badge-high-value">Collaboration Tool</span>
+            <span class="action-badge badge-high-value">Community Builder</span>
           </div>
         </div>
         <div class="action-body">
-          <p class="action-description">Currently: member directory is a phone book. Potential: a discovery tool where members find peer reviewers, committee members, session organizers by specialty.</p>
-          <p class="action-note">Enrich profiles with research interests, projects, recent pubs (auto-pulled from ORCID), availability for peer review/committees/media.</p>
+          <p class="action-description">The member directory today is a contact list. With richer profiles — research interests, current projects, ORCID publications (pulled automatically), and availability for peer review or media — it becomes a collaboration and discovery tool. A scholar looking for a Solomonic-tradition specialist can find one in minutes.</p>
+          <p class="action-note">Richer profiles also give members a reason to log in regularly and keep their information current. The directory becomes more valuable the more it's used.</p>
           <button class="btn-details">Details</button>
         </div>
       </div>
@@ -648,12 +711,12 @@
           <div class="action-title">Ars Magica Blog — Editorial Program</div>
           <div class="action-meta">
             <span class="action-badge badge-nice-to-have">Nice to Have</span>
-            <span class="action-badge badge-high-value">Visibility + Community</span>
+            <span class="action-badge badge-high-value">Community Builder</span>
           </div>
         </div>
         <div class="action-body">
-          <p class="action-description">One blog post from 2021. A dormant blog signals a dormant organization. With editorial commitment, 6–8 posts/year becomes shareable content.</p>
-          <p class="action-note">Posts like: research previews, source spotlights, pedagogical pieces, conference reports, book forums, dissertation spotlights.</p>
+          <p class="action-description">The Ars Magica blog has one post from 2021. With an editorial commitment — 6–8 posts a year — it becomes a place for the field to think out loud between conferences. Research previews, source spotlights, pedagogical pieces, conference reports, book forums, dissertation spotlights: there's no shortage of material from active members.</p>
+          <p class="action-note">Each post is searchable, shareable, and brings new visitors to the site. The technical work is minimal; this is an organizational and editorial commitment.</p>
           <button class="btn-details">Details</button>
         </div>
       </div>
@@ -664,12 +727,12 @@
           <div class="action-title">Open-Access Working Papers (via Zenodo)</div>
           <div class="action-meta">
             <span class="action-badge badge-nice-to-have">Nice to Have</span>
-            <span class="action-badge badge-high-value">Field Infrastructure</span>
+            <span class="action-badge badge-high-value">Community Builder</span>
           </div>
         </div>
         <div class="action-body">
-          <p class="action-description">Scholars have conference papers and draft chapters that are substantial but not journal-ready. They sit on hard drives, uncited.</p>
-          <p class="action-note">Papers hosted with Societas branding get cited. Those citations carry the organization's URL. Free DOI via CERN's Zenodo.</p>
+          <p class="action-description">Many scholars have conference papers and polished draft chapters that are substantial but not yet journal-ready. Hosting them through the Societas gives them a permanent, citable home — a free DOI through CERN's Zenodo platform — and the Societas URL appears in bibliographies as those papers get cited.</p>
+          <p class="action-note">Setup takes one hour and costs nothing. Members upload papers directly to Zenodo and select the Societas community. The organization benefits from the citations indefinitely.</p>
           <button class="btn-details">Details</button>
         </div>
       </div>
@@ -680,11 +743,12 @@
           <div class="action-title">Virtual Event Infrastructure</div>
           <div class="action-meta">
             <span class="action-badge badge-nice-to-have">Nice to Have</span>
+            <span class="action-badge badge-high-value">Community Builder</span>
           </div>
         </div>
         <div class="action-body">
-          <p class="action-description">In-person attendance is down across academia. Travel costs, visa issues, accessibility. Virtual events extend reach to members who can't get to Kalamazoo.</p>
-          <p class="action-note">Annual lecture, pre-Kalamazoo roundtable (remote scholars ask questions), quarterly working groups, grad mentorship cohorts.</p>
+          <p class="action-description">Travel costs, visa difficulties, and accessibility concerns mean that some members and interested scholars simply cannot make it to Kalamazoo. Virtual events — an annual lecture, a pre-Kalamazoo roundtable, quarterly working groups — extend the Societas's community to scholars anywhere in the world.</p>
+          <p class="action-note">Sessions recorded and posted to YouTube become a permanent archive of the field's conversations. The technical setup is lightweight; the organizational benefit is significant.</p>
           <button class="btn-details">Details</button>
         </div>
       </div>
@@ -698,20 +762,20 @@
   <div class="roadmap-box">
     <h2>Implementation Roadmap</h2>
     <div class="roadmap-phase">
-      <div class="phase-title">Phase 1 (Weeks 1–4): Stabilize</div>
-      <div class="phase-desc">Restore contact page, fix PayPal, update stale content, build member dashboard, create officer self-management form. Goal: Basic credibility and functionality.</div>
+      <div class="phase-title">Phase 1 (Weeks 1–4): Stabilize the Foundation</div>
+      <div class="phase-desc">Back up everything. Verify SSL. Restore the contact page. Fix PayPal. Bring content current. Audit the member directory and newsletter archive. Goal: The organization's digital presence is reliable, current, and working — ready to build on.</div>
     </div>
     <div class="roadmap-phase">
-      <div class="phase-title">Phase 2 (Weeks 5–12): Reduce Burden</div>
-      <div class="phase-desc">Newsletter upload interface, email list integration, blog editorial program. Goal: Free up webmaster time, establish regular content flow.</div>
+      <div class="phase-title">Phase 2 (Weeks 3–8): Empower the Team</div>
+      <div class="phase-desc">Mobile responsiveness. Member dashboard for officers. Officer self-management form. Role-based admin access. Newsletter upload interface. Email list sync. Renewal reminders. Goal: Officers, editors, and volunteers can manage their own areas without going through the webmaster for every task.</div>
     </div>
     <div class="roadmap-phase">
-      <div class="phase-title">Phase 3 (Months 4–6): Build Resources</div>
-      <div class="phase-desc">Bibliography, dissertation registry, conference calendar, rich member profiles. Goal: Make the site a field resource, drive attendance and engagement.</div>
+      <div class="phase-title">Phase 3 (Months 2–6): Build for Scholars</div>
+      <div class="phase-desc">Living bibliography. Dissertation registry. Conference calendar with CFP digest. Richer member profiles with ORCID integration. Goal: The site becomes a genuine scholarly resource — something field members visit regularly, recommend to students, and cite in their work.</div>
     </div>
     <div class="roadmap-phase">
-      <div class="phase-title">Phase 4 (Ongoing): Amplify</div>
-      <div class="phase-desc">Working papers, expert directory, virtual events. Goal: Long-term visibility and community building.</div>
+      <div class="phase-title">Phase 4 (Ongoing): Grow the Community</div>
+      <div class="phase-desc">Ars Magica Blog editorial program. Open-access working papers via Zenodo. Virtual event infrastructure. Goal: The Societas Magica website becomes field infrastructure — a place the community of scholars returns to for conversation, bibliography, and connection across the year, not just at Kalamazoo.</div>
     </div>
   </div>
 
@@ -733,10 +797,64 @@
 <script>
 // Modal data — organized by card title
 const cardDetails = {
+  "Establish Backup & Recovery Process": {
+    problem: "The site contains 30 years of newsletters, a member database, conference history, and content that cannot be recreated if it's lost. Before any changes are made to the site — before any repairs, migrations, or upgrades — a complete backup of everything should exist in at least two locations.",
+    why: "A new webmaster touching unfamiliar code without a backup is taking an unnecessary risk. A daily automated backup to a second location costs $3–5/month and takes 2 hours to configure. It means that any mistake during a repair, any server failure, any migration error, can be fully reversed. It's the single most valuable thing to do on day one.",
+    impact: "Complete protection against data loss during any repair or migration. The organization's 30-year history is safe. Any mistake is recoverable.",
+    techOptions: [
+      {
+        name: "cPanel Backup to AWS S3 or Backblaze B2",
+        desc: "Most shared hosting accounts include cPanel, which has a built-in backup tool. Configure it to run a daily full backup and ship it to an Amazon S3 bucket or Backblaze B2 bucket (both are cheap, reliable, geographically separate storage). This is the standard professional approach: the backup lives on a completely different server from the site.",
+        externalCost: "$3–5 per month (cloud storage)",
+        timeToComplete: "2 hours"
+      },
+      {
+        name: "WordPress Plugin (if migrating to WordPress)",
+        desc: "UpdraftPlus is the most widely used WordPress backup plugin, with over 3 million active installs. Free version does daily backups to Google Drive, Dropbox, or S3. Install, configure a destination, schedule daily backups. Done.",
+        externalCost: "$0 (free version)",
+        timeToComplete: "30 minutes"
+      },
+      {
+        name: "Manual Backup (Interim)",
+        desc: "Before touching anything: SSH to the server, run mysqldump to export the database, tar/zip the web root, and download everything to a local drive. This is a one-time manual backup, not a recurring solution, but it's the right first move on day one before anything else.",
+        externalCost: "$0",
+        timeToComplete: "1 hour"
+      }
+    ],
+    nextSteps: "Do the manual backup on day one — before touching anything. Configure automated daily backups within the first week. This is non-negotiable infrastructure."
+  },
+
+  "Verify SSL and Security Settings": {
+    problem: "The site needs to be running on HTTPS. If it's currently on HTTP, modern browsers show a 'Not Secure' warning in the address bar to every visitor. Google's search ranking algorithm treats HTTPS as a positive signal and HTTP as a negative one — meaning the site is harder to find for anyone searching for magic studies resources.",
+    why: "SSL certificates are free through Let's Encrypt, which is supported by virtually every web host. Switching to HTTPS takes 30 minutes on most hosts. Beyond the browser warning, HTTPS also protects member login credentials (password, email) from being transmitted in plain text. For a site that handles login and payment data, this is foundational.",
+    impact: "Browser 'Not Secure' warning removed. Member login credentials protected. Search ranking improves. The site reflects professional security standards.",
+    techOptions: [
+      {
+        name: "Let's Encrypt via cPanel (Recommended)",
+        desc: "If the host uses cPanel (most shared hosts do), there's a 'SSL/TLS' section in the control panel with a one-click Let's Encrypt certificate installer. Install the certificate, then update the site's configuration to redirect all HTTP traffic to HTTPS. Total time: 30 minutes.",
+        externalCost: "$0 (Let's Encrypt is free)",
+        timeToComplete: "30 minutes"
+      },
+      {
+        name: "Host-Provided SSL",
+        desc: "Many hosts (SiteGround, Bluehost, Dreamhost, etc.) include SSL certificates in their hosting plans and offer one-click activation from the hosting control panel. Check the hosting dashboard first — the certificate may already be available.",
+        externalCost: "$0 (usually included in hosting)",
+        timeToComplete: "15 minutes"
+      },
+      {
+        name: "Cloudflare Free Tier",
+        desc: "Point the domain's DNS to Cloudflare, enable Cloudflare's free SSL. Cloudflare also adds a content delivery network (CDN) that speeds up page loads globally, and provides basic DDoS protection. More configuration than the cPanel approach, but adds additional benefits.",
+        externalCost: "$0 (Cloudflare free tier)",
+        timeToComplete: "1–2 hours"
+      }
+    ],
+    nextSteps: "Check the hosting control panel for an existing SSL certificate. If one isn't active, install Let's Encrypt immediately. Do this in the first week."
+  },
+
   "Restore Contact Page (404)": {
-    problem: "The contact page returns HTTP 404. Visitors, journalists, and prospective members cannot reach the organization or find officer contact information. This is a completely broken endpoint.",
-    why: "Journalists, prospective members, and institutional partners all expect a working contact form and officer directory. This is often the first page people visit after the home page. A broken page is credibility damage.",
-    impact: "Missed media opportunities, lost member inquiries, lost donation prospects, credibility damage.",
+    problem: "The contact page is currently returning an HTTP 404 error. The page that should show the officer directory and a contact form instead shows a browser error. This appears to have happened during a leadership transition when files were reorganized.",
+    why: "Anyone trying to reach the organization — a journalist writing about magic studies, a prospective member, a conference organizer looking to invite a speaker — encounters a dead end instead of the people they need. Restoring the page, and rebuilding it so it won't break again in the next transition, turns this into a permanent asset.",
+    impact: "Restored contact access for journalists, prospective members, and partners. Transitioning officers can update their own info without touching server files.",
     techOptions: [
       {
         name: "Quick Fix: Restore URL",
@@ -755,9 +873,9 @@ const cardDetails = {
   },
 
   "Stabilize PayPal/Payment Processing": {
-    problem: "PayPal IPN (Instant Payment Notification) broke recently. Members successfully paid their dues at PayPal, but their accounts were never activated on the website. This happened silently — members thought they were members, but they weren't actually activated.",
-    why: "This is the #1 failure point for a membership organization. When payment doesn't activate membership, you lose both the member and the revenue. It's a silent failure that doesn't get caught until members complain they can't log in.",
-    impact: "Revenue loss, member frustration, broken trust in the payment system, loss of confidence in the organization.",
+    problem: "PayPal's IPN (Instant Payment Notification) system recently stopped communicating with the website. Members completed their dues payments through PayPal, but the site never received confirmation, so their accounts were not activated. The payment went through on PayPal's end but the membership wasn't recognized on the site.",
+    why: "Getting this working again is the most urgent technical task on the list. Once restored, every dues payment activates membership immediately and automatically — no manual intervention needed. Moving to Stripe long-term gives the organization a more modern, reliable payment system with better reporting.",
+    impact: "Membership activations happen automatically on payment. Dues revenue flows reliably. Treasurer has clean payment records and reports.",
     techOptions: [
       {
         name: "Diagnose and Fix PayPal IPN (Quick Fix)",
@@ -775,10 +893,10 @@ const cardDetails = {
     nextSteps: "First, fix the immediate PayPal problem so dues start activating again. Then, long-term, migrate to Stripe when you migrate the rest of the site to WordPress or Outseta."
   },
 
-  "Update Stale Content (Last changed 2012)": {
-    problem: "Multiple pages show \"Updated: January 12, 2012\" or have incomplete/incorrect information. Membership benefits, publications, conference listings, and officer bios are out of date.",
-    why: "This makes the site look dormant. Search engines rank stale content lower. Any visitor sees immediately that the organization isn't maintaining its information.",
-    impact: "Low search rankings, visitor distrust, credibility damage.",
+  "Bring Content Up to Date": {
+    problem: "Multiple pages show \"Updated: January 12, 2012\" or have information that's no longer current. Membership benefits, publications, conference listings, and officer bios all need a refresh. The organization has been active for over 30 years and has plenty of recent activity to show.",
+    why: "A new webmaster who brings all of this current in the first month sends a clear, visible signal that the organization has new momentum. Search engines also rank pages with recent content higher, which means scholars searching for magic studies resources are more likely to find the site.",
+    impact: "The site reflects the organization's actual activity. Better search visibility. Visitors — especially prospective members — see a living, active community.",
     techOptions: [
       { name: "Audit & Update Manually", desc: "Visit every public page. Check dates and accuracy. Edit in place. Add current date.", externalCost: "$0", timeToComplete: "3–4 hours" },
       { name: "Migrate to Database-Driven System", desc: "Content that changes frequently (officer names, dues, conferences) should be in a database, not static files. Prevents dates from drifting.", externalCost: "$0", timeToComplete: "2–3 days" }
@@ -787,9 +905,9 @@ const cardDetails = {
   },
 
   "Assess Member Directory State": {
-    problem: "The member directory is login-gated (correct), but its current state is unknown. How many members? Does search work? Can members edit profiles?",
-    why: "The member list is the core value of the site. If it's broken, the whole membership program is undermined.",
-    impact: "If broken, members won't renew. Loss of engagement and revenue.",
+    problem: "The member directory is login-protected, as it should be. But its current functional state is unknown: How many members are in the database? Does search work? Can members update their own profiles? Are contact details current? These are the baseline questions that need answers before any improvements can be planned.",
+    why: "The directory is the most direct expression of member-to-member connection in the organization. Mapping exactly what it can and can't do right now is the starting point for making it much more useful — whether that's adding research interests, enabling peer-reviewer discovery, or simply making sure email addresses are current.",
+    impact: "A clear picture of member count and data quality. Informs every future improvement. Shows the treasurer the actual state of the membership roster.",
     techOptions: [
       { name: "Manual Testing", desc: "Log in with a test account. Check: member count, search functionality, profile edit capability, data quality. Document findings.", externalCost: "$0", timeToComplete: "1–2 hours" },
       { name: "Database Audit", desc: "Query the database directly to verify member count, check for data integrity issues, identify missing fields.", externalCost: "$0", timeToComplete: "1–2 hours" }
@@ -798,9 +916,9 @@ const cardDetails = {
   },
 
   "Verify Newsletter PDF Archive": {
-    problem: "All 44 newsletter PDFs are hosted on the current server. If the site migrates, these files must be moved or links must be updated.",
-    why: "A broken newsletter archive kills credibility. Scholars expect decades of organizational history to be accessible.",
-    impact: "If links break during migration, the organization looks negligent. 30 years of newsletters become inaccessible.",
+    problem: "All 44 newsletter issues are hosted as PDFs on the current server. The archive goes back decades and represents a substantial record of the field's history. Before any site migration, these files need to be inventoried, verified, and backed up so that none are lost in the transition.",
+    why: "The newsletter archive is one of the most valuable historical assets the organization has. Scholars researching the history of the discipline, or looking for early discussions of topics in the field, rely on it. A quick audit now takes 30 minutes and prevents any disruption during a future migration.",
+    impact: "Complete, accessible newsletter archive regardless of what hosting changes are made. Backed-up copies in at least two locations.",
     techOptions: [
       { name: "Spot Check Links", desc: "Test a few PDFs from different years. Do they download correctly? Check file sizes.", externalCost: "$0", timeToComplete: "30 minutes" },
       { name: "Full Audit", desc: "Test all 44 links. Note file sizes and storage location. Make a backup. Plan for migration.", externalCost: "$0", timeToComplete: "1–2 hours" }
@@ -808,10 +926,37 @@ const cardDetails = {
     nextSteps: "Do a quick spot check now. Before any migration, download all PDFs as a backup and plan the re-upload process."
   },
 
+  "Make the Site Mobile-Friendly": {
+    problem: "The current site was built for desktop screens at a fixed width. On a phone or tablet, text is tiny, navigation is hard to tap, and content spills off screen. More than half of all web traffic now comes from mobile devices, and Google's indexing algorithm prioritizes mobile-friendly pages in search results.",
+    why: "A responsive design that works well on any screen size is a baseline expectation for any 2026 website. Scholars browsing on their phones should be able to read conference announcements, check the newsletter archive, and look up a colleague's contact information just as easily as on a desktop. Most platform migrations (WordPress, Outseta) solve this automatically as part of the migration.",
+    impact: "Members can use the site on any device. Better search ranking for mobile searches. The site meets modern baseline expectations for usability.",
+    techOptions: [
+      {
+        name: "Platform Migration (Recommended — solves it automatically)",
+        desc: "Migrating to WordPress, Outseta, or Wild Apricot automatically gives the site a mobile-responsive theme. Every modern WordPress theme is responsive by default. This is the cleanest path: you solve mobile responsiveness as a side effect of modernizing the entire site, with no extra effort.",
+        externalCost: "Covered by migration platform costs",
+        timeToComplete: "Included in migration work"
+      },
+      {
+        name: "CSS Responsive Retrofit (Custom PHP site)",
+        desc: "If staying on the custom PHP site, add a CSS media query framework (Bootstrap or Tailwind) and rewrite the layout stylesheets to use responsive units (%, vw, rem) instead of fixed pixel widths. This is technical work requiring careful testing across screen sizes.",
+        externalCost: "$0",
+        timeToComplete: "1–3 days"
+      },
+      {
+        name: "Static Site Rebuild (GitHub Pages + Tailwind)",
+        desc: "Rebuild the public-facing pages as a static site using Tailwind CSS, deploy to GitHub Pages. Tailwind is mobile-first by design. This gives you full control over the design and costs nothing to host. Member login and database-driven content (directory, payments) still requires a backend.",
+        externalCost: "$0",
+        timeToComplete: "3–5 days"
+      }
+    ],
+    nextSteps: "Mobile responsiveness is most efficiently solved as part of a platform migration. If no migration is planned, prioritize the CSS retrofit within the first 2 months."
+  },
+
   "Build Member Management Dashboard": {
-    problem: "Officers need to know basic information — How many active members? Who is lapsed? When do memberships expire? Currently requires database queries or relying on outdated spreadsheets.",
-    why: "A simple admin view gives officers visibility into membership health without needing database access. Treasurer can generate reports for the board.",
-    impact: "Better governance, faster member support, clearer view of membership trends.",
+    problem: "Officers who need basic membership information — how many active members, who is coming up for renewal, whether dues collection is on track — currently have to ask the webmaster to run database queries, or work from spreadsheets that may be out of date.",
+    why: "A dashboard gives the treasurer and officers direct, real-time visibility into membership health: active members, recently renewed, expiring in 30 days, lapsed, new this month. The treasurer can pull a CSV for board reports without involving anyone else. This is the kind of administrative clarity that healthy organizations run on.",
+    impact: "Officers have direct access to membership data. Treasurer can generate accurate reports independently. Membership health becomes visible and actionable.",
     techOptions: [
       { name: "WordPress + MemberPress", desc: "Built-in Members table in admin. Search, filter, export to CSV. 1–2 hours setup.", externalCost: "~$360/yr (MemberPress license)", timeToComplete: "Low" },
       { name: "Outseta", desc: "Built-in Contacts view with all features. 30 minutes setup.", externalCost: "Included in Outseta (~$49/mo)", timeToComplete: "Very Low" },
@@ -856,10 +1001,10 @@ const cardDetails = {
     nextSteps: "Implement this soon after stabilization. It's quick and high-impact for reducing webmaster burden."
   },
 
-  "Integrate Member Email List with Membership DB": {
-    problem: "The member email list (probably Mailman or Listserv) is a separate system not synced with the website database. When someone joins, they're added manually. When they lapse, they stay on the list. Two systems, zero coordination.",
-    why: "Single source of truth. Active members automatically get announcements. Lapsed members stop receiving them. No manual sync needed.",
-    impact: "Reduced confusion, automatic enforcement of membership status, reduced manual work.",
+  "Sync Member Email List with Membership Database": {
+    problem: "The member email list and the membership database are currently two separate systems with no connection between them. When someone joins or renews, they need to be added to the email list manually. When they lapse, they remain on the list. This creates coordination overhead and occasional misfires — lapsed members receiving member communications, active members missing announcements.",
+    why: "Connecting the two systems creates a single source of truth: the membership database. Active members are on the list automatically. Lapsed members roll off when their membership expires. New joiners are added the moment their payment processes. No manual management needed.",
+    impact: "Member communications reach exactly the right audience. No lapsed members on active lists. Officers spend zero time managing list subscriptions manually.",
     techOptions: [
       { name: "Zapier Automation", desc: "Zapier watches for membership status changes and updates Mailchimp/Convertkit list tags. Quick to set up.", externalCost: "$20–$25 per month (Zapier paid)", timeToComplete: "1 hour" },
       { name: "WordPress + MailPoet", desc: "MailPoet syncs with MemberPress automatically. Active members tagged 'active', lapsed members removed.", externalCost: "$0 (MailPoet free tier)", timeToComplete: "1–2 hours" },
@@ -869,10 +1014,43 @@ const cardDetails = {
     nextSteps: "Implement alongside the member dashboard. Eliminates manual list management."
   },
 
-  "Create Living Bibliography of Magic Studies": {
-    problem: "Magic studies publications are scattered across history, religious studies, anthropology, classics, literature, and many other fields. There's no curated, searchable source. Scholars constantly miss relevant work.",
-    why: "A living bibliography makes the Societas a destination scholars visit regularly. It's searchable by period, region, subject. Non-members can access it (recruitment). RSS feed for specialists.",
-    impact: "Increases site traffic and engagement, establishes Societas as field infrastructure, drives new memberships.",
+  "Automated Membership Renewal Reminders": {
+    problem: "Most membership lapses happen because people get busy and forget to renew — not because they decided to leave. Without automated reminders, members whose memberships are expiring have to remember on their own. Many don't, and they drift away from the organization without intending to.",
+    why: "A simple sequence of reminder emails — 30 days before expiration, 7 days before, and on the expiration date — is one of the most effective retention tools any membership organization can implement. The technical work is modest; the impact on renewal rates is well-documented. This is community care made automatic: the organization reaches out to members at exactly the right moment rather than waiting for them to notice their membership has lapsed.",
+    impact: "Higher renewal rates. Fewer accidental lapses. Members feel the organization is attentive to their membership. Steadier dues revenue throughout the year.",
+    techOptions: [
+      {
+        name: "MemberPress + MailPoet (WordPress)",
+        desc: "MemberPress has built-in renewal reminder emails that trigger automatically based on expiration date. MailPoet handles the delivery. Configure the sequence once: 30-day reminder, 7-day reminder, expiration notice, and a lapsed-member win-back email at 30 days past expiration. No ongoing maintenance required after setup.",
+        externalCost: "Covered by MemberPress license (~$360/yr)",
+        timeToComplete: "2–3 hours"
+      },
+      {
+        name: "Outseta",
+        desc: "Renewal reminders are built into Outseta's membership management system. Configure the sequence in the dashboard — no code required. Outseta handles the timing and delivery automatically.",
+        externalCost: "Included in Outseta (~$49/mo)",
+        timeToComplete: "1 hour"
+      },
+      {
+        name: "Wild Apricot",
+        desc: "Wild Apricot includes automated renewal reminders as a core feature. Configure the timing and message templates in the admin panel. Handles the full sequence: upcoming, due, and overdue notices.",
+        externalCost: "Included in Wild Apricot (~$60/mo)",
+        timeToComplete: "1 hour"
+      },
+      {
+        name: "Custom PHP Cron Job",
+        desc: "A daily cron job runs a script that queries the database for members expiring in 30 days, 7 days, and today. For each group, it sends a templated email. Requires writing the script, setting up the cron job, and configuring email delivery (via PHPMailer or an SMTP service like SendGrid). More technical but free.",
+        externalCost: "$0",
+        timeToComplete: "4–6 hours"
+      }
+    ],
+    nextSteps: "Implement as part of whatever platform is chosen for membership management. If staying on custom PHP, the cron job approach is straightforward. This should be in place before the next renewal cycle."
+  },
+
+  "Create a Living Bibliography of Magic Studies": {
+    problem: "Magic studies is inherently cross-disciplinary. Relevant publications appear in history, religious studies, anthropology, classics, literary studies, art history, and more. There is no single curated, searchable bibliography for the field. Scholars working in one discipline often miss essential work published in another.",
+    why: "A living bibliography hosted by the Societas would become one of the most-used resources in the field — searchable by period, region, subject, and source type. Members contribute entries and an editor reviews them. Non-members can search it freely, which brings new scholars into contact with the organization. An RSS feed lets specialists follow new additions in their area.",
+    impact: "The Societas becomes essential field infrastructure. Regular site traffic from non-members discovering the bibliography. New membership inquiries from scholars who found the bibliography first.",
     techOptions: [
       { name: "WordPress Custom Post Type + FacetWP", desc: "Custom post type 'publication'. FacetWP adds search/filter UI. Members submit via Gravity Forms. Editor approves before going live.", externalCost: "FacetWP ~$99 per year", timeToComplete: "1–2 days" },
       { name: "Airtable (No-Code)", desc: "Build base in Airtable. Embed public view on website. Members submit via Airtable form. Editor approves in Airtable UI.", externalCost: "Airtable Plus ~$10 per month", timeToComplete: "2–3 hours" },
@@ -881,10 +1059,10 @@ const cardDetails = {
     nextSteps: "Plan for Phase 3. Requires ongoing editorial work (~5–10 hrs/month), so only start when you have a volunteer editor ready."
   },
 
-  "Dissertation Registry & Grad Student Hub": {
-    problem: "Graduate students are the future of conference attendance. The site has no hook into this community. Dissertations are invisible to each other.",
-    why: "A searchable registry connects grad students, mentors, and collaborators. Early recruitment of future members.",
-    impact: "Grows future membership, establishes grad student community, positions Societas as essential resource for the field.",
+  "Dissertation Registry & Graduate Student Hub": {
+    problem: "Graduate students working on magic studies often don't know about each other. Dissertations in progress on overlapping topics — medieval ritual magic, early modern demonology, anthropological approaches — are invisible to one another until they show up at the same conference. There's no central registry and no hub for this community on the site.",
+    why: "A searchable registry of in-progress and recently completed dissertations helps grad students find peers, advisors find potential recruits, and established scholars identify emerging researchers in their area. Connecting this community early builds the organization's next generation of participants and creates genuine scholarly relationships that deepen over careers.",
+    impact: "Graduate students find the site and each other. New memberships from early-career researchers. Mentorship connections between established scholars and grad students working in related areas.",
     techOptions: [
       { name: "WordPress (Shares infrastructure with Bibliography)", desc: "Second custom post type 'dissertation'. Same FacetWP filter UI. Completed dissertations feed into bibliography.", externalCost: "Same as bibliography", timeToComplete: "1 day (shares code with bibliography)" },
       { name: "Airtable (Shares with Bibliography)", desc: "Second base or linked table. Same approach as bibliography.", externalCost: "Same as bibliography", timeToComplete: "Very low (shares infrastructure)" }
@@ -893,9 +1071,9 @@ const cardDetails = {
   },
 
   "Field-Wide Conference Calendar & CFP Digest": {
-    problem: "Magic studies scholars present at 50+ conferences annually. There's no single place to see CFPs and deadlines. Scholars miss submissions.",
-    why: "A calendar scholars bookmark and check monthly. Members can submit new CFPs. Monthly email digest of upcoming deadlines.",
-    impact: "Increases site visits, positions Societas as field infrastructure, helps members find venues.",
+    problem: "Scholars in magic studies present across 50+ conferences a year: from Kalamazoo to the AAR, from European medieval studies conferences to specialized gatherings in religious studies and anthropology. Keeping track of call-for-papers deadlines across all of them is a genuine challenge. There's no single place to check.",
+    why: "A curated calendar — with a monthly email digest of upcoming CFPs — would be something field members bookmark and return to regularly. Members submit events and CFPs, the webmaster does a quick review once a month, and the digest goes out automatically. The time investment is low; the utility to members is high.",
+    impact: "Members miss fewer submission deadlines. The site becomes a monthly habit for scholars across the field. The monthly digest keeps the Societas name in front of members all year, not just around conference season.",
     techOptions: [
       { name: "WordPress + The Events Calendar Plugin", desc: "Events Calendar free plugin handles calendar + list view. Add custom field for 'CFP deadline'. Members submit via form.", externalCost: "$0–$90 per year (PRO for submissions)", timeToComplete: "3–4 hours" },
       { name: "Google Calendar (Simple)", desc: "Shared calendar maintained by editor. Embedded on site. Less searchable, but zero setup.", externalCost: "$0", timeToComplete: "Very low (setup only)" },
@@ -905,9 +1083,9 @@ const cardDetails = {
   },
 
   "Rich Member Profiles with ORCID Integration": {
-    problem: "Currently: member directory is a phone book. Potential: a discovery tool where members find peer reviewers, committee members, session organizers by specialty.",
-    why: "Transforms the directory into a collaboration tool. Members can search by research interests, find specialists, identify reviewers.",
-    impact: "Increases value of membership, encourages member engagement, facilitates collaboration.",
+    problem: "The member directory today is essentially a contact list: name, email, institution. The potential is something much more useful — a discovery tool where a scholar looking for a peer reviewer who works on Renaissance natural magic, or a session organizer looking for someone specializing in Islamic magical traditions, can find exactly the right person in minutes.",
+    why: "Enriching profiles with research interests, current projects, recent publications (pulled automatically from ORCID), and availability flags (open to peer review, willing to speak to media, available for committees) turns the directory into a real collaboration resource. Members have a reason to log in and keep their information current. The directory becomes more valuable the more people use it.",
+    impact: "Members can find peer reviewers, session organizers, and collaborators within the organization. The directory becomes a reason to maintain membership, not just a contact list. Conference organizers have a searchable pool of potential speakers.",
     techOptions: [
       { name: "WordPress + Ultimate Member", desc: "Ultimate Member handles profiles + directory. Add custom fields for interests, projects, ORCID. ORCID API pulls publications automatically.", externalCost: "$0 (Ultimate Member free)", timeToComplete: "1 day" },
       { name: "Outseta", desc: "Built-in people profiles. Add custom fields. ORCID field links to profile (API integration requires custom code).", externalCost: "Included", timeToComplete: "Few hours" },
@@ -917,9 +1095,9 @@ const cardDetails = {
   },
 
   "Ars Magica Blog — Editorial Program": {
-    problem: "One blog post from 2021. A dormant blog signals a dormant organization. With editorial commitment, 6–8 posts/year becomes shareable content and a reason to follow the Societas.",
-    why: "Regular posts = searchable content, shareable on social media, reason for members to return to the site.",
-    impact: "Better SEO, organic traffic, community engagement, visibility.",
+    problem: "The Ars Magica Blog has one post, from 2021. The infrastructure is there; what's missing is an editorial program — a commitment to regular content, rotating contributors, and a publishing calendar. The field has no shortage of writers or topics.",
+    why: "An active blog gives the field a place to think out loud between conferences. Post types that work well: research previews from members, source spotlights, pedagogical pieces, conference reports, book forums, dissertation spotlights, responses to recent publications. Each post is searchable, shareable on social media, and brings new visitors to the site. Cumulatively, regular posts establish the Societas as the intellectual home of the field, not just its conference organizer.",
+    impact: "Members return to the site between conferences. Each post reaches new audiences via search and social sharing. The organization has a visible, ongoing intellectual presence.",
     techOptions: [
       { name: "WordPress Native", desc: "WordPress blogging is built-in. No additional cost. Just need editorial commitment: 2 editors, monthly calendar, ~3–4 hrs per post.", externalCost: "$0", timeToComplete: "15–20 hours per month (editorial)" },
       { name: "Substack (Alternative)", desc: "External blogging platform. Embed on website or link to Substack.", externalCost: "$0", timeToComplete: "15–20 hours per month (editorial)" }
@@ -928,9 +1106,9 @@ const cardDetails = {
   },
 
   "Open-Access Working Papers (via Zenodo)": {
-    problem: "Scholars have conference papers and draft chapters that are substantial but not journal-ready. They sit on hard drives, uncited.",
-    why: "Papers hosted with Societas branding get cited. Those citations carry the organization's URL. Positions Societas as field infrastructure.",
-    impact: "Organic visibility over time as papers get cited. Positions organization as important resource.",
+    problem: "Many members have conference papers, polished drafts, and works-in-progress that are substantial and worth sharing but not yet ready for journal submission. Without a dedicated home, these papers sit on hard drives, shared informally at best, uncitable in any formal sense.",
+    why: "Hosting them through the Societas — using CERN's free Zenodo platform, which issues DOIs — gives each paper a permanent, citable presence. When scholars cite these working papers, the Societas URL appears in footnotes and bibliographies across the field. Setup takes one hour and costs nothing. The organization benefits from the citations indefinitely. It's one of the highest-return, lowest-effort ways to make the Societas useful to working scholars.",
+    impact: "Members' working papers have citable DOIs. Societas URL appears in academic bibliographies. The organization is established as a publisher of scholarly material, not just a conference organizer.",
     techOptions: [
       { name: "Zenodo Community (Recommended)", desc: "Create free community on Zenodo (run by CERN). Members upload directly to Zenodo, select Societas community. Papers get free DOIs. Societas URL appears in bibliographies forever.", externalCost: "$0", timeToComplete: "1 hour (setup only)" },
       { name: "WordPress File Library", desc: "WordPress Media Library for PDFs. Custom database for metadata.", externalCost: "$0", timeToComplete: "1 day" }
@@ -939,9 +1117,9 @@ const cardDetails = {
   },
 
   "Virtual Event Infrastructure": {
-    problem: "In-person attendance is down across academia. Travel costs, visa issues, accessibility. Virtual events extend reach to members who can't get to Kalamazoo.",
-    why: "Includes remote scholars in the community. Pre-Kalamazoo roundtable lets distant scholars ask questions about sessions.",
-    impact: "Increases engagement, extends reach beyond in-person attendees.",
+    problem: "Travel costs, visa limitations, and accessibility needs mean that a meaningful portion of the membership — and many interested scholars who aren't yet members — cannot attend Kalamazoo. The Societas's community is currently bounded by who can travel to one conference per year.",
+    why: "Virtual events break that boundary. An annual lecture, a pre-Kalamazoo roundtable for remote members, quarterly working group sessions, and graduate student mentorship cohorts extend the organization's community to scholars anywhere in the world. Sessions recorded and posted to YouTube become a permanent archive of the field's conversations — something scholars and students can access for years.",
+    impact: "Members who can't travel participate fully in the intellectual life of the organization. The Societas becomes genuinely international in its reach. Recorded sessions build a permanent archive of field discussions.",
     techOptions: [
       { name: "Zoom + YouTube", desc: "Zoom ($15/mo for webinars). Record and post to YouTube. Website lists upcoming working groups and linking to Zoom.", externalCost: "$180 per year (Zoom Pro)", timeToComplete: "Organizational only (no development)" }
     ],
@@ -970,18 +1148,18 @@ function openModal(cardEl) {
   // Build body
   let html = `
     <div class="modal-section">
-      <h3>The Problem</h3>
+      <h3>Current Situation</h3>
       <p>${details.problem}</p>
     </div>
 
     <div class="modal-section">
-      <h3>Why It Matters</h3>
+      <h3>The Opportunity</h3>
       <p>${details.why}</p>
-      <p><strong>Impact:</strong> ${details.impact}</p>
+      <p><strong>Result:</strong> ${details.impact}</p>
     </div>
 
     <div class="modal-section">
-      <h3>Technology Options</h3>
+      <h3>Approaches</h3>
   `;
 
   details.techOptions.forEach(opt => {
@@ -1007,7 +1185,7 @@ function openModal(cardEl) {
     </div>
 
     <div class="modal-section">
-      <h3>Next Steps</h3>
+      <h3>Recommended Path Forward</h3>
       <p>${details.nextSteps}</p>
     </div>
   `;
