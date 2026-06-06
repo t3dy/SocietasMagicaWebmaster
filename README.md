@@ -5,6 +5,7 @@
 | | URL |
 |---|---|
 | **Webmaster Field Guide** (tutorials) | **[https://t3dy.github.io/SocietasMagicaWebmaster](https://t3dy.github.io/SocietasMagicaWebmaster)** |
+| **Interactive Action Map** (quick start) | **[https://t3dy.github.io/SocietasMagicaWebmaster/replica/action-map.html](https://t3dy.github.io/SocietasMagicaWebmaster/replica/action-map.html)** |
 | **Modern Replica** (functional site) | **[https://t3dy.github.io/SocietasMagicaWebmaster/replica/](https://t3dy.github.io/SocietasMagicaWebmaster/replica/)** |
 
 ---
