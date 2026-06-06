@@ -4,6 +4,7 @@
 
   const navItems = [
     ['index.html',          'Home'],
+    ['action-map.html',     'Action Map'],
     ['membership.html',     'Membership'],
     ['newsletters.html',    'Newsletters'],
     ['publications.html',   'Publications'],
