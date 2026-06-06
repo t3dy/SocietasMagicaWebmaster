@@ -780,8 +780,8 @@ const cardDetails = {
     why: "This makes the site look dormant. Search engines rank stale content lower. Any visitor sees immediately that the organization isn't maintaining its information.",
     impact: "Low search rankings, visitor distrust, credibility damage.",
     techOptions: [
-      { name: "Audit & Update Manually", desc: "Visit every public page. Check dates and accuracy. Edit in place. Add current date.", cost: "3–4 hours", effort: "Low" },
-      { name: "Migrate to Database-Driven System", desc: "Content that changes frequently (officer names, dues, conferences) should be in a database, not static files. Prevents dates from drifting.", cost: "2–3 days", effort: "Medium" }
+      { name: "Audit & Update Manually", desc: "Visit every public page. Check dates and accuracy. Edit in place. Add current date.", externalCost: "3–4 hours", timeToComplete: "Low" },
+      { name: "Migrate to Database-Driven System", desc: "Content that changes frequently (officer names, dues, conferences) should be in a database, not static files. Prevents dates from drifting.", externalCost: "2–3 days", timeToComplete: "Medium" }
     ],
     nextSteps: "Start with manual updates immediately. Flag the pages that need regular updates (officers, conferences, membership) for migration to a CMS later."
   },
@@ -791,8 +791,8 @@ const cardDetails = {
     why: "The member list is the core value of the site. If it's broken, the whole membership program is undermined.",
     impact: "If broken, members won't renew. Loss of engagement and revenue.",
     techOptions: [
-      { name: "Manual Testing", desc: "Log in with a test account. Check: member count, search functionality, profile edit capability, data quality. Document findings.", cost: "1–2 hours", effort: "Low" },
-      { name: "Database Audit", desc: "Query the database directly to verify member count, check for data integrity issues, identify missing fields.", cost: "1–2 hours", effort: "Low" }
+      { name: "Manual Testing", desc: "Log in with a test account. Check: member count, search functionality, profile edit capability, data quality. Document findings.", externalCost: "1–2 hours", timeToComplete: "Low" },
+      { name: "Database Audit", desc: "Query the database directly to verify member count, check for data integrity issues, identify missing fields.", externalCost: "1–2 hours", timeToComplete: "Low" }
     ],
     nextSteps: "Do the testing immediately. Report findings to the treasurer. Use this information to prioritize improvements to the directory."
   },
@@ -802,8 +802,8 @@ const cardDetails = {
     why: "A broken newsletter archive kills credibility. Scholars expect decades of organizational history to be accessible.",
     impact: "If links break during migration, the organization looks negligent. 30 years of newsletters become inaccessible.",
     techOptions: [
-      { name: "Spot Check Links", desc: "Test a few PDFs from different years. Do they download correctly? Check file sizes.", cost: "30 minutes", effort: "Low" },
-      { name: "Full Audit", desc: "Test all 44 links. Note file sizes and storage location. Make a backup. Plan for migration.", cost: "1–2 hours", effort: "Low" }
+      { name: "Spot Check Links", desc: "Test a few PDFs from different years. Do they download correctly? Check file sizes.", externalCost: "30 minutes", timeToComplete: "Low" },
+      { name: "Full Audit", desc: "Test all 44 links. Note file sizes and storage location. Make a backup. Plan for migration.", externalCost: "1–2 hours", timeToComplete: "Low" }
     ],
     nextSteps: "Do a quick spot check now. Before any migration, download all PDFs as a backup and plan the re-upload process."
   },
@@ -813,9 +813,9 @@ const cardDetails = {
     why: "A simple admin view gives officers visibility into membership health without needing database access. Treasurer can generate reports for the board.",
     impact: "Better governance, faster member support, clearer view of membership trends.",
     techOptions: [
-      { name: "WordPress + MemberPress", desc: "Built-in Members table in admin. Search, filter, export to CSV. 1–2 hours setup.", cost: "~$360/yr (MemberPress license)", effort: "Low" },
-      { name: "Outseta", desc: "Built-in Contacts view with all features. 30 minutes setup.", cost: "Included in Outseta (~$49/mo)", effort: "Very Low" },
-      { name: "Custom PHP", desc: "Write a SQL query and render as HTML table with CSV export. 4–8 hours development.", cost: "$0", effort: "Medium" }
+      { name: "WordPress + MemberPress", desc: "Built-in Members table in admin. Search, filter, export to CSV. 1–2 hours setup.", externalCost: "~$360/yr (MemberPress license)", timeToComplete: "Low" },
+      { name: "Outseta", desc: "Built-in Contacts view with all features. 30 minutes setup.", externalCost: "Included in Outseta (~$49/mo)", timeToComplete: "Very Low" },
+      { name: "Custom PHP", desc: "Write a SQL query and render as HTML table with CSV export. 4–8 hours development.", externalCost: "$0", timeToComplete: "Medium" }
     ],
     nextSteps: "If migrating platforms, this comes free. If staying on custom PHP, worth the 1 day of development."
   },
@@ -825,9 +825,9 @@ const cardDetails = {
     why: "A form prevents breakage. Officers can self-serve updates. The page renders from the database and is never a static file that can break.",
     impact: "Prevents broken contact pages, allows officers to update their own info, reduces webmaster burden.",
     techOptions: [
-      { name: "WordPress + ACF Options Page", desc: "Create a form with fields for each role. ACF repeater field for officers. Contact page template pulls from database.", cost: "~$0 (ACF free)", effort: "Low (2–3 hrs)" },
-      { name: "Custom PHP Form", desc: "HTML form + database UPDATE query. Contact page queries the database on render.", cost: "$0", effort: "Low (2–3 hrs)" },
-      { name: "Outseta / Wild Apricot", desc: "Built-in member profiles. Officers update their own info.", cost: "Included in platform", effort: "Very Low" }
+      { name: "WordPress + ACF Options Page", desc: "Create a form with fields for each role. ACF repeater field for officers. Contact page template pulls from database.", externalCost: "~$0 (ACF free)", timeToComplete: "Low (2–3 hrs)" },
+      { name: "Custom PHP Form", desc: "HTML form + database UPDATE query. Contact page queries the database on render.", externalCost: "$0", timeToComplete: "Low (2–3 hrs)" },
+      { name: "Outseta / Wild Apricot", desc: "Built-in member profiles. Officers update their own info.", externalCost: "Included in platform", timeToComplete: "Very Low" }
     ],
     nextSteps: "Implement this soon. It prevents the \"404 contact page\" situation from ever happening again."
   },
@@ -837,9 +837,9 @@ const cardDetails = {
     why: "Reduces the webmaster bottleneck. Officers can do their jobs without needing full system access.",
     impact: "Faster content turnaround, less webmaster burden, more resilience.",
     techOptions: [
-      { name: "WordPress Roles & Capabilities", desc: "Built-in system. Create custom roles: Newsletter Editor, Blog Editor, Treasurer, etc. Each role has exact permissions needed.", cost: "~$0", effort: "Low (2–4 hrs)" },
-      { name: "Outseta / Wild Apricot", desc: "Built-in role system in dashboard.", cost: "Included", effort: "Very Low" },
-      { name: "Custom PHP", desc: "Create a simple permission table. Check permissions on each admin page.", cost: "$0", effort: "Medium (1 day)" }
+      { name: "WordPress Roles & Capabilities", desc: "Built-in system. Create custom roles: Newsletter Editor, Blog Editor, Treasurer, etc. Each role has exact permissions needed.", externalCost: "~$0", timeToComplete: "Low (2–4 hrs)" },
+      { name: "Outseta / Wild Apricot", desc: "Built-in role system in dashboard.", externalCost: "Included", timeToComplete: "Very Low" },
+      { name: "Custom PHP", desc: "Create a simple permission table. Check permissions on each admin page.", externalCost: "$0", timeToComplete: "Medium (1 day)" }
     ],
     nextSteps: "Implement after fixing immediate issues. Critical for scaling beyond one webmaster."
   },
@@ -849,9 +849,9 @@ const cardDetails = {
     why: "Empowers the editor to publish without webmaster involvement. Automates the announcement email to members.",
     impact: "Faster newsletter turnaround, less webmaster burden, automatic member notifications.",
     techOptions: [
-      { name: "WordPress Custom Post Type + ACF", desc: "Register 'newsletter_issue' post type. ACF fields for Season, Year, Issue#, PDF file. Publish fires webhook to send member email via MailPoet.", cost: "~$0–$10/mo (MailPoet free tier)", effort: "Low (4–6 hrs)" },
-      { name: "GitHub Actions (Static)", desc: "Newsletter PDFs committed to repo. GitHub Action detects new file, updates JSON manifest, triggers Netlify build. Optional webhook to Mailchimp for announcements.", cost: "$0", effort: "Medium (3–4 hrs)" },
-      { name: "Wild Apricot", desc: "Built-in document library + email tool. Upload PDF, create announcement, send. No code.", cost: "Included", effort: "Very Low" }
+      { name: "WordPress Custom Post Type + ACF", desc: "Register 'newsletter_issue' post type. ACF fields for Season, Year, Issue#, PDF file. Publish fires webhook to send member email via MailPoet.", externalCost: "~$0–$10/mo (MailPoet free tier)", timeToComplete: "Low (4–6 hrs)" },
+      { name: "GitHub Actions (Static)", desc: "Newsletter PDFs committed to repo. GitHub Action detects new file, updates JSON manifest, triggers Netlify build. Optional webhook to Mailchimp for announcements.", externalCost: "$0", timeToComplete: "Medium (3–4 hrs)" },
+      { name: "Wild Apricot", desc: "Built-in document library + email tool. Upload PDF, create announcement, send. No code.", externalCost: "Included", timeToComplete: "Very Low" }
     ],
     nextSteps: "Implement this soon after stabilization. It's quick and high-impact for reducing webmaster burden."
   },
@@ -861,10 +861,10 @@ const cardDetails = {
     why: "Single source of truth. Active members automatically get announcements. Lapsed members stop receiving them. No manual sync needed.",
     impact: "Reduced confusion, automatic enforcement of membership status, reduced manual work.",
     techOptions: [
-      { name: "Zapier Automation", desc: "Zapier watches for membership status changes and updates Mailchimp/Convertkit list tags. Quick to set up.", cost: "$20–$25/mo (Zapier paid)", effort: "Very Low (1 hr)" },
-      { name: "WordPress + MailPoet", desc: "MailPoet syncs with MemberPress automatically. Active members tagged 'active', lapsed members removed.", cost: "MailPoet free tier", effort: "Low (1–2 hrs)" },
-      { name: "Outseta / Wild Apricot", desc: "Built-in email list synced to membership status.", cost: "Included", effort: "Very Low" },
-      { name: "Custom PHP Database Trigger", desc: "When membership status changes in DB, trigger fires and updates email list.", cost: "$0", effort: "Medium (2–3 hrs)" }
+      { name: "Zapier Automation", desc: "Zapier watches for membership status changes and updates Mailchimp/Convertkit list tags. Quick to set up.", externalCost: "$20–$25/mo (Zapier paid)", timeToComplete: "Very Low (1 hr)" },
+      { name: "WordPress + MailPoet", desc: "MailPoet syncs with MemberPress automatically. Active members tagged 'active', lapsed members removed.", externalCost: "MailPoet free tier", timeToComplete: "Low (1–2 hrs)" },
+      { name: "Outseta / Wild Apricot", desc: "Built-in email list synced to membership status.", externalCost: "Included", timeToComplete: "Very Low" },
+      { name: "Custom PHP Database Trigger", desc: "When membership status changes in DB, trigger fires and updates email list.", externalCost: "$0", timeToComplete: "Medium (2–3 hrs)" }
     ],
     nextSteps: "Implement alongside the member dashboard. Eliminates manual list management."
   },
@@ -874,9 +874,9 @@ const cardDetails = {
     why: "A living bibliography makes the Societas a destination scholars visit regularly. It's searchable by period, region, subject. Non-members can access it (recruitment). RSS feed for specialists.",
     impact: "Increases site traffic and engagement, establishes Societas as field infrastructure, drives new memberships.",
     techOptions: [
-      { name: "WordPress Custom Post Type + FacetWP", desc: "Custom post type 'publication'. FacetWP adds search/filter UI. Members submit via Gravity Forms. Editor approves before going live.", cost: "FacetWP ~$99/yr", effort: "Medium (1–2 days)" },
-      { name: "Airtable (No-Code)", desc: "Build base in Airtable. Embed public view on website. Members submit via Airtable form. Editor approves in Airtable UI.", cost: "Airtable Plus ~$10/mo", effort: "Low (2–3 hrs)" },
-      { name: "Static JSON + Client-Side Search", desc: "Bibliography as JSON file in GitHub. Fuse.js for client-side search/filter. No backend needed.", cost: "$0", effort: "Medium (4–6 hrs)" }
+      { name: "WordPress Custom Post Type + FacetWP", desc: "Custom post type 'publication'. FacetWP adds search/filter UI. Members submit via Gravity Forms. Editor approves before going live.", externalCost: "FacetWP ~$99/yr", timeToComplete: "Medium (1–2 days)" },
+      { name: "Airtable (No-Code)", desc: "Build base in Airtable. Embed public view on website. Members submit via Airtable form. Editor approves in Airtable UI.", externalCost: "Airtable Plus ~$10/mo", timeToComplete: "Low (2–3 hrs)" },
+      { name: "Static JSON + Client-Side Search", desc: "Bibliography as JSON file in GitHub. Fuse.js for client-side search/filter. No backend needed.", externalCost: "$0", timeToComplete: "Medium (4–6 hrs)" }
     ],
     nextSteps: "Plan for Phase 3. Requires ongoing editorial work (~5–10 hrs/month), so only start when you have a volunteer editor ready."
   },
@@ -886,8 +886,8 @@ const cardDetails = {
     why: "A searchable registry connects grad students, mentors, and collaborators. Early recruitment of future members.",
     impact: "Grows future membership, establishes grad student community, positions Societas as essential resource for the field.",
     techOptions: [
-      { name: "WordPress (Shares infrastructure with Bibliography)", desc: "Second custom post type 'dissertation'. Same FacetWP filter UI. Completed dissertations feed into bibliography.", cost: "Same as bibliography", effort: "Low (1 day, shares code)" },
-      { name: "Airtable (Shares with Bibliography)", desc: "Second base or linked table. Same approach as bibliography.", cost: "Same as bibliography", effort: "Very Low" }
+      { name: "WordPress (Shares infrastructure with Bibliography)", desc: "Second custom post type 'dissertation'. Same FacetWP filter UI. Completed dissertations feed into bibliography.", externalCost: "Same as bibliography", timeToComplete: "Low (1 day, shares code)" },
+      { name: "Airtable (Shares with Bibliography)", desc: "Second base or linked table. Same approach as bibliography.", externalCost: "Same as bibliography", timeToComplete: "Very Low" }
     ],
     nextSteps: "Build alongside the bibliography. Small additional effort since it shares the same infrastructure."
   },
@@ -897,9 +897,9 @@ const cardDetails = {
     why: "A calendar scholars bookmark and check monthly. Members can submit new CFPs. Monthly email digest of upcoming deadlines.",
     impact: "Increases site visits, positions Societas as field infrastructure, helps members find venues.",
     techOptions: [
-      { name: "WordPress + The Events Calendar Plugin", desc: "Events Calendar free plugin handles calendar + list view. Add custom field for 'CFP deadline'. Members submit via form.", cost: "$0–$90/yr (if using PRO for submissions)", effort: "Low (3–4 hrs)" },
-      { name: "Google Calendar (Simple)", desc: "Shared calendar maintained by editor. Embedded on site. Less searchable, but zero setup.", cost: "$0", effort: "Very Low" },
-      { name: "Custom PHP Events Table", desc: "Events stored in database. Query renders calendar and list. Member submission form.", cost: "$0", effort: "Medium (1 day)" }
+      { name: "WordPress + The Events Calendar Plugin", desc: "Events Calendar free plugin handles calendar + list view. Add custom field for 'CFP deadline'. Members submit via form.", externalCost: "$0–$90/yr (if using PRO for submissions)", timeToComplete: "Low (3–4 hrs)" },
+      { name: "Google Calendar (Simple)", desc: "Shared calendar maintained by editor. Embedded on site. Less searchable, but zero setup.", externalCost: "$0", timeToComplete: "Very Low" },
+      { name: "Custom PHP Events Table", desc: "Events stored in database. Query renders calendar and list. Member submission form.", externalCost: "$0", timeToComplete: "Medium (1 day)" }
     ],
     nextSteps: "Implement in Phase 3. Monthly digest automation is the key win."
   },
@@ -909,9 +909,9 @@ const cardDetails = {
     why: "Transforms the directory into a collaboration tool. Members can search by research interests, find specialists, identify reviewers.",
     impact: "Increases value of membership, encourages member engagement, facilitates collaboration.",
     techOptions: [
-      { name: "WordPress + Ultimate Member", desc: "Ultimate Member handles profiles + directory. Add custom fields for interests, projects, ORCID. ORCID API pulls publications automatically.", cost: "Ultimate Member free", effort: "Medium (1 day)" },
-      { name: "Outseta", desc: "Built-in people profiles. Add custom fields. ORCID field links to profile (API integration requires custom code).", cost: "Included", effort: "Low" },
-      { name: "Wild Apricot", desc: "Member profiles built in. Custom fields for all data.", cost: "Included", effort: "Low" }
+      { name: "WordPress + Ultimate Member", desc: "Ultimate Member handles profiles + directory. Add custom fields for interests, projects, ORCID. ORCID API pulls publications automatically.", externalCost: "Ultimate Member free", timeToComplete: "Medium (1 day)" },
+      { name: "Outseta", desc: "Built-in people profiles. Add custom fields. ORCID field links to profile (API integration requires custom code).", externalCost: "Included", timeToComplete: "Low" },
+      { name: "Wild Apricot", desc: "Member profiles built in. Custom fields for all data.", externalCost: "Included", timeToComplete: "Low" }
     ],
     nextSteps: "Implement in Phase 3. High-value feature for engagement."
   },
@@ -921,8 +921,8 @@ const cardDetails = {
     why: "Regular posts = searchable content, shareable on social media, reason for members to return to the site.",
     impact: "Better SEO, organic traffic, community engagement, visibility.",
     techOptions: [
-      { name: "WordPress Native", desc: "WordPress blogging is built-in. No additional cost. Just need editorial commitment: 2 editors, monthly calendar, ~3–4 hrs per post.", cost: "$0", effort: "Editorial (15–20 hrs/month)" },
-      { name: "Substack (Alternative)", desc: "External blogging platform. Embed on website or link to Substack.", cost: "$0", effort: "Editorial (15–20 hrs/month)" }
+      { name: "WordPress Native", desc: "WordPress blogging is built-in. No additional cost. Just need editorial commitment: 2 editors, monthly calendar, ~3–4 hrs per post.", externalCost: "$0", timeToComplete: "Editorial (15–20 hrs/month)" },
+      { name: "Substack (Alternative)", desc: "External blogging platform. Embed on website or link to Substack.", externalCost: "$0", timeToComplete: "Editorial (15–20 hrs/month)" }
     ],
     nextSteps: "Start in Phase 2, but ONLY if you have 2 committed editors. Without editorial commitment, this will fail."
   },
@@ -932,8 +932,8 @@ const cardDetails = {
     why: "Papers hosted with Societas branding get cited. Those citations carry the organization's URL. Positions Societas as field infrastructure.",
     impact: "Organic visibility over time as papers get cited. Positions organization as important resource.",
     techOptions: [
-      { name: "Zenodo Community (Recommended)", desc: "Create free community on Zenodo (run by CERN). Members upload directly to Zenodo, select Societas community. Papers get free DOIs. Societas URL appears in bibliographies forever.", cost: "$0", effort: "Very Low (1 hr setup)" },
-      { name: "WordPress File Library", desc: "WordPress Media Library for PDFs. Custom database for metadata.", cost: "$0", effort: "Medium (1 day)" }
+      { name: "Zenodo Community (Recommended)", desc: "Create free community on Zenodo (run by CERN). Members upload directly to Zenodo, select Societas community. Papers get free DOIs. Societas URL appears in bibliographies forever.", externalCost: "$0", timeToComplete: "Very Low (1 hr setup)" },
+      { name: "WordPress File Library", desc: "WordPress Media Library for PDFs. Custom database for metadata.", externalCost: "$0", timeToComplete: "Medium (1 day)" }
     ],
     nextSteps: "Set up Zenodo community early (Phase 1 or 2). It's free and requires almost no maintenance."
   },
@@ -943,7 +943,7 @@ const cardDetails = {
     why: "Includes remote scholars in the community. Pre-Kalamazoo roundtable lets distant scholars ask questions about sessions.",
     impact: "Increases engagement, extends reach beyond in-person attendees.",
     techOptions: [
-      { name: "Zoom + YouTube", desc: "Zoom ($15/mo for webinars). Record and post to YouTube. Website lists upcoming working groups and linking to Zoom.", cost: "~$200/yr", effort: "Low (organizational)" }
+      { name: "Zoom + YouTube", desc: "Zoom ($15/mo for webinars). Record and post to YouTube. Website lists upcoming working groups and linking to Zoom.", externalCost: "~$200/yr", timeToComplete: "Low (organizational)" }
     ],
     nextSteps: "Implement in Phase 3 or 4. Requires ongoing organizational work but low technical effort."
   }
