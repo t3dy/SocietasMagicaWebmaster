@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Webmaster Position — Societas Magica</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .posting-wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    .posting-header {
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .posting-org {
+      font-family: var(--font-ui);
+      font-size: .85rem;
+      font-weight: 600;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--crimson-mid);
+      margin-bottom: .5rem;
+    }
+
+    .posting-header h1 {
+      font-size: 2rem;
+      color: var(--ink);
+      border: none;
+      padding: 0;
+      margin-bottom: .75rem;
+    }
+
+    .posting-meta {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      font-family: var(--font-ui);
+      font-size: .88rem;
+      color: var(--muted);
+    }
+
+    .posting-meta span {
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+    }
+
+    .posting-section {
+      margin-bottom: 2.25rem;
+    }
+
+    .posting-section h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      font-family: var(--font-ui);
+      color: var(--crimson-mid);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      border: none;
+      padding: 0;
+      margin: 0 0 .85rem;
+    }
+
+    .posting-section p {
+      font-size: .97rem;
+      line-height: 1.75;
+      color: var(--ink);
+      margin-bottom: .75rem;
+    }
+
+    .skill-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .skill-group h3 {
+      font-family: var(--font-ui);
+      font-size: .85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--muted);
+      margin-bottom: .6rem;
+    }
+
+    .skill-group ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .skill-group ul li {
+      font-size: .93rem;
+      padding: .3rem 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--ink);
+      display: flex;
+      align-items: baseline;
+      gap: .5rem;
+    }
+
+    .skill-group ul li::before {
+      content: '—';
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .phase-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .phase-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 1rem;
+      padding: .85rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: baseline;
+    }
+
+    .phase-item:last-child {
+      border-bottom: none;
+    }
+
+    .phase-label {
+      font-family: var(--font-ui);
+      font-size: .8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: var(--crimson-mid);
+    }
+
+    .phase-desc {
+      font-size: .93rem;
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    .phase-desc ul {
+      list-style: none;
+      padding: 0;
+      margin: .4rem 0 0;
+    }
+
+    .phase-desc ul li {
+      padding: .2rem 0;
+      font-size: .91rem;
+      color: var(--ink);
+    }
+
+    .phase-desc ul li::before {
+      content: '· ';
+      color: var(--muted);
+    }
+
+    .apply-box {
+      background: var(--crimson-light);
+      border-left: 4px solid var(--crimson-mid);
+      border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+      padding: 1.5rem 1.75rem;
+    }
+
+    .apply-box h2 {
+      font-size: 1.1rem;
+      font-family: var(--font-ui);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--crimson-mid);
+      border: none;
+      padding: 0;
+      margin-bottom: 1rem;
+    }
+
+    .apply-box p {
+      font-size: .93rem;
+      margin-bottom: .6rem;
+      color: var(--ink);
+    }
+
+    .apply-box .apply-contact {
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(0,0,0,.1);
+      font-family: var(--font-ui);
+      font-size: .88rem;
+      color: var(--muted);
+    }
+
+    .apply-placeholder {
+      display: inline-block;
+      background: rgba(0,0,0,.07);
+      border-radius: 3px;
+      padding: .1rem .45rem;
+      font-family: var(--font-ui);
+      font-size: .85rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .note-box {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.1rem 1.4rem;
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 1.25rem;
+    }
+
+    .note-box strong {
+      color: var(--ink);
+    }
+
+    @media print {
+      #site-announce, #site-header, #site-footer { display: none !important; }
+      .posting-wrap { padding: 1rem 0; }
+      .apply-box { border-left: 2px solid #7A1C1C; }
+    }
+
+    @media (max-width: 600px) {
+      .skill-cols { grid-template-columns: 1fr; }
+      .phase-item { grid-template-columns: 1fr; gap: .35rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="posting-wrap">
+
+  <div class="posting-header">
+    <div class="posting-org">Societas Magica · Position Opening</div>
+    <h1>Webmaster — Part-Time Contract</h1>
+    <div class="posting-meta">
+      <span>Part-time · Remote</span>
+      <span>Contract / Annual retainer</span>
+      <span>Approx. 5–10 hrs/month ongoing</span>
+      <span>societasmagica.org</span>
+    </div>
+  </div>
+
+  <div class="posting-section">
+    <h2>About the Organization</h2>
+    <p>The Societas Magica is an international scholarly society for academics working in the history of magic, witchcraft, and related practices across cultures and time periods. Founded in 1994, the society has approximately 450 members across five continents — historians, anthropologists, literary scholars, classicists, and religious studies scholars who study magic as a serious subject of academic inquiry.</p>
+    <p>The society publishes a biannual newsletter, sponsors sessions at the International Congress on Medieval Studies at Kalamazoo, maintains a membership directory, and collects annual dues. The website is the primary administrative and communications infrastructure of the organization.</p>
+  </div>
+
+  <div class="posting-section">
+    <h2>The Role</h2>
+    <p>We are seeking a technically capable webmaster to take ownership of the society's web presence. The incoming webmaster will stabilize the current site, implement a set of quality-of-life improvements for officers and members, and develop new scholarly resources that serve the field more broadly.</p>
+    <p>This is a part-time contract position, suitable for a freelancer or independent developer. The right candidate is technically solid, self-directed, and comfortable working asynchronously with a volunteer board of academic officers. You do not need a background in medieval studies — but you should be curious about the community you're serving and committed to building something they genuinely use.</p>
+
+    <div class="note-box">
+      <strong>Current stack:</strong> Custom PHP application on shared hosting. MySQL database. PayPal payment integration. Mailman email list. The incoming webmaster will assess and potentially migrate to a more maintainable platform (WordPress, Outseta, or similar) in the medium term.
+    </div>
+  </div>
+
+  <div class="posting-section">
+    <h2>Responsibilities by Phase</h2>
+
+    <ul class="phase-list">
+      <li class="phase-item">
+        <div class="phase-label">Month 1<br>Foundation</div>
+        <div class="phase-desc">
+          <ul>
+            <li>Establish backup and disaster recovery (database + files, automated daily offsite)</li>
+            <li>Verify SSL certificate and security configuration</li>
+            <li>Diagnose and restore payment processing (PayPal IPN or migrate to Stripe)</li>
+            <li>Restore and rebuild the officer contact directory</li>
+            <li>Update stale content across all public pages (some dated 2012)</li>
+            <li>Audit and verify the newsletter PDF archive (44 issues)</li>
+          </ul>
+        </div>
+      </li>
+      <li class="phase-item">
+        <div class="phase-label">Months 2–3<br>Empower</div>
+        <div class="phase-desc">
+          <ul>
+            <li>Make the site mobile-responsive</li>
+            <li>Implement officer self-management form (no-code directory updates)</li>
+            <li>Build member management dashboard for treasurer and officers</li>
+            <li>Set up role-based admin access (newsletter editor, treasurer, blog editor)</li>
+            <li>Build newsletter upload interface so the editor can publish independently</li>
+            <li>Sync member email list with membership database</li>
+            <li>Implement automated membership renewal reminders</li>
+          </ul>
+        </div>
+      </li>
+      <li class="phase-item">
+        <div class="phase-label">Months 4–6<br>Build</div>
+        <div class="phase-desc">
+          <ul>
+            <li>Living bibliography of magic studies (searchable, member-contributed)</li>
+            <li>Dissertation registry and graduate student hub</li>
+            <li>Field-wide conference calendar with monthly CFP digest email</li>
+            <li>Rich member profiles with ORCID integration</li>
+          </ul>
+        </div>
+      </li>
+      <li class="phase-item">
+        <div class="phase-label">Ongoing</div>
+        <div class="phase-desc">
+          <ul>
+            <li>Server monitoring and uptime, security patching</li>
+            <li>Biannual newsletter publication (upload PDF, trigger announcement email)</li>
+            <li>Content updates as directed by officers</li>
+            <li>Member support (login issues, dues questions, profile updates)</li>
+            <li>Annual review of hosting, domain, and third-party service costs</li>
+            <li>Documentation for future webmaster transitions</li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="posting-section">
+    <h2>Required Skills</h2>
+    <div class="skill-cols">
+      <div class="skill-group">
+        <h3>Server &amp; Backend</h3>
+        <ul>
+          <li>PHP — reading, debugging, and modifying existing code</li>
+          <li>MySQL — queries, schema inspection, backups, exports</li>
+          <li>Linux command line / SSH access</li>
+          <li>FTP/SFTP file management</li>
+          <li>SSL/HTTPS configuration</li>
+          <li>DNS and domain management</li>
+          <li>Shared hosting administration (cPanel or equivalent)</li>
+          <li>Backup configuration (automated offsite)</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Frontend &amp; Tooling</h3>
+        <ul>
+          <li>HTML, CSS, responsive design</li>
+          <li>JavaScript (vanilla — no framework required)</li>
+          <li>Git and GitHub</li>
+          <li>Payment system integration (PayPal IPN or Stripe Webhooks)</li>
+          <li>Email delivery configuration (SMTP, SPF/DKIM basics)</li>
+          <li>Web forms and form-to-email services</li>
+          <li>PDF file management and archiving</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="posting-section">
+    <h2>Preferred Skills</h2>
+    <div class="skill-cols">
+      <div class="skill-group">
+        <h3>Platform experience</h3>
+        <ul>
+          <li>WordPress — themes, plugins, custom post types</li>
+          <li>Membership platforms (MemberPress, Outseta, or Wild Apricot)</li>
+          <li>Email list tools (MailPoet, Mailchimp, or Mailman)</li>
+          <li>Static site deployment (GitHub Pages, Netlify)</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Nice to have</h3>
+        <ul>
+          <li>Automation tools (Zapier or Make)</li>
+          <li>Airtable or similar no-code database tools</li>
+          <li>ORCID API or academic platform integrations</li>
+          <li>Zenodo or open-access publishing infrastructure</li>
+          <li>Experience with academic or nonprofit organizations</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="posting-section">
+    <h2>What We're Looking For</h2>
+    <p>The Societas Magica is run almost entirely by volunteers who are professional academics — not technologists. The right candidate for this role is someone who can translate between the technical world and the academic one: who understands what a CFP deadline is and why it matters, who can explain a server error to a classics professor without condescension, and who takes satisfaction in building reliable infrastructure for a community that genuinely needs it.</p>
+    <p>Experience with academic or scholarly organizations is a plus but not required. Curiosity about the subject matter — the history of magic, ritual, and related practices — is welcome. What matters most is technical reliability, clear communication, and the initiative to identify and fix problems before the officers notice them.</p>
+  </div>
+
+  <div class="posting-section">
+    <h2>Time Commitment &amp; Compensation</h2>
+    <p>Estimated <strong>5–10 hours per month</strong> for routine maintenance after the initial stabilization period. The first two to three months will require more intensive work as the site is brought up to current standards and new features are implemented.</p>
+    <p>Compensation is <span class="apply-placeholder">negotiable — please include your preferred rate or fee structure in your application</span>. The society welcomes proposals structured as a monthly retainer, annual contract, or project-based milestones.</p>
+  </div>
+
+  <div class="apply-box">
+    <h2>How to Apply</h2>
+    <p>Send a brief message introducing yourself and describing your relevant experience to the address below. Please include:</p>
+    <ul style="list-style:none;padding:0;margin:.5rem 0 1rem;">
+      <li style="padding:.25rem 0;font-size:.93rem;">· Links or descriptions of websites you have maintained (especially membership or database-driven sites)</li>
+      <li style="padding:.25rem 0;font-size:.93rem;">· Your experience with the specific technologies listed above</li>
+      <li style="padding:.25rem 0;font-size:.93rem;">· Your availability (hours per week, timezone)</li>
+      <li style="padding:.25rem 0;font-size:.93rem;">· Your preferred rate or fee structure</li>
+    </ul>
+    <p>No formal cover letter required. A clear, direct message about your background and fit is preferred.</p>
+    <div class="apply-contact">
+      <strong>Contact:</strong> <span class="apply-placeholder">Officer name and title</span><br>
+      <strong>Email:</strong> <span class="apply-placeholder">officer@societasmagica.org</span><br>
+      <strong>Website:</strong> <a href="https://societasmagica.org">societasmagica.org</a>
+    </div>
+  </div>
+
+</div>
+
+<script src="nav.js"></script>
+</body>
+</html>
