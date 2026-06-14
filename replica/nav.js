@@ -1,62 +1,87 @@
-/* Shared nav, banner, and footer for every page */
+/* Shared header (announce bar + site header + nav) and footer */
 (function () {
   const path = location.pathname.split('/').pop() || 'index.html';
 
   const navItems = [
-    ['index.html',          'Home'],
-    ['action-map.html',     'Action Map'],
-    ['membership.html',     'Membership'],
-    ['newsletters.html',    'Newsletters'],
-    ['publications.html',   'Publications'],
-    ['conferences.html',    'Conferences'],
-    ['manuscripts.html',    'Manuscripts'],
-    ['syllabus.html',       'Syllabus Project'],
-    ['blog.html',           'Ars Magica Blog'],
-    ['contact.html',        'Contact Us'],
+    ['index.html',       'Home'],
+    ['membership.html',  'Membership'],
+    ['members.html',     'Members'],
+    ['newsletters.html', 'Newsletters'],
+    ['calendar.html',    'Calendar & CFPs'],
+    ['bibliography.html','Bibliography'],
+    ['blog.html',        'Blog'],
+    ['contact.html',     'Contact'],
   ];
 
-  /* ── Banner ── */
-  const banner = document.createElement('header');
-  banner.id = 'site-banner';
-  banner.innerHTML = `
-    <h1><a href="index.html" style="color:inherit;text-decoration:none;">Societas Magica</a></h1>
-    <p>Communication and Exchange among Scholars Interested in the Study of Magic</p>
-  `;
+  /* ── Announcement bar ── */
+  const announce = document.createElement('div');
+  announce.id = 'site-announce';
+  announce.innerHTML = 'New — Vol. 33 No. 1 (Spring 2025) newsletter now available. &nbsp;<a href="newsletters.html">Download PDF →</a>';
 
-  /* ── Nav ── */
+  /* ── Site header ── */
+  const header = document.createElement('header');
+  header.id = 'site-header';
+
+  const wordmark = document.createElement('a');
+  wordmark.href = 'index.html';
+  wordmark.className = 'site-wordmark';
+  wordmark.textContent = 'Societas Magica';
+
   const nav = document.createElement('nav');
   nav.id = 'site-nav';
   nav.setAttribute('aria-label', 'Primary');
-  const ul = document.createElement('ul');
+
   navItems.forEach(([href, label]) => {
-    const li = document.createElement('li');
-    const a  = document.createElement('a');
-    a.href  = href;
+    const a = document.createElement('a');
+    a.href = href;
     a.textContent = label;
-    if (href === path || (path === '' && href === 'index.html')) a.classList.add('active');
-    li.appendChild(a);
-    ul.appendChild(li);
+    if (href === path || (path === '' && href === 'index.html')) {
+      a.classList.add('active');
+    }
+    nav.appendChild(a);
   });
-  nav.appendChild(ul);
+
+  const toggle = document.createElement('button');
+  toggle.className = 'nav-toggle';
+  toggle.setAttribute('aria-label', 'Toggle navigation');
+  toggle.setAttribute('aria-expanded', 'false');
+  toggle.innerHTML = '&#9776;';
+
+  const loginBtn = document.createElement('a');
+  loginBtn.href = 'login.html';
+  loginBtn.className = 'site-login-btn';
+  loginBtn.textContent = 'Member login';
+
+  header.appendChild(wordmark);
+  header.appendChild(nav);
+  header.appendChild(toggle);
+  header.appendChild(loginBtn);
+
+  /* ── Hamburger toggle ── */
+  toggle.addEventListener('click', function () {
+    const open = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    toggle.innerHTML = open ? '&#10005;' : '&#9776;';
+  });
 
   /* ── Footer ── */
   const footer = document.createElement('footer');
   footer.id = 'site-footer';
   footer.innerHTML = `
     <div class="footer-inner">
-      <span>© 1994–2026 Societas Magica — All Rights Reserved</span>
+      <span>&#169; 1994&#8211;2026 Societas Magica &#8212; All Rights Reserved</span>
       <div class="footer-links">
         <a href="privacy.html">Privacy Policy</a>
         <a href="terms.html">Terms of Use</a>
+        <a href="contact.html">Contact</a>
         <a href="login.html">Member Login</a>
-        <a href="contact.html">Contact Us</a>
       </div>
     </div>
   `;
 
-  /* ── Insert ── */
+  /* ── Insert into page ── */
   const body = document.body;
-  body.insertBefore(nav, body.firstChild);
-  body.insertBefore(banner, nav);
+  body.insertBefore(header, body.firstChild);
+  body.insertBefore(announce, header);
   body.appendChild(footer);
 })();

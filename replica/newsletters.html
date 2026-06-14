@@ -9,403 +9,519 @@
 <body>
 
 <div class="page-wrap">
+
   <h1>Newsletter Archive</h1>
 
   <p>The <em>Societas Magica Newsletter</em> has been published since Fall 1995. After a hiatus from 2017 to 2020 (due to the absence of a volunteer editor), publication resumed with Issue 36 in Fall 2021 and continues at two issues per year.</p>
 
-  <p>All issues are available as PDF downloads. To submit articles, notes, or queries for a future issue, contact the Newsletter Editor at <a href="mailto:newsletters@societasmagica.org">newsletters@societasmagica.org</a>. Lead articles should be 1,500–2,500 words.</p>
+  <p>All issues are available as PDF downloads. To submit articles, notes, or queries for a future issue, contact the Newsletter Editor at <a href="mailto:newsletters@societasmagica.org">newsletters@societasmagica.org</a>. Lead articles should be 1,500&ndash;2,500 words.</p>
 
-  <div style="margin:1rem 0 .5rem;display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;">
-    <input type="text" id="nl-search" placeholder="Filter by issue or year…"
-      style="max-width:260px;padding:.4rem .7rem;border:1px solid var(--border);border-radius:4px;font-family:var(--font-ui);font-size:.88rem;" />
+  <div style="display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;margin:1.25rem 0 .75rem;">
+    <input type="text" id="nl-search" placeholder="Filter by issue or year&hellip;" style="max-width:220px;" />
+    <select id="nl-year-filter" style="max-width:150px;">
+      <option value="">All decades</option>
+      <option value="recent">2015&ndash;present</option>
+      <option value="mid">2005&ndash;2014</option>
+      <option value="early">1994&ndash;2004</option>
+    </select>
     <span id="nl-count" style="font-family:var(--font-ui);font-size:.82rem;color:var(--muted);"></span>
   </div>
 
-  <h2>Recent Issues (2021–2026)</h2>
-  <div class="newsletter-grid" id="nl-recent">
+  <!-- ── 2015–present (crimson spine) ── -->
+  <p class="section-label" data-era="recent">2015&ndash;present</p>
+  <div class="nl-grid">
 
-    <div class="newsletter-card" data-label="Spring 2026 Issue 44">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2026_Issue_44.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 44</div>
-        <span class="issue-label">Spring 2026</span>
-        <div class="issue-size">1,801.5 KB · PDF</div>
-      </a>
+    <div class="nl-card" data-label="Spring 2026 Issue 44" data-era="recent">
+      <div class="nl-spine era-recent"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 44</div>
+        <div class="nl-title">Spring 2026</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2026_Issue_44.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">1,801.5 KB</div>
+      </div>
     </div>
 
-    <div class="newsletter-card" data-label="Fall 2025 Issue 43">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2025_Issue_43.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 43</div>
-        <span class="issue-label">Fall 2025</span>
-        <div class="issue-size">998.8 KB · PDF</div>
-      </a>
+    <div class="nl-card" data-label="Fall 2025 Issue 43" data-era="recent">
+      <div class="nl-spine era-recent"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 43</div>
+        <div class="nl-title">Fall 2025</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2025_Issue_43.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">998.8 KB</div>
+      </div>
     </div>
 
-    <div class="newsletter-card" data-label="Spring 2025 Issue 42">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2025_Issue_42.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 42</div>
-        <span class="issue-label">Spring 2025</span>
-        <div class="issue-size">1,022.2 KB · PDF</div>
-      </a>
+    <div class="nl-card" data-label="Spring 2025 Issue 42" data-era="recent">
+      <div class="nl-spine era-recent"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 42</div>
+        <div class="nl-title">Spring 2025</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2025_Issue_42.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">1,022.2 KB</div>
+      </div>
     </div>
 
-    <div class="newsletter-card" data-label="Fall 2024 Issue 41">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2024_Issue_41.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 41</div>
-        <span class="issue-label">Fall 2024</span>
-        <div class="issue-size">744.0 KB · PDF</div>
-      </a>
+    <div class="nl-card" data-label="Fall 2024 Issue 41" data-era="recent">
+      <div class="nl-spine era-recent"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 41</div>
+        <div class="nl-title">Fall 2024</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2024_Issue_41.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">744.0 KB</div>
+      </div>
     </div>
 
-    <div class="newsletter-card" data-label="Spring 2024 Issue 40">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2024_Issue_40.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 40</div>
-        <span class="issue-label">Spring 2024</span>
-        <div class="issue-size">1,022.5 KB · PDF</div>
-      </a>
+    <div class="nl-card" data-label="Spring 2024 Issue 40" data-era="recent">
+      <div class="nl-spine era-recent"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 40</div>
+        <div class="nl-title">Spring 2024</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2024_Issue_40.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">1,022.5 KB</div>
+      </div>
     </div>
 
-    <div class="newsletter-card" data-label="Fall 2023 Issue 39">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2023_Issue_39.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 39</div>
-        <span class="issue-label">Fall 2023</span>
-        <div class="issue-size">1,293.7 KB · PDF</div>
-      </a>
+    <div class="nl-card" data-label="Fall 2023 Issue 39" data-era="recent">
+      <div class="nl-spine era-recent"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 39</div>
+        <div class="nl-title">Fall 2023</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2023_Issue_39.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">1,293.7 KB</div>
+      </div>
     </div>
 
-    <div class="newsletter-card" data-label="Fall 2022 Issue 38">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2022_Issue_38.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 38</div>
-        <span class="issue-label">Fall 2022</span>
-        <div class="issue-size">4,520.0 KB · PDF</div>
-      </a>
+    <div class="nl-card" data-label="Fall 2022 Issue 38" data-era="recent">
+      <div class="nl-spine era-recent"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 38</div>
+        <div class="nl-title">Fall 2022</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2022_Issue_38.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">4,520.0 KB</div>
+      </div>
     </div>
 
-    <div class="newsletter-card" data-label="Spring 2022 Issue 37">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2022_Issue_37.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 37</div>
-        <span class="issue-label">Spring 2022</span>
-        <div class="issue-size">2,868.1 KB · PDF</div>
-      </a>
+    <div class="nl-card" data-label="Spring 2022 Issue 37" data-era="recent">
+      <div class="nl-spine era-recent"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 37</div>
+        <div class="nl-title">Spring 2022</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2022_Issue_37.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">2,868.1 KB</div>
+      </div>
     </div>
 
-    <div class="newsletter-card" data-label="Fall 2021 Issue 36">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2021_Issue_36.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 36</div>
-        <span class="issue-label">Fall 2021</span>
-        <div class="issue-size">2,449.5 KB · PDF</div>
-      </a>
+    <div class="nl-card" data-label="Fall 2021 Issue 36" data-era="recent">
+      <div class="nl-spine era-recent"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 36</div>
+        <div class="nl-title">Fall 2021</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2021_Issue_36.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">2,449.5 KB</div>
+      </div>
+    </div>
+
+    <div class="nl-card" data-label="Spring 2017 Issue 35" data-era="recent">
+      <div class="nl-spine era-recent"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 35</div>
+        <div class="nl-title">Spring 2017</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2017_Issue_35.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">396.6 KB</div>
+      </div>
+    </div>
+
+    <div class="nl-card" data-label="Fall 2016 Issue 34" data-era="recent">
+      <div class="nl-spine era-recent"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 34</div>
+        <div class="nl-title">Fall 2016</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2016_Issue_34.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">1,026.5 KB</div>
+      </div>
+    </div>
+
+    <div class="nl-card" data-label="Spring 2016 Issue 33" data-era="recent">
+      <div class="nl-spine era-recent"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 33</div>
+        <div class="nl-title">Spring 2016</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2016_Issue_33.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">360.1 KB</div>
+      </div>
+    </div>
+
+    <div class="nl-card" data-label="Spring 2015 Issue 32" data-era="recent">
+      <div class="nl-spine era-recent"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 32</div>
+        <div class="nl-title">Spring 2015</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2015_Issue_32.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">862.5 KB</div>
+      </div>
     </div>
 
   </div>
 
   <div class="hiatus-note">
-    ⚠ Issues 36–37 were the first to resume after a <strong>publication hiatus from 2017 to 2021</strong>, when production was discontinued due to lack of a volunteer editor. Issue 35 (Spring 2017) was the last before the break.
+    Issues 36&ndash;37 were the first to resume after a <strong>publication hiatus from 2017 to 2021</strong>, when production was discontinued due to lack of a volunteer editor. Issue 35 (Spring 2017) was the last before the break.
   </div>
 
-  <h2>Archive: 2007–2017</h2>
-  <div class="newsletter-grid">
+  <!-- ── 2005–2014 (blue spine) ── -->
+  <p class="section-label" style="margin-top:2rem;" data-era="mid">2005&ndash;2014</p>
+  <div class="nl-grid">
 
-    <div class="newsletter-card" data-label="Spring 2017 Issue 35">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2017_Issue_35.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 35</div>
-        <span class="issue-label">Spring 2017</span>
-        <div class="issue-size">396.6 KB · PDF</div>
-      </a>
+    <div class="nl-card" data-label="Fall 2014 Issue 31" data-era="mid">
+      <div class="nl-spine era-mid"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 31</div>
+        <div class="nl-title">Fall 2014</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2014_Issue_31.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">1,114.6 KB</div>
+      </div>
     </div>
 
-    <div class="newsletter-card" data-label="Fall 2016 Issue 34">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2016_Issue_34.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 34</div>
-        <span class="issue-label">Fall 2016</span>
-        <div class="issue-size">1,026.5 KB · PDF</div>
-      </a>
+    <div class="nl-card" data-label="Spring 2014 Issue 30" data-era="mid">
+      <div class="nl-spine era-mid"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 30</div>
+        <div class="nl-title">Spring 2014</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2014_Issue_30.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">863.5 KB</div>
+      </div>
     </div>
 
-    <div class="newsletter-card" data-label="Spring 2016 Issue 33">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2016_Issue_33.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 33</div>
-        <span class="issue-label">Spring 2016</span>
-        <div class="issue-size">360.1 KB · PDF</div>
-      </a>
+    <div class="nl-card" data-label="Fall 2013 Issue 29" data-era="mid">
+      <div class="nl-spine era-mid"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 29</div>
+        <div class="nl-title">Fall 2013</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2013_Issue_29.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">876.8 KB</div>
+      </div>
     </div>
 
-    <div class="newsletter-card" data-label="Spring 2015 Issue 32">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2015_Issue_32.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 32</div>
-        <span class="issue-label">Spring 2015</span>
-        <div class="issue-size">862.5 KB · PDF</div>
-      </a>
+    <div class="nl-card" data-label="Spring 2013 Issue 28" data-era="mid">
+      <div class="nl-spine era-mid"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 28</div>
+        <div class="nl-title">Spring 2013</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2013_Issue_28.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">884.2 KB</div>
+      </div>
     </div>
 
-    <div class="newsletter-card" data-label="Fall 2014 Issue 31">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2014_Issue_31.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 31</div>
-        <span class="issue-label">Fall 2014</span>
-        <div class="issue-size">1,114.6 KB · PDF</div>
-      </a>
+    <div class="nl-card" data-label="Spring 2012 Issue 27" data-era="mid">
+      <div class="nl-spine era-mid"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 27</div>
+        <div class="nl-title">Spring 2012</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2012_Issue_27.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">1,223.0 KB</div>
+      </div>
     </div>
 
-    <div class="newsletter-card" data-label="Spring 2014 Issue 30">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2014_Issue_30.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 30</div>
-        <span class="issue-label">Spring 2014</span>
-        <div class="issue-size">863.5 KB · PDF</div>
-      </a>
+    <div class="nl-card" data-label="Fall 2011 Issue 26" data-era="mid">
+      <div class="nl-spine era-mid"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 26</div>
+        <div class="nl-title">Fall 2011</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2011_Issue_26.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">599.0 KB</div>
+      </div>
     </div>
 
-    <div class="newsletter-card" data-label="Fall 2013 Issue 29">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2013_Issue_29.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 29</div>
-        <span class="issue-label">Fall 2013</span>
-        <div class="issue-size">876.8 KB · PDF</div>
-      </a>
+    <div class="nl-card" data-label="Spring 2011 Issue 25" data-era="mid">
+      <div class="nl-spine era-mid"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 25</div>
+        <div class="nl-title">Spring 2011</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2011_Issue_25.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">1,029.0 KB</div>
+      </div>
     </div>
 
-    <div class="newsletter-card" data-label="Spring 2013 Issue 28">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2013_Issue_28.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 28</div>
-        <span class="issue-label">Spring 2013</span>
-        <div class="issue-size">884.2 KB · PDF</div>
-      </a>
+    <div class="nl-card" data-label="Fall 2010 Issue 24" data-era="mid">
+      <div class="nl-spine era-mid"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 24</div>
+        <div class="nl-title">Fall 2010</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2010_Issue_24.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">555.0 KB</div>
+      </div>
     </div>
 
-    <div class="newsletter-card" data-label="Spring 2012 Issue 27">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2012_Issue_27.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 27</div>
-        <span class="issue-label">Spring 2012</span>
-        <div class="issue-size">1,223.0 KB · PDF</div>
-      </a>
+    <div class="nl-card" data-label="Spring 2010 Issue 23" data-era="mid">
+      <div class="nl-spine era-mid"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 23</div>
+        <div class="nl-title">Spring 2010</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2010_Issue_23.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">1,062.0 KB</div>
+      </div>
     </div>
 
-    <div class="newsletter-card" data-label="Fall 2011 Issue 26">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2011_Issue_26.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 26</div>
-        <span class="issue-label">Fall 2011</span>
-        <div class="issue-size">599.0 KB · PDF</div>
-      </a>
+    <div class="nl-card" data-label="Fall 2009 Issue 22" data-era="mid">
+      <div class="nl-spine era-mid"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 22</div>
+        <div class="nl-title">Fall 2009</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2009_Issue_22.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">847.0 KB</div>
+      </div>
     </div>
 
-    <div class="newsletter-card" data-label="Spring 2011 Issue 25">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2011_Issue_25.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 25</div>
-        <span class="issue-label">Spring 2011</span>
-        <div class="issue-size">1,029.0 KB · PDF</div>
-      </a>
+    <div class="nl-card" data-label="Spring 2009 Issue 21" data-era="mid">
+      <div class="nl-spine era-mid"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 21</div>
+        <div class="nl-title">Spring 2009</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2009_Issue_21.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">1,119.0 KB</div>
+      </div>
     </div>
 
-    <div class="newsletter-card" data-label="Fall 2010 Issue 24">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2010_Issue_24.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 24</div>
-        <span class="issue-label">Fall 2010</span>
-        <div class="issue-size">555.0 KB · PDF</div>
-      </a>
+    <div class="nl-card" data-label="Fall 2008 Issue 20" data-era="mid">
+      <div class="nl-spine era-mid"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 20</div>
+        <div class="nl-title">Fall 2008</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2008_Issue_20.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">468.0 KB</div>
+      </div>
     </div>
 
-    <div class="newsletter-card" data-label="Spring 2010 Issue 23">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2010_Issue_23.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 23</div>
-        <span class="issue-label">Spring 2010</span>
-        <div class="issue-size">1,062.0 KB · PDF</div>
-      </a>
+    <div class="nl-card" data-label="Fall 2007 Issue 18" data-era="mid">
+      <div class="nl-spine era-mid"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 18</div>
+        <div class="nl-title">Fall 2007</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2007_Issue_18.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">1,194.0 KB</div>
+      </div>
     </div>
 
-    <div class="newsletter-card" data-label="Fall 2009 Issue 22">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2009_Issue_22.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 22</div>
-        <span class="issue-label">Fall 2009</span>
-        <div class="issue-size">847.0 KB · PDF</div>
-      </a>
+    <div class="nl-card" data-label="Spring 2007 Issue 17" data-era="mid">
+      <div class="nl-spine era-mid"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 17</div>
+        <div class="nl-title">Spring 2007</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2007_Issue_17.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">1,420.0 KB</div>
+      </div>
     </div>
 
-    <div class="newsletter-card" data-label="Spring 2009 Issue 21">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2009_Issue_21.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 21</div>
-        <span class="issue-label">Spring 2009</span>
-        <div class="issue-size">1,119.0 KB · PDF</div>
-      </a>
+    <div class="nl-card" data-label="Fall 2006 Issue 16" data-era="mid">
+      <div class="nl-spine era-mid"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 16</div>
+        <div class="nl-title">Fall 2006</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2006_Issue_16.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">1,211.0 KB</div>
+      </div>
     </div>
 
-    <div class="newsletter-card" data-label="Fall 2008 Issue 20">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2008_Issue_20.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 20</div>
-        <span class="issue-label">Fall 2008</span>
-        <div class="issue-size">468.0 KB · PDF</div>
-      </a>
+    <div class="nl-card" data-label="Spring 2006 Issue 15" data-era="mid">
+      <div class="nl-spine era-mid"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 15</div>
+        <div class="nl-title">Spring 2006</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2006_Issue_15.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">2,676.0 KB</div>
+      </div>
     </div>
 
-    <div class="newsletter-card" data-label="Fall 2007 Issue 18">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2007_Issue_18.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 18</div>
-        <span class="issue-label">Fall 2007</span>
-        <div class="issue-size">1,194.0 KB · PDF</div>
-      </a>
-    </div>
-
-    <div class="newsletter-card" data-label="Spring 2007 Issue 17">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2007_Issue_17.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 17</div>
-        <span class="issue-label">Spring 2007</span>
-        <div class="issue-size">1,420.0 KB · PDF</div>
-      </a>
-    </div>
-
-  </div>
-
-  <h2>Archive: 1995–2006</h2>
-  <div class="newsletter-grid">
-
-    <div class="newsletter-card" data-label="Fall 2006 Issue 16">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2006_Issue_16.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 16</div>
-        <span class="issue-label">Fall 2006</span>
-        <div class="issue-size">1,211.0 KB · PDF</div>
-      </a>
-    </div>
-
-    <div class="newsletter-card" data-label="Spring 2006 Issue 15">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2006_Issue_15.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 15</div>
-        <span class="issue-label">Spring 2006</span>
-        <div class="issue-size">2,676.0 KB · PDF</div>
-      </a>
-    </div>
-
-    <div class="newsletter-card" data-label="Fall 2005 Issue 14">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2005_Issue_14.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 14</div>
-        <span class="issue-label">Fall 2005</span>
-        <div class="issue-size">4,245.0 KB · PDF</div>
-      </a>
-    </div>
-
-    <div class="newsletter-card" data-label="Fall 2004 Issue 13">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2004_Issue_13.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 13</div>
-        <span class="issue-label">Fall 2004</span>
-        <div class="issue-size">2,114.0 KB · PDF</div>
-      </a>
-    </div>
-
-    <div class="newsletter-card" data-label="Spring 2004 Issue 12">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2004_Issue_12.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 12</div>
-        <span class="issue-label">Spring 2004</span>
-        <div class="issue-size">838.0 KB · PDF</div>
-      </a>
-    </div>
-
-    <div class="newsletter-card" data-label="Fall 2003 Issue 11">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2003_Issue_11.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 11</div>
-        <span class="issue-label">Fall 2003</span>
-        <div class="issue-size">1,886.0 KB · PDF</div>
-      </a>
-    </div>
-
-    <div class="newsletter-card" data-label="Spring 2003 Issue 10">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2003_Issue_10.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 10</div>
-        <span class="issue-label">Spring 2003</span>
-        <div class="issue-size">799.0 KB · PDF</div>
-      </a>
-    </div>
-
-    <div class="newsletter-card" data-label="Summer 2002 Issue 9">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Summer_2002_Issue_9.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 9</div>
-        <span class="issue-label">Summer 2002</span>
-        <div class="issue-size">1,307.0 KB · PDF</div>
-      </a>
-    </div>
-
-    <div class="newsletter-card" data-label="Winter 2001 Issue 8">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Winter_2001_Issue_8.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 8</div>
-        <span class="issue-label">Winter 2001</span>
-        <div class="issue-size">2,125.0 KB · PDF</div>
-      </a>
-    </div>
-
-    <div class="newsletter-card" data-label="Spring 2001 Issue 7">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2001_Issue_7.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 7</div>
-        <span class="issue-label">Spring 2001</span>
-        <div class="issue-size">412.0 KB · PDF</div>
-      </a>
-    </div>
-
-    <div class="newsletter-card" data-label="Fall 2000 Issue 6">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2000_Issue_6.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 6</div>
-        <span class="issue-label">Fall 2000</span>
-        <div class="issue-size">1,400.0 KB · PDF</div>
-      </a>
-    </div>
-
-    <div class="newsletter-card" data-label="Fall 1998 Issue 5">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_1998_Issue_5.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 5</div>
-        <span class="issue-label">Fall 1998</span>
-        <div class="issue-size">291.0 KB · PDF</div>
-      </a>
-    </div>
-
-    <div class="newsletter-card" data-label="Fall 1997 Issue 4">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_1997_Issue_4.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 4</div>
-        <span class="issue-label">Fall 1997</span>
-        <div class="issue-size">49.0 KB · PDF</div>
-      </a>
-    </div>
-
-    <div class="newsletter-card" data-label="Fall 1996 Issue 3">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_1996_Issue_3.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 3</div>
-        <span class="issue-label">Fall 1996</span>
-        <div class="issue-size">48.0 KB · PDF</div>
-      </a>
-    </div>
-
-    <div class="newsletter-card" data-label="Spring 1996 Issue 2">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_1996_Issue_2.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 2</div>
-        <span class="issue-label">Spring 1996</span>
-        <div class="issue-size">45.0 KB · PDF</div>
-      </a>
-    </div>
-
-    <div class="newsletter-card" data-label="Fall 1995 Issue 1">
-      <a href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_1995_Issue_1.pdf" target="_blank" rel="noopener">
-        <div class="issue-num">Issue 1</div>
-        <span class="issue-label">Fall 1995</span>
-        <div class="issue-size">43.0 KB · PDF</div>
-      </a>
+    <div class="nl-card" data-label="Fall 2005 Issue 14" data-era="mid">
+      <div class="nl-spine era-mid"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 14</div>
+        <div class="nl-title">Fall 2005</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2005_Issue_14.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">4,245.0 KB</div>
+      </div>
     </div>
 
   </div>
 
-  <p style="color:var(--muted);font-size:.85rem;font-family:var(--font-ui);margin-top:1rem;">
-    Note: Issue 19 is absent from the archive. The complete sequence runs from Issue 1 (Fall 1995) through Issue 44 (Spring 2026), with the hiatus spanning Issues 36–35 gap (2017–2021).
+  <!-- ── 1994–2004 (green spine) ── -->
+  <p class="section-label" style="margin-top:2rem;" data-era="early">1994&ndash;2004</p>
+  <div class="nl-grid">
+
+    <div class="nl-card" data-label="Fall 2004 Issue 13" data-era="early">
+      <div class="nl-spine era-early"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 13</div>
+        <div class="nl-title">Fall 2004</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2004_Issue_13.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">2,114.0 KB</div>
+      </div>
+    </div>
+
+    <div class="nl-card" data-label="Spring 2004 Issue 12" data-era="early">
+      <div class="nl-spine era-early"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 12</div>
+        <div class="nl-title">Spring 2004</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2004_Issue_12.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">838.0 KB</div>
+      </div>
+    </div>
+
+    <div class="nl-card" data-label="Fall 2003 Issue 11" data-era="early">
+      <div class="nl-spine era-early"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 11</div>
+        <div class="nl-title">Fall 2003</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2003_Issue_11.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">1,886.0 KB</div>
+      </div>
+    </div>
+
+    <div class="nl-card" data-label="Spring 2003 Issue 10" data-era="early">
+      <div class="nl-spine era-early"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 10</div>
+        <div class="nl-title">Spring 2003</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2003_Issue_10.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">799.0 KB</div>
+      </div>
+    </div>
+
+    <div class="nl-card" data-label="Summer 2002 Issue 9" data-era="early">
+      <div class="nl-spine era-early"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 9</div>
+        <div class="nl-title">Summer 2002</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Summer_2002_Issue_9.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">1,307.0 KB</div>
+      </div>
+    </div>
+
+    <div class="nl-card" data-label="Winter 2001 Issue 8" data-era="early">
+      <div class="nl-spine era-early"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 8</div>
+        <div class="nl-title">Winter 2001</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Winter_2001_Issue_8.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">2,125.0 KB</div>
+      </div>
+    </div>
+
+    <div class="nl-card" data-label="Spring 2001 Issue 7" data-era="early">
+      <div class="nl-spine era-early"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 7</div>
+        <div class="nl-title">Spring 2001</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_2001_Issue_7.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">412.0 KB</div>
+      </div>
+    </div>
+
+    <div class="nl-card" data-label="Fall 2000 Issue 6" data-era="early">
+      <div class="nl-spine era-early"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 6</div>
+        <div class="nl-title">Fall 2000</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_2000_Issue_6.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">1,400.0 KB</div>
+      </div>
+    </div>
+
+    <div class="nl-card" data-label="Fall 1998 Issue 5" data-era="early">
+      <div class="nl-spine era-early"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 5</div>
+        <div class="nl-title">Fall 1998</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_1998_Issue_5.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">291.0 KB</div>
+      </div>
+    </div>
+
+    <div class="nl-card" data-label="Fall 1997 Issue 4" data-era="early">
+      <div class="nl-spine era-early"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 4</div>
+        <div class="nl-title">Fall 1997</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_1997_Issue_4.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">49.0 KB</div>
+      </div>
+    </div>
+
+    <div class="nl-card" data-label="Fall 1996 Issue 3" data-era="early">
+      <div class="nl-spine era-early"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 3</div>
+        <div class="nl-title">Fall 1996</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_1996_Issue_3.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">48.0 KB</div>
+      </div>
+    </div>
+
+    <div class="nl-card" data-label="Spring 1996 Issue 2" data-era="early">
+      <div class="nl-spine era-early"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 2</div>
+        <div class="nl-title">Spring 1996</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Spring_1996_Issue_2.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">45.0 KB</div>
+      </div>
+    </div>
+
+    <div class="nl-card" data-label="Fall 1995 Issue 1" data-era="early">
+      <div class="nl-spine era-early"></div>
+      <div class="nl-card-body">
+        <div class="nl-vol">Issue 1</div>
+        <div class="nl-title">Fall 1995</div>
+        <a class="nl-pdf-link" href="https://societasmagica.org/userfiles/files/Newsletters/docs/SMN_Fall_1995_Issue_1.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <div class="nl-size">43.0 KB</div>
+      </div>
+    </div>
+
+  </div>
+
+  <p style="color:var(--muted);font-size:.82rem;font-family:var(--font-ui);margin-top:1rem;">
+    Note: Issue 19 is absent from the archive. The complete sequence runs from Issue 1 (Fall 1995) through Issue 44 (Spring 2026), with the hiatus spanning the 2017&ndash;2021 gap.
   </p>
+
 </div>
 
 <script src="nav.js"></script>
 <script>
-  /* Live filter */
-  const search = document.getElementById('nl-search');
-  const count  = document.getElementById('nl-count');
-  const cards  = () => document.querySelectorAll('.newsletter-card');
-  const updateCount = () => {
-    const vis = [...cards()].filter(c => c.style.display !== 'none').length;
-    count.textContent = vis + ' of ' + cards().length + ' issues';
-  };
-  search.addEventListener('input', () => {
-    const q = search.value.toLowerCase();
-    cards().forEach(c => {
-      c.style.display = c.dataset.label.toLowerCase().includes(q) ? '' : 'none';
+  /* Live filter: text search + decade filter */
+  const search     = document.getElementById('nl-search');
+  const yearFilter = document.getElementById('nl-year-filter');
+  const countEl   = document.getElementById('nl-count');
+
+  function allCards() {
+    return document.querySelectorAll('.nl-card');
+  }
+
+  function updateCount() {
+    const total = allCards().length;
+    const vis   = [...allCards()].filter(c => c.style.display !== 'none').length;
+    countEl.textContent = vis + ' of ' + total + ' issues';
+  }
+
+  function applyFilters() {
+    const q   = search.value.toLowerCase();
+    const era = yearFilter.value;
+
+    allCards().forEach(c => {
+      const matchText = !q   || c.dataset.label.toLowerCase().includes(q);
+      const matchEra  = !era || c.dataset.era === era;
+      c.style.display = (matchText && matchEra) ? '' : 'none';
     });
+
+    /* Show/hide decade section labels */
+    document.querySelectorAll('.section-label[data-era]').forEach(lbl => {
+      lbl.style.display = (!era || lbl.dataset.era === era) ? '' : 'none';
+    });
+
     updateCount();
-  });
+  }
+
+  search.addEventListener('input', applyFilters);
+  yearFilter.addEventListener('change', applyFilters);
   updateCount();
 </script>
 </body>
