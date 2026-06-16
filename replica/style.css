@@ -451,6 +451,40 @@ strong { color: var(--ink); }
   margin-top: 2rem;
 }
 
+/* ── Officers list (home page) ───────────────────────────────── */
+.officers-grid {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+}
+
+.officer-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: .7rem 1.1rem;
+  border-bottom: 1px solid var(--border);
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.officer-row:last-child { border-bottom: none; }
+
+.officer-row:nth-child(even) { background: rgba(0,0,0,.025); }
+
+.officer-role {
+  font-family: var(--font-ui);
+  font-size: .88rem;
+  color: var(--muted);
+}
+
+.officer-name {
+  font-family: var(--font-ui);
+  font-size: .93rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
 /* ── CFP items (home page) ────────────────────────────────────── */
 .cfp-item {
   padding: .85rem 0;
