@@ -59,48 +59,75 @@ ul, ol { padding-left: 1.5rem; margin-bottom: .85rem; }
 li { margin-bottom: .25rem; }
 strong { color: var(--ink); }
 
+/* ── Logo banner ──────────────────────────────────────────────── */
+#site-logo-bar {
+  background-color: var(--crimson-dark);
+  background-image: url('logo.gif');
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: auto 100%;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+}
+
+#site-logo-link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  gap: .2rem;
+}
+
+#site-logo-link:hover { text-decoration: none; }
+
+.logo-title-main {
+  font-family: var(--font-serif);
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.1;
+}
+
+.logo-title-sub {
+  font-family: var(--font-ui);
+  font-size: .78rem;
+  color: rgba(255,255,255,.65);
+  letter-spacing: .04em;
+}
+
 /* ── Announcement bar ─────────────────────────────────────────── */
 #site-announce {
-  background: var(--gold);
-  color: var(--gold-dark);
+  background: var(--crimson);
+  color: rgba(255,255,255,.9);
   text-align: center;
   padding: .45rem 1rem;
   font-family: var(--font-ui);
   font-size: .82rem;
   font-weight: 500;
+  border-bottom: 1px solid rgba(255,255,255,.1);
 }
 
 #site-announce a {
-  color: var(--gold-dark);
+  color: var(--gold);
   font-weight: 700;
   text-decoration: underline;
 }
 
 #site-announce a:hover { opacity: .8; }
 
-/* ── Site header ──────────────────────────────────────────────── */
+/* ── Site header (nav strip) ─────────────────────────────────── */
 #site-header {
   background: var(--crimson-dark);
   display: flex;
   align-items: center;
-  gap: 1.25rem;
-  padding: 0 0 0 1.5rem;
+  gap: 0;
+  padding: 0 1.5rem;
   position: sticky;
   top: 0;
   z-index: 200;
-  min-height: 72px;
+  min-height: 44px;
   border-bottom: 2px solid rgba(201,168,76,.35);
-  overflow: hidden;
-}
-
-.header-logo-img {
-  height: 72px;
-  width: 220px;
-  object-fit: cover;
-  object-position: right center;
-  flex-shrink: 0;
-  margin-left: auto;
-  display: block;
 }
 
 .site-wordmark {

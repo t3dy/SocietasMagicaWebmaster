@@ -18,14 +18,18 @@
   announce.id = 'site-announce';
   announce.innerHTML = 'New — Vol. 33 No. 1 (Spring 2025) newsletter now available. &nbsp;<a href="newsletters.html">Download PDF →</a>';
 
-  /* ── Site header ── */
+  /* ── Logo banner (above nav) ── */
+  const logoBar = document.createElement('div');
+  logoBar.id = 'site-logo-bar';
+  const logoBarLink = document.createElement('a');
+  logoBarLink.href = 'index.html';
+  logoBarLink.id = 'site-logo-link';
+  logoBarLink.innerHTML = '<span class="logo-title-main">Societas Magica</span><span class="logo-title-sub">communication and exchange among scholars</span>';
+  logoBar.appendChild(logoBarLink);
+
+  /* ── Site header (nav strip) ── */
   const header = document.createElement('header');
   header.id = 'site-header';
-
-  const wordmark = document.createElement('a');
-  wordmark.href = 'index.html';
-  wordmark.className = 'site-wordmark';
-  wordmark.textContent = 'Societas Magica';
 
   const nav = document.createElement('nav');
   nav.id = 'site-nav';
@@ -52,17 +56,9 @@
   loginBtn.className = 'site-login-btn';
   loginBtn.textContent = 'Member login';
 
-  const logoImg = document.createElement('img');
-  logoImg.src = 'logo.gif';
-  logoImg.alt = '';
-  logoImg.setAttribute('aria-hidden', 'true');
-  logoImg.className = 'header-logo-img';
-
-  header.appendChild(wordmark);
   header.appendChild(nav);
   header.appendChild(toggle);
   header.appendChild(loginBtn);
-  header.appendChild(logoImg);
 
   /* ── Hamburger toggle ── */
   toggle.addEventListener('click', function () {
@@ -90,5 +86,6 @@
   const body = document.body;
   body.insertBefore(header, body.firstChild);
   body.insertBefore(announce, header);
+  body.insertBefore(logoBar, announce);
   body.appendChild(footer);
 })();
