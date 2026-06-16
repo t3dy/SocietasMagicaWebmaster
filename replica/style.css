@@ -4,15 +4,15 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --crimson-dark:  #4a1010;
-  --crimson:       #5A1414;
-  --crimson-mid:   #7A1C1C;
-  --crimson-light: #FAF0E8;
+  --crimson-dark:  #0d1450;
+  --crimson:       #1a2b8a;
+  --crimson-mid:   #2b44b5;
+  --crimson-light: #eef2ff;
   --gold:          #C9A84C;
-  --gold-dark:     #3D2000;
-  --paper:         #FAF7F0;
-  --ink:           #1C1717;
-  --muted:         #6B6058;
+  --gold-dark:     #1a1432;
+  --paper:         #f5f7ff;
+  --ink:           #0f1533;
+  --muted:         #4a5588;
   --border:        rgba(0,0,0,.1);
   --radius:        8px;
   --radius-lg:     12px;
@@ -22,11 +22,11 @@
   --max-w:         1100px;
 
   /* Legacy aliases for existing pages */
-  --crimson2:      #4a1010;
+  --crimson2:      #0d1450;
   --gold-lt:       #f5e9cc;
-  --cream:         #FAF7F0;
-  --ink2:          #2e2520;
-  --link:          #7A1C1C;
+  --cream:         #f5f7ff;
+  --ink2:          #1e2a55;
+  --link:          #2b44b5;
   --font:          'Playfair Display', Georgia, serif;
   --font-mono:     'Cascadia Code', 'Fira Code', Consolas, monospace;
 }
@@ -80,7 +80,11 @@ strong { color: var(--ink); }
 
 /* ── Site header ──────────────────────────────────────────────── */
 #site-header {
-  background: var(--crimson-dark);
+  background-color: var(--crimson-dark);
+  background-image: url('logo.gif');
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: auto 100%;
   display: flex;
   align-items: center;
   gap: 1.25rem;
@@ -88,26 +92,9 @@ strong { color: var(--ink); }
   position: sticky;
   top: 0;
   z-index: 200;
-  min-height: 56px;
+  min-height: 72px;
   border-bottom: 2px solid rgba(201,168,76,.35);
 }
-
-.site-sigil {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-  text-decoration: none;
-  margin-right: .25rem;
-}
-
-.site-sigil-img {
-  height: 40px;
-  width: auto;
-  opacity: .85;
-  transition: opacity .2s;
-}
-
-.site-sigil:hover .site-sigil-img { opacity: 1; }
 
 .site-wordmark {
   font-family: var(--font-serif);
