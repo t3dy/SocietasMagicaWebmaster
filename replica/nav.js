@@ -22,6 +22,16 @@
   const header = document.createElement('header');
   header.id = 'site-header';
 
+  const sigilWrap = document.createElement('a');
+  sigilWrap.href = 'index.html';
+  sigilWrap.className = 'site-sigil';
+  sigilWrap.setAttribute('aria-hidden', 'true');
+  const sigilImg = document.createElement('img');
+  sigilImg.src = 'sigil-gold.png';
+  sigilImg.alt = 'Societas Magica sigil';
+  sigilImg.className = 'site-sigil-img';
+  sigilWrap.appendChild(sigilImg);
+
   const wordmark = document.createElement('a');
   wordmark.href = 'index.html';
   wordmark.className = 'site-wordmark';
@@ -52,6 +62,7 @@
   loginBtn.className = 'site-login-btn';
   loginBtn.textContent = 'Member login';
 
+  header.appendChild(sigilWrap);
   header.appendChild(wordmark);
   header.appendChild(nav);
   header.appendChild(toggle);

@@ -92,6 +92,23 @@ strong { color: var(--ink); }
   border-bottom: 2px solid rgba(201,168,76,.35);
 }
 
+.site-sigil {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
+  margin-right: .25rem;
+}
+
+.site-sigil-img {
+  height: 40px;
+  width: auto;
+  opacity: .85;
+  transition: opacity .2s;
+}
+
+.site-sigil:hover .site-sigil-img { opacity: 1; }
+
 .site-wordmark {
   font-family: var(--font-serif);
   color: #FAF0D7;
