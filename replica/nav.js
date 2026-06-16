@@ -52,10 +52,17 @@
   loginBtn.className = 'site-login-btn';
   loginBtn.textContent = 'Member login';
 
+  const logoImg = document.createElement('img');
+  logoImg.src = 'logo.gif';
+  logoImg.alt = '';
+  logoImg.setAttribute('aria-hidden', 'true');
+  logoImg.className = 'header-logo-img';
+
   header.appendChild(wordmark);
   header.appendChild(nav);
   header.appendChild(toggle);
   header.appendChild(loginBtn);
+  header.appendChild(logoImg);
 
   /* ── Hamburger toggle ── */
   toggle.addEventListener('click', function () {

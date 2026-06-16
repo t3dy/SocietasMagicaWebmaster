@@ -80,20 +80,27 @@ strong { color: var(--ink); }
 
 /* ── Site header ──────────────────────────────────────────────── */
 #site-header {
-  background-color: var(--crimson-dark);
-  background-image: url('logo.gif');
-  background-repeat: no-repeat;
-  background-position: right center;
-  background-size: auto 100%;
+  background: var(--crimson-dark);
   display: flex;
   align-items: center;
   gap: 1.25rem;
-  padding: 0 1.5rem;
+  padding: 0 0 0 1.5rem;
   position: sticky;
   top: 0;
   z-index: 200;
   min-height: 72px;
   border-bottom: 2px solid rgba(201,168,76,.35);
+  overflow: hidden;
+}
+
+.header-logo-img {
+  height: 72px;
+  width: 220px;
+  object-fit: cover;
+  object-position: right center;
+  flex-shrink: 0;
+  margin-left: auto;
+  display: block;
 }
 
 .site-wordmark {
