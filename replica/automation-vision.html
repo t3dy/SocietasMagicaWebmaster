@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automation & Modern Tech Vision — Societas Magica</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Vision-specific styles */
+    .vision-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin: 2rem 0; }
+    .vision-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+    .vision-card h3 { margin-top: 0; }
+
+    .mockup-container {
+      background: #f9f9f9;
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      font-family: var(--font-mono);
+      font-size: .9rem;
+      overflow-x: auto;
+    }
+
+    .before-after {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    @media (max-width: 768px) {
+      .before-after { grid-template-columns: 1fr; }
+    }
+
+    .before-after-half {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      background: white;
+    }
+
+    .before-after-half h4 {
+      margin-top: 0;
+      color: var(--gold);
+      text-transform: uppercase;
+      font-size: .85rem;
+      letter-spacing: .08em;
+    }
+
+    .before-after-half.before h4 { color: #d9534f; }
+    .before-after-half.after h4 { color: #5cb85c; }
+
+    .tech-stack {
+      background: var(--crimson-light);
+      border-left: 4px solid var(--crimson-mid);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: var(--radius);
+    }
+
+    .tech-stack h4 { margin-top: 0; color: var(--crimson); }
+
+    .tech-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .tech-list li {
+      padding: .5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .tech-list li:before {
+      content: "◆";
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+    }
+
+    .benefit-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--crimson-dark);
+      padding: .35rem .75rem;
+      border-radius: 20px;
+      font-size: .85rem;
+      font-weight: 600;
+      margin: .25rem .25rem .25rem 0;
+    }
+
+    .code-example {
+      background: var(--crimson-dark);
+      color: #0f0;
+      padding: 1rem;
+      border-radius: var(--radius);
+      font-family: var(--font-mono);
+      font-size: .85rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+      line-height: 1.5;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .comparison-table th {
+      background: var(--crimson-light);
+      color: var(--crimson);
+      font-weight: 600;
+    }
+
+    .comparison-table tr:hover {
+      background: #f9f9f9;
+    }
+
+    .emoji { margin-right: .25rem; }
+  </style>
+</head>
+<body>
+
+<!-- Header (injected by nav.js) -->
+<div id="nav-container"></div>
+
+<main style="max-width: var(--max-w); margin: 2rem auto; padding: 0 1.5rem;">
+
+<h1>Automation & Modern Tech Vision</h1>
+<p style="font-size: 1.1rem; color: var(--muted); margin-bottom: 2rem;">
+  How React, APIs, and intelligent automation will transform Societas Magica from a manual admin burden into a self-service scholarly platform.
+</p>
+
+<!-- ─────────────────────────────────────────────────────────────── -->
+<section>
+<h2><span class="emoji">⚡</span>The Problem: Manual & Brittle</h2>
+
+<p>The current site (14-year-old custom PHP) works, but it's entirely <strong>manual</strong>:</p>
+
+<div class="vision-grid">
+  <div class="vision-card">
+    <h3>🔁 Renewal Reminders</h3>
+    <p><strong>Current:</strong> Officer manually checks who's overdue, sends individual emails. 351 members are "older than 2 years."</p>
+    <p><strong>Problem:</strong> Falls through the cracks. No one knows whose dues are expiring until they're delinquent.</p>
+  </div>
+
+  <div class="vision-card">
+    <h3>📝 Officer Profile Updates</h3>
+    <p><strong>Current:</strong> Officer emails you to update contact info. You log into admin panel and manually update.</p>
+    <p><strong>Problem:</strong> You're the bottleneck. Takes 30 min per email.</p>
+  </div>
+
+  <div class="vision-card">
+    <h3>📰 Newsletter Publishing</h3>
+    <p><strong>Current:</strong> Editor emails you PDF + metadata. You fill in season/year/issue/author manually in admin panel.</p>
+    <p><strong>Problem:</strong> Slow, error-prone. Publishing takes a day instead of 10 minutes.</p>
+  </div>
+
+  <div class="vision-card">
+    <h3>📊 Officer Dashboard</h3>
+    <p><strong>Current:</strong> Treasurer asks you "How many paid this month?" You run a manual query.</p>
+    <p><strong>Problem:</strong> Officers are blind to data. You're doing their job.</p>
+  </div>
+</div>
+
+</section>
+
+<!-- ─────────────────────────────────────────────────────────────── -->
+<section>
+<h2><span class="emoji">🔧</span>Solution 1: Renewal Reminders (Email Automation)</h2>
+
+<div class="before-after">
+  <div class="before-after-half before">
+    <h4>❌ Current (Manual)</h4>
+    <ol>
+      <li>Officer manually reviews dues tracker</li>
+      <li>Creates mental list of overdue members</li>
+      <li>Drafts email to each member</li>
+      <li>Sends individually (or forgets)</li>
+      <li>Result: 20-30% delinquency rate</li>
+    </ol>
+    <p><strong>Time:</strong> 2 hours/month</p>
+  </div>
+
+  <div class="before-after-half after">
+    <h4>✅ Modern (Automated)</h4>
+    <ol>
+      <li>Cron job runs daily at midnight</li>
+      <li>Queries: "Whose membership expires in 60 days?"</li>
+      <li>Sends templated email automatically</li>
+      <li>Repeats for renewal date and 30-days-overdue</li>
+      <li>Result: 50%+ reduction in late payments</li>
+    </ol>
+    <p><strong>Time:</strong> 5 mins setup, 0 mins ongoing</p>
+  </div>
+</div>
+
+<div class="mockup-container">
+<strong>💌 Sample Automated Emails (sent by system)</strong>
+
+---
+Subject: Your Societas Magica Membership Renews in 60 Days
+
+Dear [Member Name],
+
+Your Societas Magica membership will expire on [DATE].
+
+Renew now and keep your access to:
+  • Exclusive newsletter archive (44 issues, 1995–2026)
+  • Member directory
+  • Conference calendar
+  • 20% discount on Magic in History books
+
+→ [Renew Your Membership]
+
+---
+Subject: Your Membership Expires TODAY
+
+Dear [Member Name],
+
+Your membership expires today. Without renewal, you'll lose access to:
+  • Member-only content
+  • Newsletter archive
+  • Officer contact directory
+
+→ [Renew Now] (takes 2 minutes)
+
+Your support keeps Societas Magica running.
+
+---
+</div>
+
+<div class="tech-stack">
+  <h4>⚙️ How It Works (Tech Side)</h4>
+  <ul class="tech-list">
+    <li><strong>Cron Job:</strong> Scheduled task runs at 2 AM daily</li>
+    <li><strong>Query:</strong> `SELECT * FROM members WHERE expiry_date = CURDATE() + 60 DAYS`</li>
+    <li><strong>Template:</strong> Use existing email system (PHP mail or SMTP)</li>
+    <li><strong>Logging:</strong> Log each email sent (audit trail)</li>
+    <li><strong>Opt-out:</strong> Members can disable reminders in preferences</li>
+  </ul>
+  <p><strong>Implementation:</strong> ~40 hours (mostly template design & testing)</p>
+</div>
+
+</section>
+
+<!-- ─────────────────────────────────────────────────────────────── -->
+<section>
+<h2><span class="emoji">👤</span>Solution 2: Officer Self-Service (API + React Form)</h2>
+
+<div class="before-after">
+  <div class="before-after-half before">
+    <h4>❌ Current (You're the Gatekeeper)</h4>
+    <ol>
+      <li>Officer emails you: "I moved, update my address"</li>
+      <li>You log into admin panel</li>
+      <li>Find officer's record</li>
+      <li>Manually edit name, phone, email, bio</li>
+      <li>Save</li>
+      <li>Reply to officer: "Done"</li>
+    </ol>
+    <p><strong>Time per request:</strong> 10-15 minutes</p>
+    <p><strong>Friction:</strong> Officer has to wait for you</p>
+  </div>
+
+  <div class="before-after-half after">
+    <h4>✅ Modern (Self-Service Form)</h4>
+    <ol>
+      <li>Officer clicks "Edit My Profile" on member page</li>
+      <li>Form loads with their current info</li>
+      <li>They update fields (name, phone, email, bio)</li>
+      <li>They click "Save"</li>
+      <li>Changes auto-save to database</li>
+      <li>Auto-notifies you (optional approval workflow)</li>
+    </ol>
+    <p><strong>Time per request:</strong> 2 minutes (for officer)</p>
+    <p><strong>Friction:</strong> Zero waiting</p>
+  </div>
+</div>
+
+<div class="mockup-container">
+<strong>🖼️ Officer Self-Service Form (React Component)</strong>
+
+<pre style="margin: 0;">
+┌─────────────────────────────────────────────┐
+│ ✎ Edit Your Officer Profile                 │
+├─────────────────────────────────────────────┤
+│                                             │
+│ Name: [Claire Fanger_____________]          │
+│                                             │
+│ Title: [President________________]          │
+│                                             │
+│ Email: [cfanger@example.com_______]         │
+│                                             │
+│ Phone: [+1-555-0123_______________]         │
+│                                             │
+│ Bio (Public):                               │
+│ ┌──────────────────────────────────┐        │
+│ │ Claire Fanger is a historian...  │        │
+│ │ (250 characters max)             │        │
+│ └──────────────────────────────────┘        │
+│                                             │
+│ [✓ Save Changes] [Cancel]                  │
+│                                             │
+│ Last updated: 2026-06-17 by you             │
+└─────────────────────────────────────────────┘
+</pre>
+
+<strong>Behind the scenes:</strong>
+<ul>
+  <li>Form validates in real-time (email format, phone length, etc.)</li>
+  <li>On save, React sends PATCH request to API: `/api/officers/me`</li>
+  <li>Database updates instantly</li>
+  <li>Public page refreshes automatically (no cache needed)</li>
+  <li>Admin notified in dashboard (optional approval)</li>
+</ul>
+</div>
+
+<div class="tech-stack">
+  <h4>⚙️ Why React + API is Better</h4>
+  <ul class="tech-list">
+    <li><strong>Instant Feedback:</strong> Form validates as you type (red underline if email is invalid)</li>
+    <li><strong>No Page Reload:</strong> Click save, data saves, you see confirmation in 100ms</li>
+    <li><strong>Real-Time Sync:</strong> Changes appear on public profile page immediately</li>
+    <li><strong>Offline-Capable:</strong> Form can queue changes if offline, syncs when internet returns</li>
+    <li><strong>Mobile-Friendly:</strong> Touch-optimized form works perfectly on phones</li>
+    <li><strong>Accessibility:</strong> Screen reader support built-in (ARIA labels)</li>
+  </ul>
+  <p><strong>Implementation:</strong> ~30 hours (React form + API endpoint)</p>
+</div>
+
+</section>
+
+<!-- ─────────────────────────────────────────────────────────────── -->
+<section>
+<h2><span class="emoji">📰</span>Solution 3: Newsletter Self-Publishing (React Upload + Auto-Metadata)</h2>
+
+<div class="before-after">
+  <div class="before-after-half before">
+    <h4>❌ Current (You're Required)</h4>
+    <p>Editor emails you: "Here's the Spring 2026 newsletter. Frater Archer. 'Making of the Lemegeton.'"</p>
+    <ol style="font-size: .9rem;">
+      <li>You log into admin panel</li>
+      <li>Click Newsletters → Upload</li>
+      <li>Select Season: "Spring"</li>
+      <li>Select Year: "2026"</li>
+      <li>Type Issue No: "44"</li>
+      <li>Type Author: "Frater Archer"</li>
+      <li>Type Title: "Making of the Lemegeton"</li>
+      <li>Upload PDF</li>
+      <li>Click Save</li>
+    </ol>
+    <p><strong>Time:</strong> 10 minutes per newsletter</p>
+    <p><strong>Error Rate:</strong> ~15% (wrong issue # is common)</p>
+  </div>
+
+  <div class="before-after-half after">
+    <h4>✅ Modern (Auto-Numbered, Drag-Drop)</h4>
+    <p>Editor clicks "Publish Newsletter" on member page:</p>
+    <ol style="font-size: .9rem;">
+      <li>Form appears (pre-filled with "Spring 2026")</li>
+      <li>Issue # auto-calculated: "Issue 44"</li>
+      <li>Drag-drop PDF into form</li>
+      <li>Type Author: "Frater Archer"</li>
+      <li>Type Title: "Making of the Lemegeton"</li>
+      <li>Click "Publish"</li>
+    </ol>
+    <p><strong>Time:</strong> 3 minutes per newsletter</p>
+    <p><strong>Error Rate:</strong> 0% (auto-numbering)</p>
+  </div>
+</div>
+
+<div class="mockup-container">
+<strong>🖼️ Newsletter Self-Publish Form (React)</strong>
+
+<pre style="margin: 0;">
+┌──────────────────────────────────────────────┐
+│ 📰 Publish New Newsletter                    │
+├──────────────────────────────────────────────┤
+│                                              │
+│ Season: [Spring ▼]  Year: [2026 ▼]          │
+│                                              │
+│ Issue #: [44] (auto-calculated)              │
+│                                              │
+│ Newsletter Title:                            │
+│ [Making of the Lemegeton_________________]   │
+│                                              │
+│ Author:                                      │
+│ [Frater Archer_______________________________]│
+│                                              │
+│ PDF File:                                    │
+│ ┌──────────────────────────────────────────┐ │
+│ │ ↓ Drop file here                         │ │
+│ │ or [Browse Files]                        │ │
+│ │ (spring_2026.pdf) ✓                      │ │
+│ └──────────────────────────────────────────┘ │
+│                                              │
+│ [☐ Send notification to members]            │
+│                                              │
+│ [✓ Publish Now] [Save as Draft] [Cancel]    │
+│                                              │
+│ ✓ 2026-06-17 Issue 43 (Fall_2025)            │
+│ ✓ 2026-05-04 Issue 42 (Spring_2025)          │
+│ ✓ 2025-12-01 Issue 41 (Fall_2024)            │
+│                                              │
+└──────────────────────────────────────────────┘
+</pre>
+
+<strong>Features:</strong>
+<ul>
+  <li>Drag-drop file upload (no more "Choose File" dialog)</li>
+  <li>Issue number auto-increments from database</li>
+  <li>Preview PDF before publishing</li>
+  <li>Schedule for future date (e.g., "Publish June 20 at 9 AM")</li>
+  <li>Recent newsletters shown (for reference)</li>
+  <li>Automatically notifies members if checkbox enabled</li>
+</ul>
+</div>
+
+<div class="tech-stack">
+  <h4>⚙️ Why React Shines Here</h4>
+  <ul class="tech-list">
+    <li><strong>Drag-Drop:</strong> Native browser API makes file upload painless</li>
+    <li><strong>Progress Bar:</strong> Watch the PDF upload in real-time (important for large files)</li>
+    <li><strong>Validation:</strong> "File must be PDF, under 50MB" checked instantly</li>
+    <li><strong>Preview:</strong> Show first page of PDF before submitting</li>
+    <li><strong>Autosave:</strong> Form saves to browser's local storage (don't lose your work if you accidentally close the tab)</li>
+  </ul>
+  <p><strong>Implementation:</strong> ~50 hours (form + file upload API + PDF preview)</p>
+</div>
+
+</section>
+
+<!-- ─────────────────────────────────────────────────────────────── -->
+<section>
+<h2><span class="emoji">📊</span>Solution 4: Officer Dashboard (Real-Time Data Visualization)</h2>
+
+<div class="mockup-container">
+<strong>🖼️ Treasurer Dashboard (React + Chart.js)</strong>
+
+<pre style="margin: 0;">
+┌────────────────────────────────────────────────────────────┐
+│ 💰 Membership Dashboard (Treasurer View)                  │
+├────────────────────────────────────────────────────────────┤
+│                                                            │
+│  Total Members: 494        Paid (2026): 92       Apr: ↑7  │
+│                                                            │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐    │
+│  │ 494 Active   │  │ 92 Paid 2026 │  │ 42 Paid 2025 │    │
+│  │ Members      │  │              │  │              │    │
+│  │              │  │ +5 this mo   │  │ -12 overdue  │    │
+│  └──────────────┘  └──────────────┘  └──────────────┘    │
+│                                                            │
+│ Revenue This Year:                                         │
+│                 ┌─────────────────────────────┐           │
+│  Jan: $8,500   │████████░░░░░░░░░░░░░░░│     │           │
+│  Feb: $7,200   │███████░░░░░░░░░░░░░░░░│     │           │
+│  Mar: $9,100   │█████████░░░░░░░░░░░░░│      │           │
+│  Apr: $10,500  │██████████░░░░░░░░░░░░│     │           │
+│  May: $11,200  │███████████░░░░░░░░░░░│     │           │
+│                 └─────────────────────────────┘           │
+│                                                            │
+│ ◀  Overdue Members                                         │
+│                                                            │
+│  Chris Brown        | Last paid: Jan 2024 | $45 Standard  │
+│  Sarah Kim          | Last paid: Dec 2023 | $138 Full    │
+│  James Martinez     | Last paid: Oct 2023 | $45 Standard  │
+│  [Send reminder] [Excuse/Void] [Notes]                   │
+│                                                            │
+│ ◀  Due Soon (Next 30 Days)                                │
+│                                                            │
+│  Emily Davis        | Expires: 2026-07-15 | $138 Full    │
+│  Robert Johnson     | Expires: 2026-07-22 | $45 Standard  │
+│  Lisa Anderson      | Expires: 2026-07-28 | $45 Standard  │
+│                                                            │
+│ [Export to CSV]  [Send Bulk Reminder]                    │
+│                                                            │
+└────────────────────────────────────────────────────────────┘
+</pre>
+
+<p><strong>What this solves:</strong></p>
+<ul>
+  <li><strong>Treasurer sees real-time data:</strong> No more "How many paid this month?" → You can see it instantly</li>
+  <li><strong>Trend visibility:</strong> Chart shows April had 7 more renewals than usual (good month!)</li>
+  <li><strong>Action-ready list:</strong> Overdue members right there, with one-click "Send Reminder" button</li>
+  <li><strong>Forecasting:</strong> "Due Soon" section helps treasurer predict next month's cash flow</li>
+  <li><strong>Bulk actions:</strong> Send reminder to 12 overdue members in one click (vs. 12 manual emails)</li>
+</ul>
+</div>
+
+<div class="tech-stack">
+  <h4>⚙️ Why React Is Essential Here</h4>
+  <ul class="tech-list">
+    <li><strong>Live Updates:</strong> Data refreshes every 60 seconds (or on-demand) without page reload</li>
+    <li><strong>Filtering:</strong> Click "Show only members who joined in 2024" — instant filter (no server call needed)</li>
+    <li><strong>Charts:</strong> Revenue chart animates and updates in real-time as new payments come in</li>
+    <li><strong>Sorting:</strong> Click "Overdue" column header to sort by days overdue (instant, client-side)</li>
+    <li><strong>Export:</strong> Click "Export to CSV" — downloads instantly (no server processing)</li>
+  </ul>
+  <p><strong>Implementation:</strong> ~60 hours (API endpoints + React dashboard + Chart.js integration)</p>
+</div>
+
+</section>
+
+<!-- ─────────────────────────────────────────────────────────────── -->
+<section>
+<h2><span class="emoji">⚛️</span>Why React + Modern Tech Stack?</h2>
+
+<div class="vision-grid">
+  <div class="vision-card">
+    <h3>⚡ Responsiveness</h3>
+    <p>Forms validate instantly. Click save, data updates in 100ms. No server waiting.</p>
+    <p><span class="benefit-badge">Better UX</span></p>
+  </div>
+
+  <div class="vision-card">
+    <h3>📱 Mobile-First</h3>
+    <p>Touch-optimized forms work perfectly on phones. Officers can update profiles from anywhere.</p>
+    <p><span class="benefit-badge">Accessibility</span></p>
+  </div>
+
+  <div class="vision-card">
+    <h3>🔄 Real-Time Sync</h3>
+    <p>Multiple people can use the site simultaneously without conflicts. Automatic sync across devices.</p>
+    <p><span class="benefit-badge">Scalability</span></p>
+  </div>
+
+  <div class="vision-card">
+    <h3>🎯 Smart UX</h3>
+    <p>Forms autocomplete based on history. Drag-drop file uploads. Inline validation. Progressive disclosure.</p>
+    <p><span class="benefit-badge">Delight</span></p>
+  </div>
+
+  <div class="vision-card">
+    <h3>🔗 API-First</h3>
+    <p>Services communicate through APIs. Easy to add integrations (ORCID, Zotero, Google Calendar) later.</p>
+    <p><span class="benefit-badge">Extensibility</span></p>
+  </div>
+
+  <div class="vision-card">
+    <h3>🚀 Performance</h3>
+    <p>Code splitting + lazy loading. Only download JS you need. Faster page loads on slow connections.</p>
+    <p><span class="benefit-badge">Speed</span></p>
+  </div>
+</div>
+
+<h3>Comparison: Current PHP vs. Modern React</h3>
+
+<table class="comparison-table">
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Current PHP (2012)</th>
+      <th>Modern React + Node</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Page Reload on Save</strong></td>
+      <td>Yes (1-2 second delay)</td>
+      <td>No (saves in background, 100ms)</td>
+    </tr>
+    <tr>
+      <td><strong>Form Validation</strong></td>
+      <td>On submit (after you upload)</td>
+      <td>As you type (instant feedback)</td>
+    </tr>
+    <tr>
+      <td><strong>Error Handling</strong></td>
+      <td>Reload page, see error message</td>
+      <td>Inline error badge, fix immediately</td>
+    </tr>
+    <tr>
+      <td><strong>Mobile Experience</strong></td>
+      <td>Cramped, hard to tap buttons</td>
+      <td>Touch-optimized, full-screen forms</td>
+    </tr>
+    <tr>
+      <td><strong>Real-Time Data</strong></td>
+      <td>Refresh page manually</td>
+      <td>Updates automatically every 60 sec</td>
+    </tr>
+    <tr>
+      <td><strong>Offline Support</strong></td>
+      <td>None</td>
+      <td>Form queues changes, syncs when online</td>
+    </tr>
+    <tr>
+      <td><strong>Accessibility</strong></td>
+      <td>Minimal (no ARIA)</td>
+      <td>Screen reader ready (ARIA labels)</td>
+    </tr>
+    <tr>
+      <td><strong>Developer Experience</strong></td>
+      <td>Single server, hard to extend</td>
+      <td>Modular, reusable components, hot reload</td>
+    </tr>
+  </tbody>
+</table>
+
+</section>
+
+<!-- ─────────────────────────────────────────────────────────────── -->
+<section>
+<h2><span class="emoji">🏗️</span>Implementation Roadmap</h2>
+
+<p>You don't have to rebuild the whole site at once. Modern approach is to evolve piece by piece:</p>
+
+<table class="comparison-table">
+  <thead>
+    <tr>
+      <th>Phase</th>
+      <th>Priority</th>
+      <th>Effort</th>
+      <th>Impact</th>
+      <th>Timeline</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Phase 1 (Now)</strong></td>
+      <td>Fix bugs<br/>Update stale content<br/>Backups</td>
+      <td>Low</td>
+      <td>Stability ✓</td>
+      <td>2 weeks</td>
+    </tr>
+    <tr>
+      <td><strong>Phase 2a</strong></td>
+      <td>Build API layer<br/>Add renewal reminders</td>
+      <td>Medium</td>
+      <td>Automation ✓<br/>+20-30% renewals</td>
+      <td>8 weeks</td>
+    </tr>
+    <tr>
+      <td><strong>Phase 2b</strong></td>
+      <td>React forms:<br/>Officer profiles<br/>Newsletter upload</td>
+      <td>Medium</td>
+      <td>Self-service ✓<br/>-2 hrs/week admin</td>
+      <td>12 weeks</td>
+    </tr>
+    <tr>
+      <td><strong>Phase 2c</strong></td>
+      <td>Treasurer dashboard</td>
+      <td>Medium</td>
+      <td>Data visibility ✓<br/>Empowered officers</td>
+      <td>6 weeks</td>
+    </tr>
+    <tr>
+      <td><strong>Phase 3</strong></td>
+      <td>Scholarly features:<br/>Bibliography<br/>Dissertation registry<br/>ORCID integration</td>
+      <td>High</td>
+      <td>Destination site ✓<br/>Research hub</td>
+      <td>16 weeks</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Total time to full modernization:</strong> ~6 months (if dedicated dev works 50% time) or 3 months (if full-time contractor)</p>
+<p><strong>Cost range:</strong> $15k–$30k depending on contractor vs. in-house dev</p>
+
+</section>
+
+<!-- ─────────────────────────────────────────────────────────────── -->
+<section>
+<h2><span class="emoji">💡</span>Key Insight: You Don't Need a "Redesign"</h2>
+
+<p>You don't need to redesign the <em>entire site</em> at once. Modern approach is <strong>surgical modernization</strong>:</p>
+
+<ol>
+  <li><strong>Keep the database.</strong> It works. Don't migrate.</li>
+  <li><strong>Build an API layer.</strong> Let the database speak JSON.</li>
+  <li><strong>Add React components one at a time.</strong> Officer form first. Newsletter upload second. Dashboard third.</li>
+  <li><strong>Leave old pages alone.</strong> Home page, Publications, Blog—stay on PHP. They work.</li>
+  <li><strong>Gradually replace.</strong> Over 6 months, 60% of the site is React. After 12 months, retire the PHP.</li>
+</ol>
+
+<p><strong>Benefit:</strong> Low risk. If something breaks, roll back the one component. The rest of the site keeps working.</p>
+
+<div class="tech-stack">
+  <h4>🛠️ Recommended Tech Stack</h4>
+  <ul class="tech-list">
+    <li><strong>Backend:</strong> Node.js (Express) + existing MySQL database</li>
+    <li><strong>API:</strong> REST (or GraphQL if doing Dissertation Registry later)</li>
+    <li><strong>Frontend:</strong> React 18+ (component library like Material UI or Chakra)</li>
+    <li><strong>Authentication:</strong> JWT tokens (decouples frontend from PHP sessions)</li>
+    <li><strong>Hosting:</strong> Same shared hosting or move to cloud ($50-100/month for better performance)</li>
+    <li><strong>CI/CD:</strong> GitHub Actions (auto-deploy on git push)</li>
+  </ul>
+</div>
+
+</section>
+
+<!-- ─────────────────────────────────────────────────────────────── -->
+<section>
+<h2><span class="emoji">🎯</span>Bottom Line</h2>
+
+<p>Current site is <strong>stable but manual.</strong> With strategic use of React + APIs + automation:</p>
+
+<ul style="font-size: 1.05rem;">
+  <li><strong>Renewal reminders:</strong> Cut delinquency 20–30% automatically</li>
+  <li><strong>Officer self-service:</strong> Save 2 hrs/week admin time</li>
+  <li><strong>Newsletter publishing:</strong> Go from 10 min to 3 min per issue</li>
+  <li><strong>Treasurer dashboard:</strong> Give officers real-time data instead of asking you</li>
+  <li><strong>Mobile-first:</strong> Members and officers can work from anywhere</li>
+</ul>
+
+<p style="margin-top: 1.5rem; padding: 1rem; background: var(--gold); color: var(--crimson-dark); border-radius: var(--radius); font-weight: 600;">
+  <strong>This isn't about vanity.</strong> This is about turning a 14-year-old manual site into a 21st-century self-service platform that scales with Societas Magica's growth.
+</p>
+
+</section>
+
+</main>
+
+<!-- Footer (injected by nav.js) -->
+<div id="footer-container"></div>
+
+<script src="nav.js"></script>
+</body>
+</html>
