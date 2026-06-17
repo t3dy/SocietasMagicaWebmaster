@@ -238,56 +238,56 @@
 <main style="max-width: var(--max-w); margin: 2rem auto; padding: 0 1.5rem;">
 
   <h1>Automation &amp; Modern Tech Vision</h1>
-  <p class="page-intro">How React, APIs, and intelligent automation will transform Societas Magica from a manual admin burden into a self-service scholarly platform — with real mockups of what each improvement looks like.</p>
+  <p class="page-intro">The site works — but everything runs through one person. These four changes give time back to the people who've been doing things the hard way, and show what each one actually looks like to use.</p>
 
   <!-- ─── THE PROBLEM ──────────────────────────────────────────────── -->
   <section class="vision-section">
-    <h2>⚡ The Problem: Manual &amp; Brittle</h2>
-    <p>The current site works, but it's entirely <strong>manual</strong>. Every task flows through you or Paul:</p>
+    <h2>The Problem: Everything Is Manual</h2>
+    <p>The site works, but almost nothing happens on its own. Every task flows through the webmaster or Paul:</p>
     <div class="problem-grid">
       <div class="problem-card">
         <h3>🔁 Renewal Reminders</h3>
-        <p>351 members are more than 2 years lapsed. No automated system has ever reminded them to renew. It requires manual lookup and individual emails.</p>
+        <p>351 members are more than two years lapsed and have never once received a reminder. Someone has to notice, look them up, and write to them individually — or it just doesn't happen.</p>
       </div>
       <div class="problem-card">
         <h3>📝 Officer Profiles</h3>
-        <p>Officer emails you a change. You log into admin, find the record, edit it manually, reply "done." 15 minutes per change that should take 2.</p>
+        <p>An officer moves institutions. She emails the webmaster. He logs in, finds the record, updates it, replies to confirm. Fifteen minutes of back-and-forth for a two-field change.</p>
       </div>
       <div class="problem-card">
         <h3>📰 Newsletter Publishing</h3>
-        <p>Editor sends you a PDF by email. You fill in season, year, issue number, author, title by hand. One wrong number breaks the archive sequence.</p>
+        <p>The editor emails a PDF with metadata in the body of the message. The webmaster logs in, transcribes everything by hand, and hopes he didn't mistype the issue number.</p>
       </div>
       <div class="problem-card">
         <h3>📊 Financial Visibility</h3>
-        <p>Treasurer asks "how many paid this month?" You run a database query. Officers are blind to membership health without your intervention.</p>
+        <p>Before every board meeting, the treasurer emails to ask how many members have paid. Someone runs a query. The number goes into an email. Repeat next quarter.</p>
       </div>
     </div>
   </section>
 
   <!-- ─── SOLUTION 1: EMAIL AUTOMATION ───────────────────────────── -->
   <section class="vision-section">
-    <h2>📧 Solution 1: Automated Renewal Reminders</h2>
+    <h2>📧 Automated Renewal Reminders</h2>
 
     <div class="ba-grid">
       <div class="ba-card before">
-        <div class="ba-label">❌ Current — manual</div>
+        <div class="ba-label">❌ Currently</div>
         <ol>
-          <li>Officer manually reviews dues tracker</li>
-          <li>Builds mental list of overdue members</li>
-          <li>Drafts individual emails</li>
-          <li>Sends them one by one — or forgets</li>
+          <li>Officer reviews dues tracker by hand</li>
+          <li>Figures out who's overdue from memory or spreadsheet</li>
+          <li>Writes individual reminder emails</li>
+          <li>Sends them — or runs out of time and doesn't</li>
         </ol>
-        <div class="ba-stat"><strong>Time:</strong> ~2 hours/month &nbsp;|&nbsp; <strong>Outcome:</strong> 20–30% delinquency</div>
+        <div class="ba-stat"><strong>Time:</strong> ~2 hours/month &nbsp;|&nbsp; <strong>Result:</strong> 20–30% delinquency</div>
       </div>
       <div class="ba-card after">
-        <div class="ba-label">✅ Modern — automated</div>
+        <div class="ba-label">✅ With automation</div>
         <ol>
-          <li>Cron job runs nightly at 2 AM</li>
-          <li>Queries: who expires in 60 / 30 / 0 days?</li>
-          <li>Sends templated email to each group</li>
-          <li>Logs every email sent for audit trail</li>
+          <li>A scheduled job runs every night</li>
+          <li>Checks who expires in 60 / 30 / 0 days</li>
+          <li>Sends a tailored email to each group automatically</li>
+          <li>Logs every message sent so there's an audit trail</li>
         </ol>
-        <div class="ba-stat"><strong>Time:</strong> 0 mins ongoing &nbsp;|&nbsp; <strong>Outcome:</strong> 50%+ fewer lapses</div>
+        <div class="ba-stat"><strong>Time:</strong> Zero ongoing &nbsp;|&nbsp; <strong>Result:</strong> far fewer lapses</div>
       </div>
     </div>
 
@@ -345,42 +345,41 @@
     <div class="tech-stack">
       <h4>How it works</h4>
       <ul class="tech-list">
-        <li><strong>Cron job</strong> runs at 2 AM daily — queries the existing MySQL members table</li>
-        <li><strong>Three triggers:</strong> 60-day warning, 30-day warning, expiry-day notice</li>
-        <li><strong>PHP mailer or SendGrid</strong> handles delivery with SPF/DKIM so it lands in inboxes, not spam</li>
-        <li><strong>Audit log:</strong> every email stored in a <code>email_log</code> table — who got what and when</li>
-        <li><strong>Opt-out:</strong> one-click unsubscribe link in every email (legal requirement)</li>
-        <li><strong>Effort:</strong> ~40 hours — most of that is testing the email templates</li>
+        <li><strong>Scheduled job</strong> runs nightly — queries the existing MySQL members table, no new data to maintain</li>
+        <li><strong>Three triggers:</strong> 60-day warning, 30-day warning, and an expiry-day notice</li>
+        <li><strong>Delivery via SendGrid</strong> with proper SPF/DKIM records so messages land in inboxes, not spam folders</li>
+        <li><strong>Audit log:</strong> every email is stored in an <code>email_log</code> table — who got what and when</li>
+        <li><strong>Opt-out link</strong> in every email, one click, no login required</li>
       </ul>
     </div>
   </section>
 
   <!-- ─── SOLUTION 2: OFFICER PROFILE FORM ────────────────────────── -->
   <section class="vision-section">
-    <h2>👤 Solution 2: Officer Self-Service Profile</h2>
+    <h2>👤 Officer Self-Service Profiles</h2>
 
     <div class="ba-grid">
       <div class="ba-card before">
-        <div class="ba-label">❌ Current — you're the gatekeeper</div>
+        <div class="ba-label">❌ Currently</div>
         <ol>
-          <li>Officer emails: "I moved, new phone is…"</li>
-          <li>You log into the admin control panel</li>
-          <li>Find their record in the member table</li>
-          <li>Manually edit the fields</li>
-          <li>Reply confirming it's done</li>
+          <li>Officer emails: "I moved — new phone is…"</li>
+          <li>Webmaster logs into the admin panel</li>
+          <li>Finds the record, edits the fields</li>
+          <li>Replies to confirm it's done</li>
+          <li>Officer waits a day or two for each small change</li>
         </ol>
-        <div class="ba-stat"><strong>Time:</strong> 10–15 min per change &nbsp;|&nbsp; <strong>Friction:</strong> officer waits for you</div>
+        <div class="ba-stat"><strong>Time:</strong> 10–15 min per change &nbsp;|&nbsp; <strong>Friction:</strong> officer waits on you</div>
       </div>
       <div class="ba-card after">
-        <div class="ba-label">✅ Modern — self-service</div>
+        <div class="ba-label">✅ With self-service</div>
         <ol>
-          <li>Officer clicks "Edit My Profile" on their member page</li>
-          <li>Form loads pre-filled with their current data</li>
-          <li>They update what's changed and hit Save</li>
-          <li>Database updates in &lt;100ms</li>
-          <li>Public officer listing refreshes automatically</li>
+          <li>Officer clicks "Edit My Profile" on her member page</li>
+          <li>Form opens pre-filled with her current info</li>
+          <li>She changes what's out of date and hits Save</li>
+          <li>The public officer listing updates immediately</li>
+          <li>No email, no waiting, no middleman</li>
         </ol>
-        <div class="ba-stat"><strong>Time:</strong> 2 min for officer &nbsp;|&nbsp; <strong>Friction:</strong> none</div>
+        <div class="ba-stat"><strong>Time:</strong> 2 min, start to finish &nbsp;|&nbsp; <strong>Friction:</strong> none</div>
       </div>
     </div>
 
@@ -457,42 +456,41 @@
     <div class="tech-stack">
       <h4>How it works</h4>
       <ul class="tech-list">
-        <li><strong>React form</strong> pre-populates with a GET request to <code>/api/officers/me</code></li>
-        <li><strong>Real-time validation</strong> as you type — red border + error message if email is malformed</li>
-        <li>On Save, sends a <strong>PATCH to /api/officers/:id</strong> — database updates in under 100ms</li>
-        <li>Public officer listing is <strong>server-rendered from the same table</strong> — no cache to clear</li>
-        <li>Optional: changes go into a <strong>pending approval queue</strong> for webmaster sign-off before going live</li>
-        <li><strong>Effort:</strong> ~30 hours — React form + one API endpoint</li>
+        <li><strong>The form pre-fills</strong> from the existing member record — the officer sees her current data, not a blank slate</li>
+        <li><strong>Validation happens as she types</strong> — a malformed email address gets flagged before she even tries to save</li>
+        <li>On Save, a <strong>PATCH request updates the database directly</strong> — no page reload, change is visible in under a second</li>
+        <li>The public officer listing <strong>reads from the same table</strong>, so it's always current without any extra steps</li>
+        <li>Optional: changes can sit in a <strong>pending queue</strong> for webmaster review before going live — useful during the transition</li>
       </ul>
     </div>
   </section>
 
   <!-- ─── SOLUTION 3: NEWSLETTER UPLOAD ───────────────────────────── -->
   <section class="vision-section">
-    <h2>📰 Solution 3: Newsletter Self-Publishing</h2>
+    <h2>📰 Newsletter Self-Publishing</h2>
 
     <div class="ba-grid">
       <div class="ba-card before">
-        <div class="ba-label">❌ Current — you're required</div>
+        <div class="ba-label">❌ Currently</div>
         <ol>
-          <li>Editor emails you: PDF + metadata as freeform text</li>
-          <li>You log into admin, click Newsletters → Upload</li>
-          <li>Fill in Season, Year, Issue #, Author, Title by hand</li>
-          <li>Upload the file, click Save</li>
-          <li>Hope you typed Issue #44 and not #43</li>
+          <li>Editor emails a PDF with metadata written out in the message body</li>
+          <li>Webmaster logs into admin and opens the newsletter upload form</li>
+          <li>Types in Season, Year, Issue #, Author, Title by hand</li>
+          <li>Uploads the file, clicks Save</li>
+          <li>Hopes he typed Issue 44 and not Issue 43</li>
         </ol>
-        <div class="ba-stat"><strong>Time:</strong> 10–15 min &nbsp;|&nbsp; <strong>Error rate:</strong> ~15% (wrong issue # common)</div>
+        <div class="ba-stat"><strong>Time:</strong> 10–15 min &nbsp;|&nbsp; <strong>Error rate:</strong> higher than it should be</div>
       </div>
       <div class="ba-card after">
-        <div class="ba-label">✅ Modern — editor publishes directly</div>
+        <div class="ba-label">✅ With direct publishing</div>
         <ol>
-          <li>Editor clicks "Publish Newsletter" on their member page</li>
-          <li>Season + Year pre-filled; Issue # auto-calculated as #45</li>
-          <li>Drag PDF into the drop zone</li>
-          <li>Fill in Title + Author, click Publish</li>
+          <li>Editor opens "Publish Newsletter" from her member page</li>
+          <li>Season and Year are pre-filled; issue number is calculated automatically</li>
+          <li>She drags the PDF into the drop zone</li>
+          <li>Fills in title and author, clicks Publish</li>
           <li>Archive updates; members get a notification email</li>
         </ol>
-        <div class="ba-stat"><strong>Time:</strong> 3 min &nbsp;|&nbsp; <strong>Error rate:</strong> 0% (auto-numbered)</div>
+        <div class="ba-stat"><strong>Time:</strong> 3 min &nbsp;|&nbsp; <strong>Error rate:</strong> zero for the issue number</div>
       </div>
     </div>
 
@@ -590,40 +588,39 @@
     <div class="tech-stack">
       <h4>How it works</h4>
       <ul class="tech-list">
-        <li><strong>Issue # auto-increments:</strong> API queries <code>MAX(issue_no) + 1</code> from the newsletters table — no human counting</li>
-        <li><strong>Drag-drop upload:</strong> File API in the browser handles it; a progress bar appears for large PDFs</li>
-        <li><strong>PDF validation:</strong> File type and size checked before upload starts</li>
-        <li><strong>Member notification:</strong> If checked, queues a batch email to all active members using the existing mailer</li>
-        <li><strong>Role-gated:</strong> Only users with the <code>newsletter_editor</code> role see this page</li>
-        <li><strong>Effort:</strong> ~50 hours — form + file upload API + email queue integration</li>
+        <li><strong>Issue number is calculated automatically</strong> — the API looks up <code>MAX(issue_no) + 1</code> from the newsletters table, so no one has to count</li>
+        <li><strong>Drag-and-drop upload</strong> with a progress bar for large PDFs — no clunky file dialog</li>
+        <li><strong>File validation</strong> runs before anything uploads: wrong file type or oversized PDF gets flagged immediately</li>
+        <li><strong>Member notification</strong> is opt-in per issue — if checked, it queues a batch email to all active members</li>
+        <li><strong>Role-gated:</strong> the page is only visible to users with the <code>newsletter_editor</code> role</li>
       </ul>
     </div>
   </section>
 
   <!-- ─── SOLUTION 4: TREASURER DASHBOARD ─────────────────────────── -->
   <section class="vision-section">
-    <h2>📊 Solution 4: Treasurer Dashboard</h2>
+    <h2>📊 Treasurer Dashboard</h2>
 
     <div class="ba-grid">
       <div class="ba-card before">
-        <div class="ba-label">❌ Current — officers are blind</div>
+        <div class="ba-label">❌ Currently</div>
         <ul>
-          <li>Treasurer asks you: "How many paid this month?"</li>
-          <li>You query the database, copy the number, send an email</li>
-          <li>Repeat for every board meeting</li>
-          <li>No one knows who's about to lapse until they already have</li>
+          <li>Treasurer emails: "How many members paid this month?"</li>
+          <li>Webmaster queries the database and replies with a number</li>
+          <li>Same exchange before every board meeting</li>
+          <li>Nobody knows who's about to lapse until they already have</li>
         </ul>
-        <div class="ba-stat"><strong>Time:</strong> 30 min per board report &nbsp;|&nbsp; <strong>Visibility:</strong> none</div>
+        <div class="ba-stat"><strong>Time:</strong> 30 min per board report &nbsp;|&nbsp; <strong>Visibility:</strong> none without asking</div>
       </div>
       <div class="ba-card after">
-        <div class="ba-label">✅ Modern — officers self-serve</div>
+        <div class="ba-label">✅ With a dashboard</div>
         <ul>
-          <li>Treasurer logs in, sees real-time membership health</li>
-          <li>Revenue chart, overdue list, expiring-soon list — all visible</li>
-          <li>One click to send a bulk reminder to overdue members</li>
-          <li>One click to export CSV for board report</li>
+          <li>Treasurer logs in and sees current membership health at a glance</li>
+          <li>Revenue trend, overdue list, expiring-soon list — all there</li>
+          <li>One click sends a bulk reminder to everyone who's lapsed</li>
+          <li>One click exports a CSV for the board report</li>
         </ul>
-        <div class="ba-stat"><strong>Time:</strong> 2 min for board report &nbsp;|&nbsp; <strong>Visibility:</strong> complete</div>
+        <div class="ba-stat"><strong>Time:</strong> 2 min to pull a board report &nbsp;|&nbsp; <strong>Visibility:</strong> always current</div>
       </div>
     </div>
 
@@ -763,105 +760,101 @@
     <div class="tech-stack">
       <h4>How it works</h4>
       <ul class="tech-list">
-        <li><strong>All data from the existing MySQL database</strong> — no migration, no new schema</li>
-        <li><strong>React renders client-side:</strong> sorting and filtering columns is instant, no server call needed</li>
-        <li><strong>Revenue bars:</strong> CSS-only chart — no heavy charting library required for this level of display</li>
-        <li><strong>"Send Reminder" button</strong> calls <code>POST /api/reminders/send/:memberId</code> and queues the email</li>
-        <li><strong>"Export CSV"</strong> calls <code>GET /api/members/export.csv</code> — browser downloads the file directly</li>
-        <li><strong>Effort:</strong> ~60 hours — API endpoints + React dashboard components</li>
+        <li><strong>Everything comes from the existing MySQL database</strong> — no new schema, no data migration</li>
+        <li><strong>Sorting and filtering are instant</strong> — the full dataset loads once; React handles the rest client-side without hitting the server again</li>
+        <li><strong>The revenue bars are CSS-only</strong> — no charting library needed for this level of display</li>
+        <li><strong>"Send Reminder"</strong> queues an email to that member immediately; "Send Bulk Reminder" does the whole overdue list at once</li>
+        <li><strong>"Export CSV"</strong> is a direct browser download — treasurer opens it in Excel or imports it to whatever the board uses</li>
       </ul>
     </div>
   </section>
 
   <!-- ─── WHY REACT ────────────────────────────────────────────────── -->
   <section class="vision-section">
-    <h2>⚛️ Why React + Modern Stack?</h2>
+    <h2>⚛️ Why React?</h2>
 
     <div class="feature-grid">
       <div class="feature-card">
         <h3>⚡ No Page Reloads</h3>
-        <p>Click Save — data saves in the background. No white flash, no waiting. Confirmation appears in 100ms.</p>
+        <p>Click Save — the data saves in the background. No white flash, no waiting. A confirmation appears in place.</p>
         <span class="feature-badge">Better UX</span>
       </div>
       <div class="feature-card">
         <h3>✅ Inline Validation</h3>
-        <p>Email field turns red the moment the format is wrong — before you even try to submit. No more "please try again."</p>
+        <p>The email field turns red the moment the format is wrong — before you even try to submit. No "please try again" after a page reload.</p>
         <span class="feature-badge">Fewer Errors</span>
       </div>
       <div class="feature-card">
-        <h3>📱 Mobile-First</h3>
-        <p>Officers updating profiles from a phone at Kalamazoo works as well as at a desktop. Touch targets are large, forms reflow to one column.</p>
-        <span class="feature-badge">Accessibility</span>
+        <h3>📱 Works on Phones</h3>
+        <p>An officer updating her profile from her phone at Kalamazoo gets the same experience as at a desktop. Forms reflow, touch targets are large.</p>
+        <span class="feature-badge">Mobile-Ready</span>
       </div>
       <div class="feature-card">
-        <h3>🔄 Real-Time Data</h3>
-        <p>Dashboard numbers refresh every 60 seconds without a page reload. Treasurer always sees current membership counts.</p>
-        <span class="feature-badge">Live Updates</span>
+        <h3>🔄 Live Data</h3>
+        <p>The treasurer dashboard refreshes on its own. She doesn't need to reload the page to see who paid this morning.</p>
+        <span class="feature-badge">Always Current</span>
       </div>
       <div class="feature-card">
-        <h3>🔗 API-First</h3>
-        <p>Everything talks through APIs. Adding ORCID, Zotero, Google Calendar, or a Stripe webhook later is a new endpoint — not a site rewrite.</p>
-        <span class="feature-badge">Extensible</span>
+        <h3>🔗 Easy to Extend</h3>
+        <p>Once the site talks through APIs, adding ORCID, Zotero, or Stripe later is a new endpoint — not a rewrite of pages that already work.</p>
+        <span class="feature-badge">Future-Proof</span>
       </div>
       <div class="feature-card">
-        <h3>🧩 Component Reuse</h3>
-        <p>The member profile form, the officer form, and the newsletter form all share the same form components. Build once, use everywhere.</p>
-        <span class="feature-badge">Less Code</span>
+        <h3>🧩 Shared Components</h3>
+        <p>The member form, officer form, and newsletter form all use the same building blocks. Write it once, change it in one place.</p>
+        <span class="feature-badge">Less Maintenance</span>
       </div>
     </div>
 
-    <h3>Current PHP vs. Modern React</h3>
+    <h3>What changes in practice</h3>
     <table class="cmp-table">
-      <thead><tr><th>Behaviour</th><th>Current PHP (2012)</th><th>React + API</th></tr></thead>
+      <thead><tr><th>Situation</th><th>Current PHP (2011)</th><th>React + API</th></tr></thead>
       <tbody>
-        <tr><td><strong>Save data</strong></td><td class="cmp-old">Full page reload, 2–4 sec wait</td><td class="cmp-new">Background save, 100ms, no reload</td></tr>
-        <tr><td><strong>Form validation</strong></td><td class="cmp-old">After submit — page reloads to show error</td><td class="cmp-new">As you type — inline red underline</td></tr>
-        <tr><td><strong>File upload</strong></td><td class="cmp-old">Browse dialog, no progress indicator</td><td class="cmp-new">Drag-drop, real-time progress bar</td></tr>
-        <tr><td><strong>Dashboard data</strong></td><td class="cmp-old">Manually refresh page to see latest</td><td class="cmp-new">Auto-refreshes every 60 seconds</td></tr>
-        <tr><td><strong>Mobile use</strong></td><td class="cmp-old">Fixed-width layout, cramped on phones</td><td class="cmp-new">Responsive, touch-optimized</td></tr>
-        <tr><td><strong>Offline</strong></td><td class="cmp-old">Nothing works without internet</td><td class="cmp-new">Form queues changes, syncs on reconnect</td></tr>
-        <tr><td><strong>Adding integrations</strong></td><td class="cmp-old">Modify PHP files, hope nothing breaks</td><td class="cmp-new">New API endpoint, existing UI unchanged</td></tr>
+        <tr><td><strong>Saving a form</strong></td><td class="cmp-old">Full page reload, 2–4 second wait</td><td class="cmp-new">Background save, confirmation in place</td></tr>
+        <tr><td><strong>Validation error</strong></td><td class="cmp-old">Submit, page reloads, error message at top</td><td class="cmp-new">Red underline as you type, before submit</td></tr>
+        <tr><td><strong>Uploading a PDF</strong></td><td class="cmp-old">File browser dialog, no progress shown</td><td class="cmp-new">Drag and drop, real-time progress bar</td></tr>
+        <tr><td><strong>Checking member counts</strong></td><td class="cmp-old">Reload the page and hope the query is fast</td><td class="cmp-new">Numbers refresh automatically</td></tr>
+        <tr><td><strong>Using a phone</strong></td><td class="cmp-old">Fixed-width layout, cramped and hard to tap</td><td class="cmp-new">Responsive, single-column on small screens</td></tr>
+        <tr><td><strong>Adding a new integration</strong></td><td class="cmp-old">Edit PHP files and hope nothing else breaks</td><td class="cmp-new">New API endpoint, existing pages untouched</td></tr>
       </tbody>
     </table>
   </section>
 
   <!-- ─── ROADMAP ──────────────────────────────────────────────────── -->
   <section class="vision-section">
-    <h2>🏗️ Implementation Roadmap</h2>
-    <p>You don't rewrite the whole site. You replace pieces one at a time — old PHP stays running while each React component goes live beside it.</p>
+    <h2>🏗️ How We Get There</h2>
+    <p>The whole site doesn't need to change at once. The old PHP keeps running while each new piece goes live beside it. If something goes wrong, you roll back that one component — nothing else is affected.</p>
 
     <div class="roadmap">
       <div class="roadmap-step">
         <div class="phase-badge">Phase 1 · Now</div>
         <h4>Stabilize</h4>
-        <p>Bug fixes, backups, stale content updates, SSL check. No new features. Gets the foundation solid.</p>
+        <p>Fix the known glitches, set up backups, update stale content. No new features yet — just get the foundation solid before building on it.</p>
       </div>
       <div class="roadmap-step">
-        <div class="phase-badge">Phase 2a · 8 wks</div>
+        <div class="phase-badge">Phase 2a</div>
         <h4>API Layer + Reminders</h4>
-        <p>Build REST API over existing MySQL. Add renewal reminder cron job. Email delivery fixed as part of this.</p>
+        <p>Lay a thin API over the existing MySQL database. Add the renewal reminder job. Fix email delivery properly while we're in there.</p>
       </div>
       <div class="roadmap-step">
-        <div class="phase-badge">Phase 2b · 12 wks</div>
+        <div class="phase-badge">Phase 2b</div>
         <h4>Self-Service Forms</h4>
-        <p>Officer profile form. Newsletter publish form. Role-based access so editors don't need webmaster.</p>
+        <p>Officer profile editing. Newsletter publishing. Role-based access so editors and officers can do their own work without going through the webmaster.</p>
       </div>
       <div class="roadmap-step">
-        <div class="phase-badge">Phase 2c · 6 wks</div>
+        <div class="phase-badge">Phase 2c</div>
         <h4>Treasurer Dashboard</h4>
-        <p>Real-time membership health view. Bulk reminder send. CSV export. Officers stop asking you for data.</p>
+        <p>Real-time membership view, bulk reminders, CSV export. The treasurer stops emailing questions she should be able to answer herself.</p>
       </div>
       <div class="roadmap-step">
-        <div class="phase-badge">Phase 3 · 16 wks</div>
+        <div class="phase-badge">Phase 3</div>
         <h4>Scholarly Features</h4>
-        <p>Bibliography, dissertation registry, ORCID integration, rich member profiles. Site becomes a field resource.</p>
+        <p>Living bibliography, dissertation registry, ORCID integration, rich member profiles. This is where the site becomes something the field actually uses.</p>
       </div>
     </div>
 
-    <p style="margin-top:1rem;"><strong>Total:</strong> ~6 months at half-time, or ~3 months with a contractor. Cost range: <strong>$15k–$30k</strong> depending on who builds it.</p>
-
     <div style="margin-top:2rem; padding:1.25rem 1.5rem; background:var(--gold); color:var(--crimson-dark); border-radius:var(--radius);">
-      <strong>The key insight:</strong> this isn't a redesign. It's surgical modernization — keep the database, keep the PHP pages that work, and replace the manual bottlenecks one component at a time. If anything breaks, roll back that component. The rest of the site keeps running.
+      <strong>The key point:</strong> this isn't a redesign. It's replacing the manual bottlenecks one at a time — keeping Paul's database and the PHP pages that work, and adding the pieces that let officers and editors do their own work. The site stays live the whole time.
     </div>
   </section>
 
