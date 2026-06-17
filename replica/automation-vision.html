@@ -6,729 +6,866 @@
   <title>Automation & Modern Tech Vision — Societas Magica</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Vision-specific styles */
-    .vision-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin: 2rem 0; }
-    .vision-card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      box-shadow: var(--shadow);
-    }
-    .vision-card h3 { margin-top: 0; }
+    /* ── Page layout ─────────────────────────────── */
+    .page-intro { font-size: 1.1rem; color: var(--muted); max-width: 720px; margin-bottom: 3rem; }
 
-    .mockup-container {
-      background: #f9f9f9;
-      border: 1px dashed var(--border);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-      font-family: var(--font-mono);
-      font-size: .9rem;
-      overflow-x: auto;
-    }
+    /* ── Problem grid ────────────────────────────── */
+    .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 1.25rem; margin: 1.5rem 0 3rem; }
+    .problem-card { background: #fff; border: 1px solid var(--border); border-top: 3px solid #d9534f; border-radius: var(--radius); padding: 1.25rem; }
+    .problem-card h3 { margin: 0 0 .6rem; font-size: 1rem; color: var(--ink); }
+    .problem-card p { margin: 0; font-size: .9rem; color: var(--muted); line-height: 1.6; }
 
-    .before-after {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      margin: 2rem 0;
-    }
+    /* ── Section wrapper ─────────────────────────── */
+    .vision-section { margin-bottom: 5rem; }
+    .vision-section h2 { font-size: 1.5rem; }
 
-    @media (max-width: 768px) {
-      .before-after { grid-template-columns: 1fr; }
-    }
+    /* ── Before / after ─────────────────────────── */
+    .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0; }
+    @media (max-width: 680px) { .ba-grid { grid-template-columns: 1fr; } }
+    .ba-card { border-radius: var(--radius); padding: 1.25rem 1.5rem; }
+    .ba-card.before { background: #fff5f5; border: 1px solid #f5c6cb; }
+    .ba-card.after  { background: #f0fff4; border: 1px solid #b2dfdb; }
+    .ba-label { font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: .75rem; }
+    .ba-card.before .ba-label { color: #c0392b; }
+    .ba-card.after  .ba-label { color: #27ae60; }
+    .ba-card ol, .ba-card ul { margin: 0; padding-left: 1.25rem; }
+    .ba-card li { font-size: .9rem; margin-bottom: .35rem; color: var(--ink); }
+    .ba-stat { margin-top: .85rem; font-size: .85rem; }
+    .ba-stat strong { color: var(--ink); }
 
-    .before-after-half {
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      background: white;
-    }
-
-    .before-after-half h4 {
-      margin-top: 0;
-      color: var(--gold);
-      text-transform: uppercase;
-      font-size: .85rem;
-      letter-spacing: .08em;
-    }
-
-    .before-after-half.before h4 { color: #d9534f; }
-    .before-after-half.after h4 { color: #5cb85c; }
-
-    .tech-stack {
-      background: var(--crimson-light);
-      border-left: 4px solid var(--crimson-mid);
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-      border-radius: var(--radius);
-    }
-
-    .tech-stack h4 { margin-top: 0; color: var(--crimson); }
-
-    .tech-list {
-      list-style: none;
+    /* ── UI Mockup shell ─────────────────────────── */
+    .mockup-shell {
+      background: #f1f3f5;
+      border-radius: 10px;
       padding: 0;
+      margin: 2rem 0;
+      box-shadow: 0 4px 24px rgba(0,0,0,.14);
+      overflow: hidden;
     }
-
-    .tech-list li {
-      padding: .5rem 0;
-      padding-left: 1.5rem;
-      position: relative;
+    .mockup-titlebar {
+      background: #e2e5e8;
+      padding: .45rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: .45rem;
     }
+    .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+    .dot-r { background: #ff5f57; }
+    .dot-y { background: #febc2e; }
+    .dot-g { background: #28c840; }
+    .mockup-titlebar-label { font-size: .8rem; color: #666; margin-left: auto; }
+    .mockup-body { background: #fff; padding: 2rem; }
 
-    .tech-list li:before {
-      content: "◆";
-      position: absolute;
-      left: 0;
-      color: var(--gold);
-    }
-
-    .benefit-badge {
-      display: inline-block;
-      background: var(--gold);
-      color: var(--crimson-dark);
-      padding: .35rem .75rem;
-      border-radius: 20px;
-      font-size: .85rem;
-      font-weight: 600;
-      margin: .25rem .25rem .25rem 0;
-    }
-
-    .code-example {
-      background: var(--crimson-dark);
-      color: #0f0;
-      padding: 1rem;
-      border-radius: var(--radius);
-      font-family: var(--font-mono);
-      font-size: .85rem;
-      overflow-x: auto;
-      margin: 1rem 0;
-      line-height: 1.5;
-    }
-
-    .comparison-table {
+    /* ── Form elements ───────────────────────────── */
+    .ui-form-group { margin-bottom: 1.1rem; }
+    .ui-label { display: block; font-size: .8rem; font-weight: 600; color: #555; margin-bottom: .35rem; letter-spacing: .03em; }
+    .ui-input {
       width: 100%;
-      border-collapse: collapse;
-      margin: 1.5rem 0;
+      padding: .55rem .75rem;
+      border: 1px solid #ced4da;
+      border-radius: 5px;
+      font-size: .95rem;
+      color: var(--ink);
+      background: #fff;
+      box-sizing: border-box;
+    }
+    .ui-input:focus-visible { outline: 2px solid var(--crimson-mid); }
+    .ui-input.has-value { border-color: #adb5bd; }
+    .ui-select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 0l6 8 6-8z' fill='%23666'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right .75rem center;
+      padding-right: 2rem;
+    }
+    .ui-textarea {
+      width: 100%; height: 90px; resize: none;
+      padding: .55rem .75rem;
+      border: 1px solid #ced4da;
+      border-radius: 5px;
+      font-size: .9rem;
+      font-family: inherit;
+      color: var(--ink);
+      box-sizing: border-box;
+    }
+    .ui-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .ui-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+    @media (max-width: 500px) { .ui-row, .ui-row-3 { grid-template-columns: 1fr; } }
+
+    .ui-auto-badge {
+      display: inline-block;
+      background: #e8f5e9;
+      color: #2e7d32;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      padding: .15rem .45rem;
+      border-radius: 3px;
+      vertical-align: middle;
+      margin-left: .4rem;
     }
 
-    .comparison-table th,
-    .comparison-table td {
-      padding: 1rem;
-      text-align: left;
-      border-bottom: 1px solid var(--border);
-    }
+    /* ── Buttons ─────────────────────────────────── */
+    .ui-btn { display: inline-block; padding: .55rem 1.2rem; border-radius: 5px; font-size: .9rem; font-weight: 600; cursor: default; border: none; }
+    .ui-btn-primary { background: var(--crimson); color: #fff; }
+    .ui-btn-secondary { background: #fff; color: var(--ink); border: 1px solid #ced4da; }
+    .ui-btn-ghost { background: transparent; color: var(--muted); }
+    .ui-btn-danger { background: #c0392b; color: #fff; }
+    .ui-btn-sm { padding: .3rem .7rem; font-size: .8rem; }
+    .ui-btn-row { display: flex; gap: .6rem; margin-top: 1.25rem; flex-wrap: wrap; align-items: center; }
 
-    .comparison-table th {
-      background: var(--crimson-light);
-      color: var(--crimson);
-      font-weight: 600;
+    /* ── Dropzone ────────────────────────────────── */
+    .ui-dropzone {
+      border: 2px dashed #ced4da;
+      border-radius: 8px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      background: #f8f9fa;
     }
+    .ui-dropzone.has-file { border-color: #27ae60; background: #f0fff4; }
+    .ui-dropzone-icon { font-size: 2rem; margin-bottom: .5rem; }
+    .ui-dropzone-text { font-size: .9rem; color: var(--muted); }
+    .ui-dropzone-filename { font-size: .9rem; font-weight: 600; color: #27ae60; margin-top: .4rem; }
+    .ui-dropzone-size { font-size: .8rem; color: #888; }
 
-    .comparison-table tr:hover {
-      background: #f9f9f9;
-    }
+    /* ── Checkbox ────────────────────────────────── */
+    .ui-checkbox-row { display: flex; align-items: center; gap: .6rem; margin: .75rem 0; }
+    .ui-checkbox { width: 16px; height: 16px; accent-color: var(--crimson); }
+    .ui-checkbox-label { font-size: .9rem; color: var(--ink); }
 
-    .emoji { margin-right: .25rem; }
+    /* ── Recent list ─────────────────────────────── */
+    .ui-recent { margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--border); }
+    .ui-recent-label { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: .6rem; }
+    .ui-recent-item { display: flex; align-items: center; gap: .6rem; padding: .45rem 0; border-bottom: 1px solid #f1f3f5; font-size: .85rem; }
+    .ui-recent-check { color: #27ae60; font-size: 1rem; }
+    .ui-recent-name { font-weight: 600; color: var(--crimson-mid); }
+    .ui-recent-meta { color: var(--muted); margin-left: auto; }
+
+    /* ── Profile avatar + form ───────────────────── */
+    .ui-profile-header { display: flex; align-items: center; gap: 1.25rem; margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border); }
+    .ui-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--crimson-light); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 700; color: var(--crimson); flex-shrink: 0; }
+    .ui-profile-name { font-weight: 700; font-size: 1.1rem; color: var(--ink); }
+    .ui-profile-role { font-size: .85rem; color: var(--muted); }
+    .ui-last-updated { font-size: .75rem; color: #aaa; margin-top: 1rem; }
+
+    /* ── Success toast ───────────────────────────── */
+    .ui-toast { background: #27ae60; color: #fff; border-radius: 6px; padding: .65rem 1rem; font-size: .88rem; display: inline-flex; align-items: center; gap: .5rem; margin-bottom: 1rem; }
+
+    /* ── Dashboard ───────────────────────────────── */
+    .dash-stat-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin-bottom: 1.5rem; }
+    @media (max-width: 600px) { .dash-stat-row { grid-template-columns: 1fr 1fr; } }
+    .dash-stat { background: #f8f9fa; border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center; }
+    .dash-stat-value { font-size: 1.7rem; font-weight: 700; color: var(--crimson); line-height: 1; }
+    .dash-stat-label { font-size: .75rem; color: var(--muted); margin-top: .3rem; text-transform: uppercase; letter-spacing: .05em; }
+    .dash-stat-delta { font-size: .78rem; margin-top: .35rem; }
+    .delta-up { color: #27ae60; }
+    .delta-dn { color: #c0392b; }
+
+    .dash-section-title { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin: 1.5rem 0 .75rem; }
+
+    /* ── Bar chart ───────────────────────────────── */
+    .bar-chart { display: flex; flex-direction: column; gap: .5rem; }
+    .bar-row { display: flex; align-items: center; gap: .75rem; font-size: .82rem; }
+    .bar-month { width: 28px; color: var(--muted); flex-shrink: 0; }
+    .bar-track { flex: 1; background: #e9ecef; border-radius: 4px; height: 22px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--crimson), var(--crimson-mid)); display: flex; align-items: center; padding-left: .5rem; }
+    .bar-val { font-size: .75rem; color: #fff; font-weight: 600; white-space: nowrap; }
+
+    /* ── Member table ────────────────────────────── */
+    .ui-table { width: 100%; border-collapse: collapse; font-size: .85rem; margin-top: .5rem; }
+    .ui-table th { background: var(--crimson-light); color: var(--crimson); font-weight: 600; padding: .55rem .75rem; text-align: left; font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; border-bottom: 2px solid var(--border); }
+    .ui-table td { padding: .6rem .75rem; border-bottom: 1px solid #f1f3f5; vertical-align: middle; }
+    .ui-table tr:last-child td { border-bottom: none; }
+    .ui-table tr:hover td { background: #f8f9fa; }
+    .tag { display: inline-block; padding: .2rem .55rem; border-radius: 4px; font-size: .72rem; font-weight: 700; }
+    .tag-danger { background: #fde8e8; color: #c0392b; }
+    .tag-warn   { background: #fff3cd; color: #856404; }
+    .tag-ok     { background: #d4edda; color: #155724; }
+
+    /* ── Email preview ───────────────────────────── */
+    .email-client { background: #f1f3f5; border-radius: 8px; overflow: hidden; }
+    .email-toolbar { background: var(--crimson-dark); padding: .6rem 1rem; display: flex; gap: .75rem; align-items: center; }
+    .email-toolbar-btn { background: rgba(255,255,255,.15); color: #fff; border: none; padding: .3rem .7rem; border-radius: 4px; font-size: .78rem; cursor: default; }
+    .email-pane { display: grid; grid-template-columns: 220px 1fr; min-height: 360px; }
+    @media (max-width: 600px) { .email-pane { grid-template-columns: 1fr; } }
+    .email-list { background: #fff; border-right: 1px solid var(--border); padding: .5rem 0; }
+    .email-list-item { padding: .75rem 1rem; border-bottom: 1px solid #f1f3f5; cursor: default; }
+    .email-list-item.active { background: var(--crimson-light); border-left: 3px solid var(--crimson); }
+    .email-list-from { font-size: .83rem; font-weight: 600; color: var(--ink); }
+    .email-list-subj { font-size: .78rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .email-list-date { font-size: .72rem; color: #aaa; float: right; }
+    .email-view { padding: 1.5rem; background: #fafafa; }
+    .email-view-from { font-size: .82rem; color: var(--muted); margin-bottom: .25rem; }
+    .email-view-subj { font-size: 1.05rem; font-weight: 700; color: var(--ink); margin-bottom: 1rem; padding-bottom: .75rem; border-bottom: 1px solid var(--border); }
+    .email-body { font-size: .9rem; line-height: 1.7; color: var(--ink); }
+    .email-body p { margin-bottom: .75rem; }
+    .email-body ul { padding-left: 1.25rem; margin-bottom: .75rem; }
+    .email-body li { margin-bottom: .2rem; }
+    .email-cta { display: inline-block; background: var(--crimson); color: #fff; padding: .6rem 1.4rem; border-radius: 5px; font-weight: 600; font-size: .9rem; text-decoration: none; margin: .5rem 0 1rem; }
+
+    /* ── Tech stack pill ─────────────────────────── */
+    .tech-stack { background: var(--crimson-light); border-left: 4px solid var(--crimson-mid); padding: 1.25rem 1.5rem; margin: 2rem 0; border-radius: var(--radius); }
+    .tech-stack h4 { margin: 0 0 .75rem; font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; color: var(--crimson); }
+    .tech-list { list-style: none; padding: 0; margin: 0; }
+    .tech-list li { padding: .35rem 0 .35rem 1.4rem; position: relative; font-size: .9rem; }
+    .tech-list li::before { content: "◆"; position: absolute; left: 0; color: var(--gold); font-size: .65rem; top: .5rem; }
+
+    /* ── Comparison table ────────────────────────── */
+    .cmp-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: .9rem; }
+    .cmp-table th, .cmp-table td { padding: .85rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+    .cmp-table th { background: var(--crimson-light); color: var(--crimson); font-weight: 600; font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; }
+    .cmp-table tr:hover td { background: #f9f9f9; }
+    .cmp-old { color: #c0392b; }
+    .cmp-new { color: #27ae60; font-weight: 500; }
+
+    /* ── Roadmap ─────────────────────────────────── */
+    .roadmap { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .roadmap-step { border-radius: var(--radius); padding: 1.25rem; background: #fff; border: 1px solid var(--border); position: relative; }
+    .roadmap-step h4 { margin: 0 0 .5rem; font-size: .95rem; color: var(--crimson); }
+    .roadmap-step p { margin: 0; font-size: .85rem; color: var(--muted); line-height: 1.6; }
+    .roadmap-step .phase-badge { display: inline-block; background: var(--crimson); color: #fff; font-size: .65rem; font-weight: 700; text-transform: uppercase; padding: .15rem .4rem; border-radius: 3px; margin-bottom: .6rem; }
+
+    /* ── Feature pills ───────────────────────────── */
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 1.25rem; margin: 1.5rem 0; }
+    .feature-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; }
+    .feature-card h3 { margin: 0 0 .5rem; font-size: 1rem; color: var(--ink); }
+    .feature-card p { margin: 0; font-size: .88rem; color: var(--muted); line-height: 1.6; }
+    .feature-badge { display: inline-block; background: var(--gold); color: var(--crimson-dark); padding: .2rem .6rem; border-radius: 12px; font-size: .75rem; font-weight: 700; margin-top: .6rem; }
   </style>
 </head>
 <body>
 
-<!-- Header (injected by nav.js) -->
-<div id="nav-container"></div>
-
 <main style="max-width: var(--max-w); margin: 2rem auto; padding: 0 1.5rem;">
 
-<h1>Automation & Modern Tech Vision</h1>
-<p style="font-size: 1.1rem; color: var(--muted); margin-bottom: 2rem;">
-  How React, APIs, and intelligent automation will transform Societas Magica from a manual admin burden into a self-service scholarly platform.
-</p>
-
-<!-- ─────────────────────────────────────────────────────────────── -->
-<section>
-<h2><span class="emoji">⚡</span>The Problem: Manual & Brittle</h2>
-
-<p>The current site (14-year-old custom PHP) works, but it's entirely <strong>manual</strong>:</p>
-
-<div class="vision-grid">
-  <div class="vision-card">
-    <h3>🔁 Renewal Reminders</h3>
-    <p><strong>Current:</strong> Officer manually checks who's overdue, sends individual emails. 351 members are "older than 2 years."</p>
-    <p><strong>Problem:</strong> Falls through the cracks. No one knows whose dues are expiring until they're delinquent.</p>
-  </div>
-
-  <div class="vision-card">
-    <h3>📝 Officer Profile Updates</h3>
-    <p><strong>Current:</strong> Officer emails you to update contact info. You log into admin panel and manually update.</p>
-    <p><strong>Problem:</strong> You're the bottleneck. Takes 30 min per email.</p>
-  </div>
-
-  <div class="vision-card">
-    <h3>📰 Newsletter Publishing</h3>
-    <p><strong>Current:</strong> Editor emails you PDF + metadata. You fill in season/year/issue/author manually in admin panel.</p>
-    <p><strong>Problem:</strong> Slow, error-prone. Publishing takes a day instead of 10 minutes.</p>
-  </div>
-
-  <div class="vision-card">
-    <h3>📊 Officer Dashboard</h3>
-    <p><strong>Current:</strong> Treasurer asks you "How many paid this month?" You run a manual query.</p>
-    <p><strong>Problem:</strong> Officers are blind to data. You're doing their job.</p>
-  </div>
-</div>
-
-</section>
-
-<!-- ─────────────────────────────────────────────────────────────── -->
-<section>
-<h2><span class="emoji">🔧</span>Solution 1: Renewal Reminders (Email Automation)</h2>
-
-<div class="before-after">
-  <div class="before-after-half before">
-    <h4>❌ Current (Manual)</h4>
-    <ol>
-      <li>Officer manually reviews dues tracker</li>
-      <li>Creates mental list of overdue members</li>
-      <li>Drafts email to each member</li>
-      <li>Sends individually (or forgets)</li>
-      <li>Result: 20-30% delinquency rate</li>
-    </ol>
-    <p><strong>Time:</strong> 2 hours/month</p>
-  </div>
-
-  <div class="before-after-half after">
-    <h4>✅ Modern (Automated)</h4>
-    <ol>
-      <li>Cron job runs daily at midnight</li>
-      <li>Queries: "Whose membership expires in 60 days?"</li>
-      <li>Sends templated email automatically</li>
-      <li>Repeats for renewal date and 30-days-overdue</li>
-      <li>Result: 50%+ reduction in late payments</li>
-    </ol>
-    <p><strong>Time:</strong> 5 mins setup, 0 mins ongoing</p>
-  </div>
-</div>
-
-<div class="mockup-container">
-<strong>💌 Sample Automated Emails (sent by system)</strong>
-
----
-Subject: Your Societas Magica Membership Renews in 60 Days
-
-Dear [Member Name],
-
-Your Societas Magica membership will expire on [DATE].
-
-Renew now and keep your access to:
-  • Exclusive newsletter archive (44 issues, 1995–2026)
-  • Member directory
-  • Conference calendar
-  • 20% discount on Magic in History books
-
-→ [Renew Your Membership]
-
----
-Subject: Your Membership Expires TODAY
-
-Dear [Member Name],
-
-Your membership expires today. Without renewal, you'll lose access to:
-  • Member-only content
-  • Newsletter archive
-  • Officer contact directory
-
-→ [Renew Now] (takes 2 minutes)
-
-Your support keeps Societas Magica running.
-
----
-</div>
-
-<div class="tech-stack">
-  <h4>⚙️ How It Works (Tech Side)</h4>
-  <ul class="tech-list">
-    <li><strong>Cron Job:</strong> Scheduled task runs at 2 AM daily</li>
-    <li><strong>Query:</strong> `SELECT * FROM members WHERE expiry_date = CURDATE() + 60 DAYS`</li>
-    <li><strong>Template:</strong> Use existing email system (PHP mail or SMTP)</li>
-    <li><strong>Logging:</strong> Log each email sent (audit trail)</li>
-    <li><strong>Opt-out:</strong> Members can disable reminders in preferences</li>
-  </ul>
-  <p><strong>Implementation:</strong> ~40 hours (mostly template design & testing)</p>
-</div>
-
-</section>
-
-<!-- ─────────────────────────────────────────────────────────────── -->
-<section>
-<h2><span class="emoji">👤</span>Solution 2: Officer Self-Service (API + React Form)</h2>
-
-<div class="before-after">
-  <div class="before-after-half before">
-    <h4>❌ Current (You're the Gatekeeper)</h4>
-    <ol>
-      <li>Officer emails you: "I moved, update my address"</li>
-      <li>You log into admin panel</li>
-      <li>Find officer's record</li>
-      <li>Manually edit name, phone, email, bio</li>
-      <li>Save</li>
-      <li>Reply to officer: "Done"</li>
-    </ol>
-    <p><strong>Time per request:</strong> 10-15 minutes</p>
-    <p><strong>Friction:</strong> Officer has to wait for you</p>
-  </div>
-
-  <div class="before-after-half after">
-    <h4>✅ Modern (Self-Service Form)</h4>
-    <ol>
-      <li>Officer clicks "Edit My Profile" on member page</li>
-      <li>Form loads with their current info</li>
-      <li>They update fields (name, phone, email, bio)</li>
-      <li>They click "Save"</li>
-      <li>Changes auto-save to database</li>
-      <li>Auto-notifies you (optional approval workflow)</li>
-    </ol>
-    <p><strong>Time per request:</strong> 2 minutes (for officer)</p>
-    <p><strong>Friction:</strong> Zero waiting</p>
-  </div>
-</div>
-
-<div class="mockup-container">
-<strong>🖼️ Officer Self-Service Form (React Component)</strong>
-
-<pre style="margin: 0;">
-┌─────────────────────────────────────────────┐
-│ ✎ Edit Your Officer Profile                 │
-├─────────────────────────────────────────────┤
-│                                             │
-│ Name: [Claire Fanger_____________]          │
-│                                             │
-│ Title: [President________________]          │
-│                                             │
-│ Email: [cfanger@example.com_______]         │
-│                                             │
-│ Phone: [+1-555-0123_______________]         │
-│                                             │
-│ Bio (Public):                               │
-│ ┌──────────────────────────────────┐        │
-│ │ Claire Fanger is a historian...  │        │
-│ │ (250 characters max)             │        │
-│ └──────────────────────────────────┘        │
-│                                             │
-│ [✓ Save Changes] [Cancel]                  │
-│                                             │
-│ Last updated: 2026-06-17 by you             │
-└─────────────────────────────────────────────┘
-</pre>
-
-<strong>Behind the scenes:</strong>
-<ul>
-  <li>Form validates in real-time (email format, phone length, etc.)</li>
-  <li>On save, React sends PATCH request to API: `/api/officers/me`</li>
-  <li>Database updates instantly</li>
-  <li>Public page refreshes automatically (no cache needed)</li>
-  <li>Admin notified in dashboard (optional approval)</li>
-</ul>
-</div>
-
-<div class="tech-stack">
-  <h4>⚙️ Why React + API is Better</h4>
-  <ul class="tech-list">
-    <li><strong>Instant Feedback:</strong> Form validates as you type (red underline if email is invalid)</li>
-    <li><strong>No Page Reload:</strong> Click save, data saves, you see confirmation in 100ms</li>
-    <li><strong>Real-Time Sync:</strong> Changes appear on public profile page immediately</li>
-    <li><strong>Offline-Capable:</strong> Form can queue changes if offline, syncs when internet returns</li>
-    <li><strong>Mobile-Friendly:</strong> Touch-optimized form works perfectly on phones</li>
-    <li><strong>Accessibility:</strong> Screen reader support built-in (ARIA labels)</li>
-  </ul>
-  <p><strong>Implementation:</strong> ~30 hours (React form + API endpoint)</p>
-</div>
-
-</section>
-
-<!-- ─────────────────────────────────────────────────────────────── -->
-<section>
-<h2><span class="emoji">📰</span>Solution 3: Newsletter Self-Publishing (React Upload + Auto-Metadata)</h2>
-
-<div class="before-after">
-  <div class="before-after-half before">
-    <h4>❌ Current (You're Required)</h4>
-    <p>Editor emails you: "Here's the Spring 2026 newsletter. Frater Archer. 'Making of the Lemegeton.'"</p>
-    <ol style="font-size: .9rem;">
-      <li>You log into admin panel</li>
-      <li>Click Newsletters → Upload</li>
-      <li>Select Season: "Spring"</li>
-      <li>Select Year: "2026"</li>
-      <li>Type Issue No: "44"</li>
-      <li>Type Author: "Frater Archer"</li>
-      <li>Type Title: "Making of the Lemegeton"</li>
-      <li>Upload PDF</li>
-      <li>Click Save</li>
-    </ol>
-    <p><strong>Time:</strong> 10 minutes per newsletter</p>
-    <p><strong>Error Rate:</strong> ~15% (wrong issue # is common)</p>
-  </div>
-
-  <div class="before-after-half after">
-    <h4>✅ Modern (Auto-Numbered, Drag-Drop)</h4>
-    <p>Editor clicks "Publish Newsletter" on member page:</p>
-    <ol style="font-size: .9rem;">
-      <li>Form appears (pre-filled with "Spring 2026")</li>
-      <li>Issue # auto-calculated: "Issue 44"</li>
-      <li>Drag-drop PDF into form</li>
-      <li>Type Author: "Frater Archer"</li>
-      <li>Type Title: "Making of the Lemegeton"</li>
-      <li>Click "Publish"</li>
-    </ol>
-    <p><strong>Time:</strong> 3 minutes per newsletter</p>
-    <p><strong>Error Rate:</strong> 0% (auto-numbering)</p>
-  </div>
-</div>
-
-<div class="mockup-container">
-<strong>🖼️ Newsletter Self-Publish Form (React)</strong>
-
-<pre style="margin: 0;">
-┌──────────────────────────────────────────────┐
-│ 📰 Publish New Newsletter                    │
-├──────────────────────────────────────────────┤
-│                                              │
-│ Season: [Spring ▼]  Year: [2026 ▼]          │
-│                                              │
-│ Issue #: [44] (auto-calculated)              │
-│                                              │
-│ Newsletter Title:                            │
-│ [Making of the Lemegeton_________________]   │
-│                                              │
-│ Author:                                      │
-│ [Frater Archer_______________________________]│
-│                                              │
-│ PDF File:                                    │
-│ ┌──────────────────────────────────────────┐ │
-│ │ ↓ Drop file here                         │ │
-│ │ or [Browse Files]                        │ │
-│ │ (spring_2026.pdf) ✓                      │ │
-│ └──────────────────────────────────────────┘ │
-│                                              │
-│ [☐ Send notification to members]            │
-│                                              │
-│ [✓ Publish Now] [Save as Draft] [Cancel]    │
-│                                              │
-│ ✓ 2026-06-17 Issue 43 (Fall_2025)            │
-│ ✓ 2026-05-04 Issue 42 (Spring_2025)          │
-│ ✓ 2025-12-01 Issue 41 (Fall_2024)            │
-│                                              │
-└──────────────────────────────────────────────┘
-</pre>
-
-<strong>Features:</strong>
-<ul>
-  <li>Drag-drop file upload (no more "Choose File" dialog)</li>
-  <li>Issue number auto-increments from database</li>
-  <li>Preview PDF before publishing</li>
-  <li>Schedule for future date (e.g., "Publish June 20 at 9 AM")</li>
-  <li>Recent newsletters shown (for reference)</li>
-  <li>Automatically notifies members if checkbox enabled</li>
-</ul>
-</div>
-
-<div class="tech-stack">
-  <h4>⚙️ Why React Shines Here</h4>
-  <ul class="tech-list">
-    <li><strong>Drag-Drop:</strong> Native browser API makes file upload painless</li>
-    <li><strong>Progress Bar:</strong> Watch the PDF upload in real-time (important for large files)</li>
-    <li><strong>Validation:</strong> "File must be PDF, under 50MB" checked instantly</li>
-    <li><strong>Preview:</strong> Show first page of PDF before submitting</li>
-    <li><strong>Autosave:</strong> Form saves to browser's local storage (don't lose your work if you accidentally close the tab)</li>
-  </ul>
-  <p><strong>Implementation:</strong> ~50 hours (form + file upload API + PDF preview)</p>
-</div>
-
-</section>
-
-<!-- ─────────────────────────────────────────────────────────────── -->
-<section>
-<h2><span class="emoji">📊</span>Solution 4: Officer Dashboard (Real-Time Data Visualization)</h2>
-
-<div class="mockup-container">
-<strong>🖼️ Treasurer Dashboard (React + Chart.js)</strong>
-
-<pre style="margin: 0;">
-┌────────────────────────────────────────────────────────────┐
-│ 💰 Membership Dashboard (Treasurer View)                  │
-├────────────────────────────────────────────────────────────┤
-│                                                            │
-│  Total Members: 494        Paid (2026): 92       Apr: ↑7  │
-│                                                            │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐    │
-│  │ 494 Active   │  │ 92 Paid 2026 │  │ 42 Paid 2025 │    │
-│  │ Members      │  │              │  │              │    │
-│  │              │  │ +5 this mo   │  │ -12 overdue  │    │
-│  └──────────────┘  └──────────────┘  └──────────────┘    │
-│                                                            │
-│ Revenue This Year:                                         │
-│                 ┌─────────────────────────────┐           │
-│  Jan: $8,500   │████████░░░░░░░░░░░░░░░│     │           │
-│  Feb: $7,200   │███████░░░░░░░░░░░░░░░░│     │           │
-│  Mar: $9,100   │█████████░░░░░░░░░░░░░│      │           │
-│  Apr: $10,500  │██████████░░░░░░░░░░░░│     │           │
-│  May: $11,200  │███████████░░░░░░░░░░░│     │           │
-│                 └─────────────────────────────┘           │
-│                                                            │
-│ ◀  Overdue Members                                         │
-│                                                            │
-│  Chris Brown        | Last paid: Jan 2024 | $45 Standard  │
-│  Sarah Kim          | Last paid: Dec 2023 | $138 Full    │
-│  James Martinez     | Last paid: Oct 2023 | $45 Standard  │
-│  [Send reminder] [Excuse/Void] [Notes]                   │
-│                                                            │
-│ ◀  Due Soon (Next 30 Days)                                │
-│                                                            │
-│  Emily Davis        | Expires: 2026-07-15 | $138 Full    │
-│  Robert Johnson     | Expires: 2026-07-22 | $45 Standard  │
-│  Lisa Anderson      | Expires: 2026-07-28 | $45 Standard  │
-│                                                            │
-│ [Export to CSV]  [Send Bulk Reminder]                    │
-│                                                            │
-└────────────────────────────────────────────────────────────┘
-</pre>
-
-<p><strong>What this solves:</strong></p>
-<ul>
-  <li><strong>Treasurer sees real-time data:</strong> No more "How many paid this month?" → You can see it instantly</li>
-  <li><strong>Trend visibility:</strong> Chart shows April had 7 more renewals than usual (good month!)</li>
-  <li><strong>Action-ready list:</strong> Overdue members right there, with one-click "Send Reminder" button</li>
-  <li><strong>Forecasting:</strong> "Due Soon" section helps treasurer predict next month's cash flow</li>
-  <li><strong>Bulk actions:</strong> Send reminder to 12 overdue members in one click (vs. 12 manual emails)</li>
-</ul>
-</div>
-
-<div class="tech-stack">
-  <h4>⚙️ Why React Is Essential Here</h4>
-  <ul class="tech-list">
-    <li><strong>Live Updates:</strong> Data refreshes every 60 seconds (or on-demand) without page reload</li>
-    <li><strong>Filtering:</strong> Click "Show only members who joined in 2024" — instant filter (no server call needed)</li>
-    <li><strong>Charts:</strong> Revenue chart animates and updates in real-time as new payments come in</li>
-    <li><strong>Sorting:</strong> Click "Overdue" column header to sort by days overdue (instant, client-side)</li>
-    <li><strong>Export:</strong> Click "Export to CSV" — downloads instantly (no server processing)</li>
-  </ul>
-  <p><strong>Implementation:</strong> ~60 hours (API endpoints + React dashboard + Chart.js integration)</p>
-</div>
-
-</section>
-
-<!-- ─────────────────────────────────────────────────────────────── -->
-<section>
-<h2><span class="emoji">⚛️</span>Why React + Modern Tech Stack?</h2>
-
-<div class="vision-grid">
-  <div class="vision-card">
-    <h3>⚡ Responsiveness</h3>
-    <p>Forms validate instantly. Click save, data updates in 100ms. No server waiting.</p>
-    <p><span class="benefit-badge">Better UX</span></p>
-  </div>
-
-  <div class="vision-card">
-    <h3>📱 Mobile-First</h3>
-    <p>Touch-optimized forms work perfectly on phones. Officers can update profiles from anywhere.</p>
-    <p><span class="benefit-badge">Accessibility</span></p>
-  </div>
-
-  <div class="vision-card">
-    <h3>🔄 Real-Time Sync</h3>
-    <p>Multiple people can use the site simultaneously without conflicts. Automatic sync across devices.</p>
-    <p><span class="benefit-badge">Scalability</span></p>
-  </div>
-
-  <div class="vision-card">
-    <h3>🎯 Smart UX</h3>
-    <p>Forms autocomplete based on history. Drag-drop file uploads. Inline validation. Progressive disclosure.</p>
-    <p><span class="benefit-badge">Delight</span></p>
-  </div>
-
-  <div class="vision-card">
-    <h3>🔗 API-First</h3>
-    <p>Services communicate through APIs. Easy to add integrations (ORCID, Zotero, Google Calendar) later.</p>
-    <p><span class="benefit-badge">Extensibility</span></p>
-  </div>
-
-  <div class="vision-card">
-    <h3>🚀 Performance</h3>
-    <p>Code splitting + lazy loading. Only download JS you need. Faster page loads on slow connections.</p>
-    <p><span class="benefit-badge">Speed</span></p>
-  </div>
-</div>
-
-<h3>Comparison: Current PHP vs. Modern React</h3>
-
-<table class="comparison-table">
-  <thead>
-    <tr>
-      <th>Feature</th>
-      <th>Current PHP (2012)</th>
-      <th>Modern React + Node</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Page Reload on Save</strong></td>
-      <td>Yes (1-2 second delay)</td>
-      <td>No (saves in background, 100ms)</td>
-    </tr>
-    <tr>
-      <td><strong>Form Validation</strong></td>
-      <td>On submit (after you upload)</td>
-      <td>As you type (instant feedback)</td>
-    </tr>
-    <tr>
-      <td><strong>Error Handling</strong></td>
-      <td>Reload page, see error message</td>
-      <td>Inline error badge, fix immediately</td>
-    </tr>
-    <tr>
-      <td><strong>Mobile Experience</strong></td>
-      <td>Cramped, hard to tap buttons</td>
-      <td>Touch-optimized, full-screen forms</td>
-    </tr>
-    <tr>
-      <td><strong>Real-Time Data</strong></td>
-      <td>Refresh page manually</td>
-      <td>Updates automatically every 60 sec</td>
-    </tr>
-    <tr>
-      <td><strong>Offline Support</strong></td>
-      <td>None</td>
-      <td>Form queues changes, syncs when online</td>
-    </tr>
-    <tr>
-      <td><strong>Accessibility</strong></td>
-      <td>Minimal (no ARIA)</td>
-      <td>Screen reader ready (ARIA labels)</td>
-    </tr>
-    <tr>
-      <td><strong>Developer Experience</strong></td>
-      <td>Single server, hard to extend</td>
-      <td>Modular, reusable components, hot reload</td>
-    </tr>
-  </tbody>
-</table>
-
-</section>
-
-<!-- ─────────────────────────────────────────────────────────────── -->
-<section>
-<h2><span class="emoji">🏗️</span>Implementation Roadmap</h2>
-
-<p>You don't have to rebuild the whole site at once. Modern approach is to evolve piece by piece:</p>
-
-<table class="comparison-table">
-  <thead>
-    <tr>
-      <th>Phase</th>
-      <th>Priority</th>
-      <th>Effort</th>
-      <th>Impact</th>
-      <th>Timeline</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Phase 1 (Now)</strong></td>
-      <td>Fix bugs<br/>Update stale content<br/>Backups</td>
-      <td>Low</td>
-      <td>Stability ✓</td>
-      <td>2 weeks</td>
-    </tr>
-    <tr>
-      <td><strong>Phase 2a</strong></td>
-      <td>Build API layer<br/>Add renewal reminders</td>
-      <td>Medium</td>
-      <td>Automation ✓<br/>+20-30% renewals</td>
-      <td>8 weeks</td>
-    </tr>
-    <tr>
-      <td><strong>Phase 2b</strong></td>
-      <td>React forms:<br/>Officer profiles<br/>Newsletter upload</td>
-      <td>Medium</td>
-      <td>Self-service ✓<br/>-2 hrs/week admin</td>
-      <td>12 weeks</td>
-    </tr>
-    <tr>
-      <td><strong>Phase 2c</strong></td>
-      <td>Treasurer dashboard</td>
-      <td>Medium</td>
-      <td>Data visibility ✓<br/>Empowered officers</td>
-      <td>6 weeks</td>
-    </tr>
-    <tr>
-      <td><strong>Phase 3</strong></td>
-      <td>Scholarly features:<br/>Bibliography<br/>Dissertation registry<br/>ORCID integration</td>
-      <td>High</td>
-      <td>Destination site ✓<br/>Research hub</td>
-      <td>16 weeks</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Total time to full modernization:</strong> ~6 months (if dedicated dev works 50% time) or 3 months (if full-time contractor)</p>
-<p><strong>Cost range:</strong> $15k–$30k depending on contractor vs. in-house dev</p>
-
-</section>
-
-<!-- ─────────────────────────────────────────────────────────────── -->
-<section>
-<h2><span class="emoji">💡</span>Key Insight: You Don't Need a "Redesign"</h2>
-
-<p>You don't need to redesign the <em>entire site</em> at once. Modern approach is <strong>surgical modernization</strong>:</p>
-
-<ol>
-  <li><strong>Keep the database.</strong> It works. Don't migrate.</li>
-  <li><strong>Build an API layer.</strong> Let the database speak JSON.</li>
-  <li><strong>Add React components one at a time.</strong> Officer form first. Newsletter upload second. Dashboard third.</li>
-  <li><strong>Leave old pages alone.</strong> Home page, Publications, Blog—stay on PHP. They work.</li>
-  <li><strong>Gradually replace.</strong> Over 6 months, 60% of the site is React. After 12 months, retire the PHP.</li>
-</ol>
-
-<p><strong>Benefit:</strong> Low risk. If something breaks, roll back the one component. The rest of the site keeps working.</p>
-
-<div class="tech-stack">
-  <h4>🛠️ Recommended Tech Stack</h4>
-  <ul class="tech-list">
-    <li><strong>Backend:</strong> Node.js (Express) + existing MySQL database</li>
-    <li><strong>API:</strong> REST (or GraphQL if doing Dissertation Registry later)</li>
-    <li><strong>Frontend:</strong> React 18+ (component library like Material UI or Chakra)</li>
-    <li><strong>Authentication:</strong> JWT tokens (decouples frontend from PHP sessions)</li>
-    <li><strong>Hosting:</strong> Same shared hosting or move to cloud ($50-100/month for better performance)</li>
-    <li><strong>CI/CD:</strong> GitHub Actions (auto-deploy on git push)</li>
-  </ul>
-</div>
-
-</section>
-
-<!-- ─────────────────────────────────────────────────────────────── -->
-<section>
-<h2><span class="emoji">🎯</span>Bottom Line</h2>
-
-<p>Current site is <strong>stable but manual.</strong> With strategic use of React + APIs + automation:</p>
-
-<ul style="font-size: 1.05rem;">
-  <li><strong>Renewal reminders:</strong> Cut delinquency 20–30% automatically</li>
-  <li><strong>Officer self-service:</strong> Save 2 hrs/week admin time</li>
-  <li><strong>Newsletter publishing:</strong> Go from 10 min to 3 min per issue</li>
-  <li><strong>Treasurer dashboard:</strong> Give officers real-time data instead of asking you</li>
-  <li><strong>Mobile-first:</strong> Members and officers can work from anywhere</li>
-</ul>
-
-<p style="margin-top: 1.5rem; padding: 1rem; background: var(--gold); color: var(--crimson-dark); border-radius: var(--radius); font-weight: 600;">
-  <strong>This isn't about vanity.</strong> This is about turning a 14-year-old manual site into a 21st-century self-service platform that scales with Societas Magica's growth.
-</p>
-
-</section>
+  <h1>Automation &amp; Modern Tech Vision</h1>
+  <p class="page-intro">How React, APIs, and intelligent automation will transform Societas Magica from a manual admin burden into a self-service scholarly platform — with real mockups of what each improvement looks like.</p>
+
+  <!-- ─── THE PROBLEM ──────────────────────────────────────────────── -->
+  <section class="vision-section">
+    <h2>⚡ The Problem: Manual &amp; Brittle</h2>
+    <p>The current site works, but it's entirely <strong>manual</strong>. Every task flows through you or Paul:</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <h3>🔁 Renewal Reminders</h3>
+        <p>351 members are more than 2 years lapsed. No automated system has ever reminded them to renew. It requires manual lookup and individual emails.</p>
+      </div>
+      <div class="problem-card">
+        <h3>📝 Officer Profiles</h3>
+        <p>Officer emails you a change. You log into admin, find the record, edit it manually, reply "done." 15 minutes per change that should take 2.</p>
+      </div>
+      <div class="problem-card">
+        <h3>📰 Newsletter Publishing</h3>
+        <p>Editor sends you a PDF by email. You fill in season, year, issue number, author, title by hand. One wrong number breaks the archive sequence.</p>
+      </div>
+      <div class="problem-card">
+        <h3>📊 Financial Visibility</h3>
+        <p>Treasurer asks "how many paid this month?" You run a database query. Officers are blind to membership health without your intervention.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SOLUTION 1: EMAIL AUTOMATION ───────────────────────────── -->
+  <section class="vision-section">
+    <h2>📧 Solution 1: Automated Renewal Reminders</h2>
+
+    <div class="ba-grid">
+      <div class="ba-card before">
+        <div class="ba-label">❌ Current — manual</div>
+        <ol>
+          <li>Officer manually reviews dues tracker</li>
+          <li>Builds mental list of overdue members</li>
+          <li>Drafts individual emails</li>
+          <li>Sends them one by one — or forgets</li>
+        </ol>
+        <div class="ba-stat"><strong>Time:</strong> ~2 hours/month &nbsp;|&nbsp; <strong>Outcome:</strong> 20–30% delinquency</div>
+      </div>
+      <div class="ba-card after">
+        <div class="ba-label">✅ Modern — automated</div>
+        <ol>
+          <li>Cron job runs nightly at 2 AM</li>
+          <li>Queries: who expires in 60 / 30 / 0 days?</li>
+          <li>Sends templated email to each group</li>
+          <li>Logs every email sent for audit trail</li>
+        </ol>
+        <div class="ba-stat"><strong>Time:</strong> 0 mins ongoing &nbsp;|&nbsp; <strong>Outcome:</strong> 50%+ fewer lapses</div>
+      </div>
+    </div>
+
+    <p style="font-weight:600; margin-bottom:.5rem;">What the member receives:</p>
+
+    <div class="mockup-shell">
+      <div class="mockup-titlebar">
+        <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+        <span class="mockup-titlebar-label">Mail — ted.hand@gmail.com</span>
+      </div>
+      <div class="email-client">
+        <div class="email-toolbar">
+          <span class="email-toolbar-btn">Compose</span>
+          <span class="email-toolbar-btn">Inbox (3)</span>
+          <span class="email-toolbar-btn">Sent</span>
+        </div>
+        <div class="email-pane">
+          <div class="email-list">
+            <div class="email-list-item active">
+              <span class="email-list-date">Today</span>
+              <div class="email-list-from">Societas Magica</div>
+              <div class="email-list-subj">Your membership renews in 30 days</div>
+            </div>
+            <div class="email-list-item">
+              <span class="email-list-date">Jun 15</span>
+              <div class="email-list-from">Societas Magica</div>
+              <div class="email-list-subj">Spring 2026 Newsletter now available</div>
+            </div>
+            <div class="email-list-item">
+              <span class="email-list-date">May 30</span>
+              <div class="email-list-from">Societas Magica</div>
+              <div class="email-list-subj">Your membership renews in 60 days</div>
+            </div>
+          </div>
+          <div class="email-view">
+            <div class="email-view-from">From: <strong>noreply@societasmagica.org</strong> &nbsp;·&nbsp; To: Albert Hand</div>
+            <div class="email-view-subj">Your Societas Magica membership renews in 30 days</div>
+            <div class="email-body">
+              <p>Dear Albert,</p>
+              <p>Your Societas Magica membership expires on <strong>July 17, 2026</strong>. Renew now to keep access to:</p>
+              <ul>
+                <li>Full newsletter archive — 44 issues since 1995</li>
+                <li>Members-only directory (494 scholars)</li>
+                <li>20% discount on <em>Magic in History</em> books</li>
+                <li>Conference calendar &amp; CFP digest</li>
+              </ul>
+              <a class="email-cta" href="#">Renew My Membership →</a>
+              <p style="font-size:.82rem; color:#888;">Questions? Reply to this email or contact <a href="#">admin@societasmagica.org</a>. To stop receiving renewal reminders, update your <a href="#">notification preferences</a>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tech-stack">
+      <h4>How it works</h4>
+      <ul class="tech-list">
+        <li><strong>Cron job</strong> runs at 2 AM daily — queries the existing MySQL members table</li>
+        <li><strong>Three triggers:</strong> 60-day warning, 30-day warning, expiry-day notice</li>
+        <li><strong>PHP mailer or SendGrid</strong> handles delivery with SPF/DKIM so it lands in inboxes, not spam</li>
+        <li><strong>Audit log:</strong> every email stored in a <code>email_log</code> table — who got what and when</li>
+        <li><strong>Opt-out:</strong> one-click unsubscribe link in every email (legal requirement)</li>
+        <li><strong>Effort:</strong> ~40 hours — most of that is testing the email templates</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ─── SOLUTION 2: OFFICER PROFILE FORM ────────────────────────── -->
+  <section class="vision-section">
+    <h2>👤 Solution 2: Officer Self-Service Profile</h2>
+
+    <div class="ba-grid">
+      <div class="ba-card before">
+        <div class="ba-label">❌ Current — you're the gatekeeper</div>
+        <ol>
+          <li>Officer emails: "I moved, new phone is…"</li>
+          <li>You log into the admin control panel</li>
+          <li>Find their record in the member table</li>
+          <li>Manually edit the fields</li>
+          <li>Reply confirming it's done</li>
+        </ol>
+        <div class="ba-stat"><strong>Time:</strong> 10–15 min per change &nbsp;|&nbsp; <strong>Friction:</strong> officer waits for you</div>
+      </div>
+      <div class="ba-card after">
+        <div class="ba-label">✅ Modern — self-service</div>
+        <ol>
+          <li>Officer clicks "Edit My Profile" on their member page</li>
+          <li>Form loads pre-filled with their current data</li>
+          <li>They update what's changed and hit Save</li>
+          <li>Database updates in &lt;100ms</li>
+          <li>Public officer listing refreshes automatically</li>
+        </ol>
+        <div class="ba-stat"><strong>Time:</strong> 2 min for officer &nbsp;|&nbsp; <strong>Friction:</strong> none</div>
+      </div>
+    </div>
+
+    <p style="font-weight:600; margin-bottom:.5rem;">What the officer sees:</p>
+
+    <div class="mockup-shell">
+      <div class="mockup-titlebar">
+        <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+        <span class="mockup-titlebar-label">societasmagica.org / member / profile / edit</span>
+      </div>
+      <div class="mockup-body">
+        <div class="ui-toast">✓ Profile saved successfully — public page updated.</div>
+
+        <div class="ui-profile-header">
+          <div class="ui-avatar">CF</div>
+          <div>
+            <div class="ui-profile-name">Claire Fanger</div>
+            <div class="ui-profile-role">Treasurer · Member since 1998 · Full member</div>
+          </div>
+        </div>
+
+        <div class="ui-row">
+          <div class="ui-form-group">
+            <label class="ui-label">First Name</label>
+            <input class="ui-input has-value" type="text" value="Claire" readonly>
+          </div>
+          <div class="ui-form-group">
+            <label class="ui-label">Last Name</label>
+            <input class="ui-input has-value" type="text" value="Fanger" readonly>
+          </div>
+        </div>
+
+        <div class="ui-form-group">
+          <label class="ui-label">Officer Title</label>
+          <select class="ui-input ui-select">
+            <option>President</option>
+            <option selected>Treasurer</option>
+            <option>Secretary</option>
+            <option>Vice President</option>
+            <option>Newsletter Editor</option>
+          </select>
+        </div>
+
+        <div class="ui-form-group">
+          <label class="ui-label">Contact Email (shown in officer directory)</label>
+          <input class="ui-input has-value" type="email" value="cfanger@example.edu" readonly>
+        </div>
+
+        <div class="ui-row">
+          <div class="ui-form-group">
+            <label class="ui-label">Institution</label>
+            <input class="ui-input has-value" type="text" value="Southern Methodist University" readonly>
+          </div>
+          <div class="ui-form-group">
+            <label class="ui-label">Phone (optional)</label>
+            <input class="ui-input has-value" type="text" value="+1 (214) 555-0182" readonly>
+          </div>
+        </div>
+
+        <div class="ui-form-group">
+          <label class="ui-label">Short Bio <span style="font-weight:400;color:#aaa;">(shown publicly · max 250 chars)</span></label>
+          <textarea class="ui-textarea" readonly>Claire Fanger is a professor at SMU specializing in medieval Christian magic and ritual. She is the editor of Conjuring Spirits (1998) and Invoking Angels (2012).</textarea>
+        </div>
+
+        <div class="ui-btn-row">
+          <span class="ui-btn ui-btn-primary">Save Changes</span>
+          <span class="ui-btn ui-btn-secondary">Cancel</span>
+        </div>
+
+        <div class="ui-last-updated">Last updated: 2026-06-17 · Changes appear on the public site immediately.</div>
+      </div>
+    </div>
+
+    <div class="tech-stack">
+      <h4>How it works</h4>
+      <ul class="tech-list">
+        <li><strong>React form</strong> pre-populates with a GET request to <code>/api/officers/me</code></li>
+        <li><strong>Real-time validation</strong> as you type — red border + error message if email is malformed</li>
+        <li>On Save, sends a <strong>PATCH to /api/officers/:id</strong> — database updates in under 100ms</li>
+        <li>Public officer listing is <strong>server-rendered from the same table</strong> — no cache to clear</li>
+        <li>Optional: changes go into a <strong>pending approval queue</strong> for webmaster sign-off before going live</li>
+        <li><strong>Effort:</strong> ~30 hours — React form + one API endpoint</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ─── SOLUTION 3: NEWSLETTER UPLOAD ───────────────────────────── -->
+  <section class="vision-section">
+    <h2>📰 Solution 3: Newsletter Self-Publishing</h2>
+
+    <div class="ba-grid">
+      <div class="ba-card before">
+        <div class="ba-label">❌ Current — you're required</div>
+        <ol>
+          <li>Editor emails you: PDF + metadata as freeform text</li>
+          <li>You log into admin, click Newsletters → Upload</li>
+          <li>Fill in Season, Year, Issue #, Author, Title by hand</li>
+          <li>Upload the file, click Save</li>
+          <li>Hope you typed Issue #44 and not #43</li>
+        </ol>
+        <div class="ba-stat"><strong>Time:</strong> 10–15 min &nbsp;|&nbsp; <strong>Error rate:</strong> ~15% (wrong issue # common)</div>
+      </div>
+      <div class="ba-card after">
+        <div class="ba-label">✅ Modern — editor publishes directly</div>
+        <ol>
+          <li>Editor clicks "Publish Newsletter" on their member page</li>
+          <li>Season + Year pre-filled; Issue # auto-calculated as #45</li>
+          <li>Drag PDF into the drop zone</li>
+          <li>Fill in Title + Author, click Publish</li>
+          <li>Archive updates; members get a notification email</li>
+        </ol>
+        <div class="ba-stat"><strong>Time:</strong> 3 min &nbsp;|&nbsp; <strong>Error rate:</strong> 0% (auto-numbered)</div>
+      </div>
+    </div>
+
+    <p style="font-weight:600; margin-bottom:.5rem;">What the newsletter editor sees:</p>
+
+    <div class="mockup-shell">
+      <div class="mockup-titlebar">
+        <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+        <span class="mockup-titlebar-label">societasmagica.org / admin / newsletter / publish</span>
+      </div>
+      <div class="mockup-body">
+        <div style="font-size:1.1rem; font-weight:700; color:var(--crimson); margin-bottom:1.25rem;">Publish New Newsletter</div>
+
+        <div class="ui-row-3">
+          <div class="ui-form-group">
+            <label class="ui-label">Season</label>
+            <select class="ui-input ui-select">
+              <option>Spring</option>
+              <option selected>Fall</option>
+              <option>Summer</option>
+              <option>Winter</option>
+            </select>
+          </div>
+          <div class="ui-form-group">
+            <label class="ui-label">Year</label>
+            <select class="ui-input ui-select">
+              <option selected>2026</option>
+              <option>2027</option>
+            </select>
+          </div>
+          <div class="ui-form-group">
+            <label class="ui-label">Issue Number <span class="ui-auto-badge">AUTO</span></label>
+            <input class="ui-input" type="text" value="45" readonly style="background:#f8f9fa; color:var(--muted);">
+          </div>
+        </div>
+
+        <div class="ui-form-group">
+          <label class="ui-label">Lead Article Title</label>
+          <input class="ui-input has-value" type="text" value="Solomonic Ritual in the Sixteenth-Century Low Countries" readonly>
+        </div>
+
+        <div class="ui-form-group">
+          <label class="ui-label">Lead Author</label>
+          <input class="ui-input has-value" type="text" value="Dr. Martine van der Berg" readonly>
+        </div>
+
+        <div class="ui-form-group">
+          <label class="ui-label">PDF File</label>
+          <div class="ui-dropzone has-file">
+            <div class="ui-dropzone-icon">📄</div>
+            <div class="ui-dropzone-filename">Fall_2026_Issue_45.pdf</div>
+            <div class="ui-dropzone-size">4.2 MB · Ready to upload</div>
+          </div>
+        </div>
+
+        <div class="ui-checkbox-row">
+          <input class="ui-checkbox" type="checkbox" id="notify" checked>
+          <label class="ui-checkbox-label" for="notify">Notify all active members by email when published</label>
+        </div>
+        <div class="ui-checkbox-row">
+          <input class="ui-checkbox" type="checkbox" id="draft">
+          <label class="ui-checkbox-label" for="draft">Save as draft (don't publish yet)</label>
+        </div>
+
+        <div class="ui-btn-row">
+          <span class="ui-btn ui-btn-primary">Publish Now</span>
+          <span class="ui-btn ui-btn-secondary">Save Draft</span>
+          <span class="ui-btn ui-btn-ghost">Cancel</span>
+        </div>
+
+        <div class="ui-recent">
+          <div class="ui-recent-label">Recent Issues</div>
+          <div class="ui-recent-item">
+            <span class="ui-recent-check">✓</span>
+            <span class="ui-recent-name">Issue 44 — Spring 2026</span>
+            <span style="font-size:.85rem; color:var(--muted);">The Making of the Lemegeton</span>
+            <span class="ui-recent-meta">2026-03-10</span>
+          </div>
+          <div class="ui-recent-item">
+            <span class="ui-recent-check">✓</span>
+            <span class="ui-recent-name">Issue 43 — Fall 2025</span>
+            <span style="font-size:.85rem; color:var(--muted);">Introducing the Secret History of Western Esotericism Podcast</span>
+            <span class="ui-recent-meta">2025-10-02</span>
+          </div>
+          <div class="ui-recent-item">
+            <span class="ui-recent-check">✓</span>
+            <span class="ui-recent-name">Issue 42 — Spring 2025</span>
+            <span style="font-size:.85rem; color:var(--muted);">The Rhetoric of Chaos Magic</span>
+            <span class="ui-recent-meta">2025-04-18</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tech-stack">
+      <h4>How it works</h4>
+      <ul class="tech-list">
+        <li><strong>Issue # auto-increments:</strong> API queries <code>MAX(issue_no) + 1</code> from the newsletters table — no human counting</li>
+        <li><strong>Drag-drop upload:</strong> File API in the browser handles it; a progress bar appears for large PDFs</li>
+        <li><strong>PDF validation:</strong> File type and size checked before upload starts</li>
+        <li><strong>Member notification:</strong> If checked, queues a batch email to all active members using the existing mailer</li>
+        <li><strong>Role-gated:</strong> Only users with the <code>newsletter_editor</code> role see this page</li>
+        <li><strong>Effort:</strong> ~50 hours — form + file upload API + email queue integration</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ─── SOLUTION 4: TREASURER DASHBOARD ─────────────────────────── -->
+  <section class="vision-section">
+    <h2>📊 Solution 4: Treasurer Dashboard</h2>
+
+    <div class="ba-grid">
+      <div class="ba-card before">
+        <div class="ba-label">❌ Current — officers are blind</div>
+        <ul>
+          <li>Treasurer asks you: "How many paid this month?"</li>
+          <li>You query the database, copy the number, send an email</li>
+          <li>Repeat for every board meeting</li>
+          <li>No one knows who's about to lapse until they already have</li>
+        </ul>
+        <div class="ba-stat"><strong>Time:</strong> 30 min per board report &nbsp;|&nbsp; <strong>Visibility:</strong> none</div>
+      </div>
+      <div class="ba-card after">
+        <div class="ba-label">✅ Modern — officers self-serve</div>
+        <ul>
+          <li>Treasurer logs in, sees real-time membership health</li>
+          <li>Revenue chart, overdue list, expiring-soon list — all visible</li>
+          <li>One click to send a bulk reminder to overdue members</li>
+          <li>One click to export CSV for board report</li>
+        </ul>
+        <div class="ba-stat"><strong>Time:</strong> 2 min for board report &nbsp;|&nbsp; <strong>Visibility:</strong> complete</div>
+      </div>
+    </div>
+
+    <p style="font-weight:600; margin-bottom:.5rem;">What the treasurer sees:</p>
+
+    <div class="mockup-shell">
+      <div class="mockup-titlebar">
+        <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+        <span class="mockup-titlebar-label">societasmagica.org / admin / dashboard</span>
+      </div>
+      <div class="mockup-body">
+
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.25rem; flex-wrap:wrap; gap:.5rem;">
+          <div style="font-size:1.1rem; font-weight:700; color:var(--crimson);">💰 Membership Dashboard</div>
+          <div style="display:flex; gap:.5rem;">
+            <span class="ui-btn ui-btn-secondary ui-btn-sm">Export CSV</span>
+            <span class="ui-btn ui-btn-primary ui-btn-sm">Send Bulk Reminder</span>
+          </div>
+        </div>
+
+        <div class="dash-stat-row">
+          <div class="dash-stat">
+            <div class="dash-stat-value">494</div>
+            <div class="dash-stat-label">Total Members</div>
+            <div class="dash-stat-delta delta-up">↑ 12 this year</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-value">92</div>
+            <div class="dash-stat-label">Paid for 2026</div>
+            <div class="dash-stat-delta delta-up">↑ 5 this month</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-value">42</div>
+            <div class="dash-stat-label">Last Paid 2025</div>
+            <div class="dash-stat-delta delta-dn">↓ 12 overdue</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-value">351</div>
+            <div class="dash-stat-label">Lapsed 2+ yrs</div>
+            <div class="dash-stat-delta" style="color:#888;">no change</div>
+          </div>
+        </div>
+
+        <div class="dash-section-title">Revenue — 2026</div>
+        <div class="bar-chart">
+          <div class="bar-row"><span class="bar-month">Jan</span><div class="bar-track"><div class="bar-fill" style="width:68%"><span class="bar-val">$8,500</span></div></div></div>
+          <div class="bar-row"><span class="bar-month">Feb</span><div class="bar-track"><div class="bar-fill" style="width:58%"><span class="bar-val">$7,200</span></div></div></div>
+          <div class="bar-row"><span class="bar-month">Mar</span><div class="bar-track"><div class="bar-fill" style="width:73%"><span class="bar-val">$9,100</span></div></div></div>
+          <div class="bar-row"><span class="bar-month">Apr</span><div class="bar-track"><div class="bar-fill" style="width:84%"><span class="bar-val">$10,500</span></div></div></div>
+          <div class="bar-row"><span class="bar-month">May</span><div class="bar-track"><div class="bar-fill" style="width:90%"><span class="bar-val">$11,200</span></div></div></div>
+          <div class="bar-row"><span class="bar-month">Jun</span><div class="bar-track"><div class="bar-fill" style="width:38%"><span class="bar-val">$4,700 so far</span></div></div></div>
+        </div>
+
+        <div class="dash-section-title" style="margin-top:1.5rem;">Overdue Members (last paid before 2025)</div>
+        <table class="ui-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Last Paid</th>
+              <th>Type</th>
+              <th>Amount Due</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Chris Brown</strong></td>
+              <td>Jan 2024</td>
+              <td>Standard</td>
+              <td>$45</td>
+              <td><span class="tag tag-danger">2+ yrs overdue</span></td>
+              <td><span class="ui-btn ui-btn-primary ui-btn-sm">Send Reminder</span></td>
+            </tr>
+            <tr>
+              <td><strong>Sarah Kim</strong></td>
+              <td>Dec 2023</td>
+              <td>Full</td>
+              <td>$138</td>
+              <td><span class="tag tag-danger">2+ yrs overdue</span></td>
+              <td><span class="ui-btn ui-btn-primary ui-btn-sm">Send Reminder</span></td>
+            </tr>
+            <tr>
+              <td><strong>James Martinez</strong></td>
+              <td>Oct 2024</td>
+              <td>Standard</td>
+              <td>$45</td>
+              <td><span class="tag tag-warn">1 yr overdue</span></td>
+              <td><span class="ui-btn ui-btn-primary ui-btn-sm">Send Reminder</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="dash-section-title" style="margin-top:1.5rem;">Expiring Soon — Next 30 Days</div>
+        <table class="ui-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Expires</th>
+              <th>Type</th>
+              <th>Amount Due</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Emily Davis</strong></td>
+              <td>Jul 15, 2026</td>
+              <td>Full</td>
+              <td>$138</td>
+              <td><span class="tag tag-warn">28 days left</span></td>
+              <td><span class="ui-btn ui-btn-secondary ui-btn-sm">View</span></td>
+            </tr>
+            <tr>
+              <td><strong>Robert Johnson</strong></td>
+              <td>Jul 22, 2026</td>
+              <td>Standard</td>
+              <td>$45</td>
+              <td><span class="tag tag-warn">35 days left</span></td>
+              <td><span class="ui-btn ui-btn-secondary ui-btn-sm">View</span></td>
+            </tr>
+            <tr>
+              <td><strong>Lisa Anderson</strong></td>
+              <td>Jul 28, 2026</td>
+              <td>Full</td>
+              <td>$138</td>
+              <td><span class="tag tag-ok">41 days left</span></td>
+              <td><span class="ui-btn ui-btn-secondary ui-btn-sm">View</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+    <div class="tech-stack">
+      <h4>How it works</h4>
+      <ul class="tech-list">
+        <li><strong>All data from the existing MySQL database</strong> — no migration, no new schema</li>
+        <li><strong>React renders client-side:</strong> sorting and filtering columns is instant, no server call needed</li>
+        <li><strong>Revenue bars:</strong> CSS-only chart — no heavy charting library required for this level of display</li>
+        <li><strong>"Send Reminder" button</strong> calls <code>POST /api/reminders/send/:memberId</code> and queues the email</li>
+        <li><strong>"Export CSV"</strong> calls <code>GET /api/members/export.csv</code> — browser downloads the file directly</li>
+        <li><strong>Effort:</strong> ~60 hours — API endpoints + React dashboard components</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ─── WHY REACT ────────────────────────────────────────────────── -->
+  <section class="vision-section">
+    <h2>⚛️ Why React + Modern Stack?</h2>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>⚡ No Page Reloads</h3>
+        <p>Click Save — data saves in the background. No white flash, no waiting. Confirmation appears in 100ms.</p>
+        <span class="feature-badge">Better UX</span>
+      </div>
+      <div class="feature-card">
+        <h3>✅ Inline Validation</h3>
+        <p>Email field turns red the moment the format is wrong — before you even try to submit. No more "please try again."</p>
+        <span class="feature-badge">Fewer Errors</span>
+      </div>
+      <div class="feature-card">
+        <h3>📱 Mobile-First</h3>
+        <p>Officers updating profiles from a phone at Kalamazoo works as well as at a desktop. Touch targets are large, forms reflow to one column.</p>
+        <span class="feature-badge">Accessibility</span>
+      </div>
+      <div class="feature-card">
+        <h3>🔄 Real-Time Data</h3>
+        <p>Dashboard numbers refresh every 60 seconds without a page reload. Treasurer always sees current membership counts.</p>
+        <span class="feature-badge">Live Updates</span>
+      </div>
+      <div class="feature-card">
+        <h3>🔗 API-First</h3>
+        <p>Everything talks through APIs. Adding ORCID, Zotero, Google Calendar, or a Stripe webhook later is a new endpoint — not a site rewrite.</p>
+        <span class="feature-badge">Extensible</span>
+      </div>
+      <div class="feature-card">
+        <h3>🧩 Component Reuse</h3>
+        <p>The member profile form, the officer form, and the newsletter form all share the same form components. Build once, use everywhere.</p>
+        <span class="feature-badge">Less Code</span>
+      </div>
+    </div>
+
+    <h3>Current PHP vs. Modern React</h3>
+    <table class="cmp-table">
+      <thead><tr><th>Behaviour</th><th>Current PHP (2012)</th><th>React + API</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Save data</strong></td><td class="cmp-old">Full page reload, 2–4 sec wait</td><td class="cmp-new">Background save, 100ms, no reload</td></tr>
+        <tr><td><strong>Form validation</strong></td><td class="cmp-old">After submit — page reloads to show error</td><td class="cmp-new">As you type — inline red underline</td></tr>
+        <tr><td><strong>File upload</strong></td><td class="cmp-old">Browse dialog, no progress indicator</td><td class="cmp-new">Drag-drop, real-time progress bar</td></tr>
+        <tr><td><strong>Dashboard data</strong></td><td class="cmp-old">Manually refresh page to see latest</td><td class="cmp-new">Auto-refreshes every 60 seconds</td></tr>
+        <tr><td><strong>Mobile use</strong></td><td class="cmp-old">Fixed-width layout, cramped on phones</td><td class="cmp-new">Responsive, touch-optimized</td></tr>
+        <tr><td><strong>Offline</strong></td><td class="cmp-old">Nothing works without internet</td><td class="cmp-new">Form queues changes, syncs on reconnect</td></tr>
+        <tr><td><strong>Adding integrations</strong></td><td class="cmp-old">Modify PHP files, hope nothing breaks</td><td class="cmp-new">New API endpoint, existing UI unchanged</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ─── ROADMAP ──────────────────────────────────────────────────── -->
+  <section class="vision-section">
+    <h2>🏗️ Implementation Roadmap</h2>
+    <p>You don't rewrite the whole site. You replace pieces one at a time — old PHP stays running while each React component goes live beside it.</p>
+
+    <div class="roadmap">
+      <div class="roadmap-step">
+        <div class="phase-badge">Phase 1 · Now</div>
+        <h4>Stabilize</h4>
+        <p>Bug fixes, backups, stale content updates, SSL check. No new features. Gets the foundation solid.</p>
+      </div>
+      <div class="roadmap-step">
+        <div class="phase-badge">Phase 2a · 8 wks</div>
+        <h4>API Layer + Reminders</h4>
+        <p>Build REST API over existing MySQL. Add renewal reminder cron job. Email delivery fixed as part of this.</p>
+      </div>
+      <div class="roadmap-step">
+        <div class="phase-badge">Phase 2b · 12 wks</div>
+        <h4>Self-Service Forms</h4>
+        <p>Officer profile form. Newsletter publish form. Role-based access so editors don't need webmaster.</p>
+      </div>
+      <div class="roadmap-step">
+        <div class="phase-badge">Phase 2c · 6 wks</div>
+        <h4>Treasurer Dashboard</h4>
+        <p>Real-time membership health view. Bulk reminder send. CSV export. Officers stop asking you for data.</p>
+      </div>
+      <div class="roadmap-step">
+        <div class="phase-badge">Phase 3 · 16 wks</div>
+        <h4>Scholarly Features</h4>
+        <p>Bibliography, dissertation registry, ORCID integration, rich member profiles. Site becomes a field resource.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:1rem;"><strong>Total:</strong> ~6 months at half-time, or ~3 months with a contractor. Cost range: <strong>$15k–$30k</strong> depending on who builds it.</p>
+
+    <div style="margin-top:2rem; padding:1.25rem 1.5rem; background:var(--gold); color:var(--crimson-dark); border-radius:var(--radius);">
+      <strong>The key insight:</strong> this isn't a redesign. It's surgical modernization — keep the database, keep the PHP pages that work, and replace the manual bottlenecks one component at a time. If anything breaks, roll back that component. The rest of the site keeps running.
+    </div>
+  </section>
 
 </main>
-
-<!-- Footer (injected by nav.js) -->
-<div id="footer-container"></div>
 
 <script src="nav.js"></script>
 </body>
